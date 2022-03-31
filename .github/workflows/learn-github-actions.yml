@@ -1,10 +1,14 @@
-name: DigitalOcean App Platform deployment
+name: deploy-digital-ocean
 on:
   push:
     branches:
       - main
-uses: digitalocean/app_action@main
-with:
-    app_name: bgg-companion
-    token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: DigitalOcean App Platform deployment
+        uses: digitalocean/app_action@main
+        with:
+          app_name: bgg-companion
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
