@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="./app.js" defer></script>
     <meta charset="UTF-8">
     <title>BGGC Random Game</title>
 </head>
@@ -31,21 +32,5 @@
         <p id="game-name">
         </p>
     </div>
-    <script>
-        function get_random_game() { // creating a JS function called get random game
-            const user = document.getElementById("user").value; // creating a variable "user" which is equal to: the value of the element input with an ID of user
-            fetch('/random_game?user='+ user) // a get request to the flask endpoint + the user variable
-            .then(response => response.json()) // .then happens async after the above.  an Anyomous function that takes a response instance as an argument and returns a json for the response
-            .then(game => { // another .then happens async after the above.  This is another anaymous function that creates a game_field variable equal to the element with an id of game-name
-                const game_field = document.getElementById("game-name");
-                game_field.innerText = game.name; // and than sets the inner text of the element equal to the property name of the json response game
-            });
-        }
-
-        const submit_button = document.getElementById("submit");
-        submit_button.addEventListener("click", get_random_game);
-
-
-    </script>
 </body>
 </html>
