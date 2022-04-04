@@ -1,2 +1,5 @@
 .idea/
 __pycache__/
+src/__pycache_/
+src/utils/__pycache__/
+*.pyc

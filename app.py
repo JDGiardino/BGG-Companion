@@ -1,6 +1,5 @@
-import json
 import dataclasses
-from flask import Flask, request, Response, abort
+from flask import Flask, request, Response, abort, jsonify, render_template
 from typing import Union
 from src.bgg_companion_api import get_random_game
 from src.exceptions import UserIsNoneError
@@ -17,6 +16,11 @@ def post_random_game() -> Union[str, Response]:
     else:
         user = args.get('user')
     try:
-        return json.dumps(dataclasses.asdict(get_random_game(user)))  # use flask's json-ify
+        return jsonify(dataclasses.asdict(get_random_game(user)))  # use flask's json-ify
     except UserIsNoneError as exc:
         abort(Response(response=str(exc), status=404))
+
+
+@app.route("/home")
+def home():
+    return render_template("home.html")

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="./app.js" defer></script>
+    <meta charset="UTF-8">
+    <title>BGGC Random Game</title>
+</head>
+<body>
+    <img src= https://user-images.githubusercontent.com/14614633/154339148-fdd2fcdc-41d6-49d6-b7d0-8a2c2d3a48b7.jpg alt="BGG Image" height="100" width="300"/>
+    <hr>
+    <h1>BGG Companion</h1>
+    <nav>
+        <table>
+            <tbody>
+                <tr>
+                    <td> <a href="./home.html">Random Game</a> </td>
+                    <td> | </td>
+                    <td> <a href="./leaderboards.html">[PLACEHOLDER] Leaderboards</a> </td>
+                </tr>
+            </tbody>
+        </table>
+    </nav>
+    <div id="random-game-request">
+        <h2>Random Game</h2>
+        <label for="user">Enter a <a href="https://boardgamegeek.com/" target="_blank">BoardGameGeek</a> user to choose a random game from their collection</label>
+        <input type="text" name="user" id="user" value="JDGiardino" required>
+        <br>
+        <br>
+        <input type="submit" value="Submit" id="submit">
+    </div>
+    <div id="random-game-response">
+        <p id="game-name">
+        </p>
+    </div>
+</body>
+</html>
