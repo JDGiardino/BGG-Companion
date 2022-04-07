@@ -1,3 +1,8 @@
+function clear_random_game_response_elements() {
+    document.getElementById("game-name").innerHTML = "";
+    document.getElementById("game-error").innerHTML = "";
+}
+
 async function get_random_game() {
     const user = document.getElementById("user").value;
     fetch('/random_game?user=' + user)
@@ -14,4 +19,5 @@ async function get_random_game() {
 }
 
 const submit_button = document.getElementById("submit");
-submit_button.addEventListener("click", () => get_random_game());
+submit_button.addEventListener("click",  clear_random_game_response_elements);
+submit_button.addEventListener("click",  () => get_random_game());
