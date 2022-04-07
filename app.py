@@ -11,14 +11,11 @@ app = Flask(__name__)
 @app.route("/random_game")
 def post_random_game() -> Union[str, Response]:
     args = request.args
-    if args.get('user') is None or args.get('user') == '':
-        user = 'JDGiardino'
-    else:
-        user = args.get('user')
+    user = args.get('user')
     try:
         return jsonify(dataclasses.asdict(get_random_game(user)))  # use flask's json-ify
     except UserIsNoneError as exc:
-        abort(Response(response=str(exc), status=404))
+        return abort(Response(response=str(exc), status=404))
 
 
 @app.route("/home")
