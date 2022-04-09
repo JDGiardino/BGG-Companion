@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="./app.js" defer></script>
     <meta charset="UTF-8">
     <title>BGGC Random Game</title>
 </head>
@@ -31,6 +30,9 @@
     <div id="random-game-response">
         <p id="game-name">
         </p>
+        <p id="game-error">
+        </p>
     </div>
+    <script type=text/javascript src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
