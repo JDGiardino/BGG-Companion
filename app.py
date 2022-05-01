@@ -13,7 +13,7 @@ def post_random_game() -> Union[str, Response]:
     args = request.args
     user = args.get('user')
     try:
-        return jsonify(dataclasses.asdict(get_random_game(user)))  # use flask's json-ify
+        return jsonify(dataclasses.asdict(get_random_game(user))
     except UserIsNoneError as exc:
         return abort(Response(response=str(exc), status=404))
 
