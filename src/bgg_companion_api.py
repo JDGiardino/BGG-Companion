@@ -1,12 +1,14 @@
 import collections
 import random
-
 import xmltodict
+
 from src.models.BoardGame import BoardGame
 from src.models.GameFilter import GameFilter
 from src.exceptions import UserIsNoneError, BoardGameIsNoneError
-from typing import Union, OrderedDict, Optional, Type
 from src.utils.requests_retry_client import RequestsRetryClient
+from src.bgg_companion_game_filter import FilterBoardGame
+
+from typing import Union, OrderedDict
 from cachetools import cached, TTLCache
 
 
@@ -74,28 +76,10 @@ def get_users_game_ids(user: str) -> list[str]:
         return id_list
 
 
-def game_type(game: BoardGame, gamefilter: GameFilter) -> bool:
-    return game.type == gamefilter.gameType
-
-
-def maxplayers_gt(game: BoardGame, gamefilter: GameFilter) -> bool:
-    return gamefilter.maxplayers is None or game.maxplayers >= gamefilter.maxplayers
-
-
-def exactplayers(game: BoardGame, gamefilter: GameFilter) -> bool:
-    return gamefilter.exactplayers is None or (game.maxplayers == gamefilter.exactplayers and game.minplayers == gamefilter.exactplayers)
-
-
-def game_matches_filter(game: BoardGame, gamefilter: GameFilter) -> bool:
-    return game_type(game=game, gamefilter=gamefilter) and \
-           maxplayers_gt(game=game, gamefilter=gamefilter) and \
-           exactplayers(game=game, gamefilter=gamefilter)
-
-
 def filter_games(board_games: list[BoardGame], game_filter: GameFilter) -> list[BoardGame]:
     filtered_board_games = []
     for game in board_games:
-        if game_matches_filter(game, game_filter):
+        if FilterBoardGame().game_matches_filter(game, game_filter):
             filtered_board_games.append(game)
     return filtered_board_games
 
