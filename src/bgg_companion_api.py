@@ -76,16 +76,8 @@ def get_users_game_ids(user: str) -> list[str]:
         return id_list
 
 
-def filter_games(board_games: list[BoardGame], game_filter: GameFilter) -> list[BoardGame]:
-    filtered_board_games = []
-    for game in board_games:
-        if FilterBoardGame().game_matches_filter(game, game_filter):
-            filtered_board_games.append(game)
-    return filtered_board_games
-
-
 def get_random_game(user: str, maxplayers=None, exactplayers=None) -> BoardGame:
     ids_list = get_users_game_ids(user)
     board_games = get_board_games(tuple(ids_list))
-    game = random.choice(filter_games(board_games, GameFilter(maxplayers=maxplayers, exactplayers=exactplayers)))
+    game = random.choice(FilterBoardGame().filter_games(board_games, GameFilter(maxplayers=maxplayers, exactplayers=exactplayers)))
     return game
