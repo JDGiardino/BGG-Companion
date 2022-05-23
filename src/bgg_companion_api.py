@@ -6,7 +6,7 @@ from src.models.BoardGame import BoardGame
 from src.models.GameFilter import GameFilter
 from src.exceptions import UserIsNoneError, BoardGameIsNoneError
 from src.utils.requests_retry_client import RequestsRetryClient
-from src.bgg_companion_game_filter import FilterBoardGame
+from src.bgg_companion_game_filter import FilterBoardGames
 
 from typing import Union, OrderedDict
 from cachetools import cached, TTLCache
@@ -79,5 +79,7 @@ def get_users_game_ids(user: str) -> list[str]:
 def get_random_game(user: str, maxplayers=None, exactplayers=None) -> BoardGame:
     ids_list = get_users_game_ids(user)
     board_games = get_board_games(tuple(ids_list))
-    game = random.choice(FilterBoardGame().filter_games(board_games, GameFilter(maxplayers=maxplayers, exactplayers=exactplayers)))
+    game_filter = GameFilter(maxplayers=maxplayers, exactplayers=exactplayers)
+    filtered_board_games = FilterBoardGames(board_games=board_games, game_filter=game_filter)
+    game = random.choice(filtered_board_games.filter_games())
     return game
