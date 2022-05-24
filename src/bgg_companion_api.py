@@ -22,7 +22,7 @@ def get_collection(user: str) -> Union[None, dict]:
     string_xml = request(f'https://boardgamegeek.com/xmlapi2/collection?username={user}')
     xml_parse = xmltodict.parse(string_xml)
     if "errors" in xml_parse and xml_parse["errors"]["error"]["message"] == "Invalid username specified":
-        raise BoardGameIsNoneError("A board game was passed that does not exist within BoardGameGeek.")
+        raise UserIsNoneError("Invalid username specified.  Please enter a valid https://boardgamegeek.com/ username.")
     users_game_collection = xml_parse["items"]["item"]
     return users_game_collection
 
@@ -32,7 +32,7 @@ def get_board_games(ids: tuple[str]) -> list[BoardGame]:
     string_xml = request(f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}')
     xml_parse = xmltodict.parse(string_xml)
     if "item" not in xml_parse["items"]:
-        return []  # This returns when none of the given id(s) were found
+        raise BoardGameIsNoneError("A board game was passed that does not exist within BoardGameGeek.")
     items = xml_parse["items"]["item"]
     board_games = []
     for item in items:
