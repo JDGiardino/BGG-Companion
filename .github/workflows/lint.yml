@@ -11,7 +11,7 @@ on:
 
 jobs:
   run-linter:
-    name: Run linters
+    name: Run linter
     runs-on: ubuntu-latest
 
     steps:
@@ -24,10 +24,9 @@ jobs:
           python-version: 3.9
 
       - name: Install Python dependencies
-        run: pip install black flake8
+        run: pip install black
 
       - name: Run linter
         uses: wearerequired/lint-action@v2.0.0
         with:
           black : true
-          flake8 : true
