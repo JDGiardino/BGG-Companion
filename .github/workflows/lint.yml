@@ -26,6 +26,7 @@ jobs:
 
       - name: Install Python dependencies
         run: pip install black
+        run: black
 
       - name: Run linters
         uses: wearerequired/lint-action@v2.0.0
