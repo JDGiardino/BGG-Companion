@@ -15,7 +15,7 @@ def post_random_game() -> Union[str, Response]:
     args = request.args
     user = args.get('user')
     try:
-        return jsonify(dataclasses.asdict(get_random_game(user)))
+        return jsonify(dataclasses.asdict(get_random_game(user))
     except UserIsNoneError as exc:
         return abort(Response(response=str(exc), status=404))
     except Exception as exc:
