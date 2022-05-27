@@ -1,34 +1,71 @@
-name: Lint
 
+   
+# This is a CI workflow for query alerts
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
   push:
-    branches:
-      - main
+    branches: [ dev, qa, main ]
   pull_request:
-    branches:
-      - main
+    branches: [ dev, qa, main ]
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  run-linters:
-    name: Run linters
+  CI:
+    name: Continuous Integration
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Set up Python
+      - name: Set up Python binary
         uses: actions/setup-python@v1
         with:
-          python-version: 3.8
+          python-version: '3.9.x'
 
-      - name: Install Python dependencies
-        run: pip install black
+      - name: Save Python Version
+        id: save-python-version
+        run: |
+             python_version=`python -c "import platform; print(platform.python_version())"`
+             echo "::set-output name=PYTHON_VERSION::$python_version"
+      - name: Display Python version
+        run: echo "The Python version is ${{ steps.save-python-version.outputs.PYTHON_VERSION }}"
 
-      - name: Run linters
-        uses: wearerequired/lint-action@v2.0.0
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.1.1
         with:
-          auto_fix: true
-          black: true
+          virtualenvs-path: ~/.virtualenvs
+          virtualenvs-create: true
+
+      - name: Cache Poetry virtualenv
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: ~/.virtualenvs
+          # We noticed build breaks when github updates python version.
+          # To try to avoid this in the future, we add the python version
+          # to the cache key to force the cache update.
+          key: poetry-${{ hashFiles('**/poetry.lock') }}-${{ runner.os }}-${{steps.save-python-version.outputs.PYTHON_VERSION}}
+
+      - name: Install Dependencies
+        run: poetry install
+        if: steps.cache.outputs.cache-hit != 'true'
+
+      - name: Code Quality
+        run: poetry run black . --check
+
+      - name: Determine Deploying Environment
+        run: bash bin/determine_env.bash
+        id: set_env
+
+      - name: Test with pytest and store results
+        run: poetry run pytest -v --cucumberjson=~/report.json
+        env:
+          ENVIRONMENT_PROFILE: ${{steps.set_env.outputs.environment_profile}}
+          GOOGLE_AUTH_KEY: ${{secrets[steps.set_env.outputs.github_ci_bot_secret]}}
+
+      - name: Feature Tests Summary
+        if: always() 
+        run: poetry run python -m src.deployment.pytest_bdd_report.main -f ~/report.json
