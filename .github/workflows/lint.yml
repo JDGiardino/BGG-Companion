@@ -24,7 +24,7 @@ jobs:
           python-version: 3.9.x
           
       - name: Display Python version
-        run: echo "The Python version is ${{ steps.save-python-version.outputs.PYTHON_VERSION }}"
+        run: echo "The Python version is $(which python)"
         
       - name: Install Python dependencies
         run: pip install black
