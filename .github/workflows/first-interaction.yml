@@ -1,5 +1,4 @@
 name: First interaction
-description: Greet new contributors when they create their first issue or open their first pull request
 
 on:
   pull_request:
