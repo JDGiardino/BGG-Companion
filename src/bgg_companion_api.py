@@ -9,7 +9,7 @@ from cachetools import cached, TTLCache
 
 
 def request(url: str):
-    response = RequestsRetryClient().request(method="GET", url=url)
+    response = RequestsRetryClient().request(method='GET', url=url)
     return response.text
 
 
