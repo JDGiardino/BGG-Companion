@@ -24,7 +24,7 @@ jobs:
           python-version: 3.9
 
       - name: Install Python dependencies
-        run: pip install black
+        run: pip install black flake8
 
       - name: Run linter
         uses: wearerequired/lint-action@v2.0.0
