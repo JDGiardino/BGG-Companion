@@ -59,13 +59,3 @@ jobs:
       - name: Determine Deploying Environment
         run: bash bin/determine_env.bash
         id: set_env
-
-      - name: Test with pytest and store results
-        run: poetry run pytest -v --cucumberjson=~/report.json
-        env:
-          ENVIRONMENT_PROFILE: ${{steps.set_env.outputs.environment_profile}}
-          GOOGLE_AUTH_KEY: ${{secrets[steps.set_env.outputs.github_ci_bot_secret]}}
-
-      - name: Feature Tests Summary
-        if: always() 
-        run: poetry run python -m src.deployment.pytest_bdd_report.main -f ~/report.json
