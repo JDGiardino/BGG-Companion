@@ -30,7 +30,7 @@ jobs:
         run: pip install black
 
       - name : Run linter
-        run: python -m black . --exclude gunicorn_config.py
+        run: python -m black . --exclude gunicorn_config.py --check
         
       # I want to use this action for linters but it doesn't seem to have any "--exclude" functionality 
       #- name: Run linter
