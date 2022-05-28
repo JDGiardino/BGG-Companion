@@ -57,9 +57,15 @@ class RequestsRetryClient:
     retry_strategy: Retry = field(default_factory=make_retry_strategy)
 
     def request(
-        self, method: str, url: str, headers: Optional[dict[str, str]] = None, json: Optional[dict] = None
+        self,
+        method: str,
+        url: str,
+        headers: Optional[dict[str, str]] = None,
+        json: Optional[dict] = None,
     ) -> Response:
-        logging.info(f"Retry request: method: {method} | url: {url} | retry: {self.retry_strategy} | json: {json}")
+        logging.info(
+            f"Retry request: method: {method} | url: {url} | retry: {self.retry_strategy} | json: {json}"
+        )
         adapter = HTTPAdapter(max_retries=self.retry_strategy)
         http = requests.Session()
         http.mount("https://", adapter)
