@@ -67,13 +67,10 @@ def __to_board_game(item: collections.OrderedDict) -> BoardGame:
 
 def get_users_game_ids(user: str) -> list[str]:
     users_game_collection = get_collection(user)
-    if users_game_collection is None:
-        raise UserIsNoneError("Invalid username specified.  Please enter a valid https://boardgamegeek.com/ username.")
-    else:
-        id_list = []
-        for game in users_game_collection:
-            id_list.append(game["@objectid"])
-        return id_list
+    id_list = []
+    for game in users_game_collection:
+        id_list.append(game["@objectid"])
+    return id_list
 
 
 def get_random_game(user: str, maxplayers=None, exactplayers=None) -> BoardGame:
