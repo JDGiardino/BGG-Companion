@@ -8,7 +8,7 @@ from src.exceptions import UserIsNoneError, BoardGameIsNoneError
 from src.utils.requests_retry_client import RequestsRetryClient
 from src.bgg_companion_game_filter import FilterBoardGames
 
-from typing import Union, OrderedDict
+from typing import OrderedDict
 from cachetools import cached, TTLCache
 
 
@@ -37,6 +37,7 @@ def get_collection(user: str) -> dict:
 @cached(cache=TTLCache(maxsize=500, ttl=300))
 def get_board_games(ids: tuple[str]) -> list[BoardGame]:
     string_xml = request(f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}')
+
     xml_parse = xmltodict.parse(string_xml)
     if "item" not in xml_parse["items"]:
         raise BoardGameIsNoneError(
