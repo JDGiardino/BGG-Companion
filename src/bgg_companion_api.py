@@ -13,16 +13,21 @@ from cachetools import cached, TTLCache
 
 
 def request(url: str):
-    response = RequestsRetryClient().request(method='GET', url=url)
+    response = RequestsRetryClient().request(method="GET", url=url)
     return response.text
 
 
 @cached(cache=TTLCache(maxsize=500, ttl=300))
-def get_collection(user: str) -> dict:
-    string_xml = request(f'https://boardgamegeek.com/xmlapi2/collection?username={user}')
+def get_users_collection(user: str) -> Union[None, dict]:
+    string_xml = request(
+        f"https://boardgamegeek.com/xmlapi2/collection?username={user}"
+    )
     xml_parse = xmltodict.parse(string_xml)
-    if "errors" in xml_parse and xml_parse["errors"]["error"]["message"] == "Invalid username specified":
-        raise UserIsNoneError("Invalid username specified.  Please enter a valid https://boardgamegeek.com/ username.")
+    if (
+        "errors" in xml_parse
+        and xml_parse["errors"]["error"]["message"] == "Invalid username specified"
+    ):
+        return None
     users_game_collection = xml_parse["items"]["item"]
     return users_game_collection
 
@@ -30,6 +35,7 @@ def get_collection(user: str) -> dict:
 @cached(cache=TTLCache(maxsize=500, ttl=300))
 def get_board_games(ids: tuple[str]) -> list[BoardGame]:
     string_xml = request(f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}')
+
     xml_parse = xmltodict.parse(string_xml)
     if "item" not in xml_parse["items"]:
         raise BoardGameIsNoneError("A board game was passed that does not exist within BoardGameGeek.")
@@ -61,8 +67,16 @@ def __to_board_game(item: collections.OrderedDict) -> BoardGame:
                 break
     else:
         name = None
-    return BoardGame(id=id, name=name, description=description, type=type, minplayers=minplayers, maxplayers=maxplayers,
-                     thumbnail=thumbnail, image=image)
+    return BoardGame(
+        id=id,
+        name=name,
+        description=description,
+        type=type,
+        minplayers=minplayers,
+        maxplayers=maxplayers,
+        thumbnail=thumbnail,
+        image=image,
+    )
 
 
 def get_users_game_ids(user: str) -> list[str]:
