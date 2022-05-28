@@ -18,7 +18,7 @@ def request(url: str):
 
 
 @cached(cache=TTLCache(maxsize=500, ttl=300))
-def get_collection(user: str) -> Union[None, dict]:
+def get_collection(user: str) -> dict:
     string_xml = request(f'https://boardgamegeek.com/xmlapi2/collection?username={user}')
     xml_parse = xmltodict.parse(string_xml)
     if "errors" in xml_parse and xml_parse["errors"]["error"]["message"] == "Invalid username specified":
