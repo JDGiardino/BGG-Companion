@@ -11,6 +11,7 @@ xmltodict = "^0.12.0"
 Flask = "^2.0.2"
 cachetools = "^5.0.0"
 gunicorn = "^20.1.0"
+self = "^2020.12.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
