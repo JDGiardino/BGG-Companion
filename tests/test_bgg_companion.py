@@ -32,6 +32,7 @@ class TestGetCollection(unittest.TestCase):
     @staticmethod
     def test_exception_for_invalid_user():
         """Testing the get_collection function for requesting a BGG collection of an invalid user"""
+
     test_variables = TestGetCollectionVariables()
 
     mock_response = unittest.mock.Mock(spec=["text"])

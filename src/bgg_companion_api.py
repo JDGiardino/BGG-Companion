@@ -13,7 +13,6 @@ from cachetools import cached, TTLCache
 
 
 class BggCompanionApi(object):
-
     def __init__(self, request_client=None):
         if request_client is None:
             self.request_client = RequestsRetryClient()
@@ -42,7 +41,9 @@ class BggCompanionApi(object):
 
     @cached(cache=TTLCache(maxsize=500, ttl=300))
     def get_board_games(self, ids: tuple[str]) -> list[BoardGame]:
-        string_xml = self.request(f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}')
+        string_xml = self.request(
+            f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}'
+        )
         xml_parse = xmltodict.parse(string_xml)
         if "item" not in xml_parse["items"]:
             raise BoardGameIsNoneError(
@@ -94,7 +95,9 @@ class BggCompanionApi(object):
             id_list.append(game["@objectid"])
         return id_list
 
-    def get_random_game(self, user: str, maxplayers=None, exactplayers=None) -> BoardGame:
+    def get_random_game(
+        self, user: str, maxplayers=None, exactplayers=None
+    ) -> BoardGame:
         ids_list = self.get_users_game_ids(user)
         board_games = self.get_board_games(tuple(ids_list))
         game_filter = GameFilter(maxplayers=maxplayers, exactplayers=exactplayers)
@@ -109,4 +112,3 @@ class BggCompanionApi(object):
 # if __name__ == "__main__":
 #     bgg_companion_api = BggCompanionApi()
 #     print(bgg_companion_api.get_random_game("ewkjfbwkejbgfkwjerbgkjrw"))
-
