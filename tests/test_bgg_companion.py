@@ -53,7 +53,7 @@ class TestToBoardGame:
         test_variables = TestToBoardGameVariables()
 
         bgg_companion_api = BggCompanionApi()
-        test_item = test_variables.item_thumbnail_true
+        test_item = test_variables.item_thumbnail_false
         test_boardgame = test_variables.boardgame_thumbnail_true
 
         actual_to_board_game = bgg_companion_api.to_board_game(test_item)
