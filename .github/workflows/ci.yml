@@ -1,4 +1,4 @@
-name: CI - Python
+name: CI
 
 on:
   # Trigger the workflow on push or pull request but only for the main branch
@@ -11,7 +11,7 @@ on:
 
 jobs:
   CI:
-    name: Continuous Integration
+    name: Python Continuous Integration
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
