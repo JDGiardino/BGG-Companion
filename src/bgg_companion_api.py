@@ -1,10 +1,14 @@
 import collections
 import random
 import xmltodict
+
 from src.models.BoardGame import BoardGame
+from src.models.GameFilter import GameFilter
 from src.exceptions import UserIsNoneError, BoardGameIsNoneError
-from typing import Union, OrderedDict
 from src.utils.requests_retry_client import RequestsRetryClient
+from src.bgg_companion_game_filter import FilterBoardGames
+
+from typing import OrderedDict
 from cachetools import cached, TTLCache
 
 
@@ -14,7 +18,7 @@ def request(url: str):
 
 
 @cached(cache=TTLCache(maxsize=500, ttl=300))
-def get_users_collection(user: str) -> Union[None, dict]:
+def get_collection(user: str) -> dict:
     string_xml = request(
         f"https://boardgamegeek.com/xmlapi2/collection?username={user}"
     )
@@ -23,17 +27,22 @@ def get_users_collection(user: str) -> Union[None, dict]:
         "errors" in xml_parse
         and xml_parse["errors"]["error"]["message"] == "Invalid username specified"
     ):
-        return None
+        raise UserIsNoneError(
+            "Invalid username specified.  Please enter a valid https://boardgamegeek.com/ username."
+        )
     users_game_collection = xml_parse["items"]["item"]
     return users_game_collection
 
 
 @cached(cache=TTLCache(maxsize=500, ttl=300))
-def get_board_games(board_game_id: str) -> Union[None, list[BoardGame]]:
-    string_xml = request(f"https://api.geekdo.com/xmlapi2/thing?id={board_game_id}")
+def get_board_games(ids: tuple[str]) -> list[BoardGame]:
+    string_xml = request(f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}')
+
     xml_parse = xmltodict.parse(string_xml)
     if "item" not in xml_parse["items"]:
-        return None
+        raise BoardGameIsNoneError(
+            "A board game was passed that does not exist within BoardGameGeek."
+        )
     items = xml_parse["items"]["item"]
     board_games = []
     for item in items:
@@ -47,14 +56,19 @@ def __to_board_game(item: collections.OrderedDict) -> BoardGame:
     description = item["description"]
     minplayers = item["minplayers"]["@value"]
     maxplayers = item["maxplayers"]["@value"]
-    thumbnail = item["thumbnail"]
-    image = item["image"]
+    if "thumbnail" in item and "image" in item:
+        thumbnail = item["thumbnail"]
+        image = item["image"]
+    else:
+        thumbnail = None
+        image = None
     if isinstance(item["name"], OrderedDict):
         name = item["name"]["@value"]
     elif isinstance(item["name"], list):
         for a_dict in item["name"]:
             if a_dict["@type"] == "primary":
                 name = a_dict["@value"]
+                break
     else:
         name = None
     return BoardGame(
@@ -69,32 +83,20 @@ def __to_board_game(item: collections.OrderedDict) -> BoardGame:
     )
 
 
-def get_object_ids(user: str) -> list[str]:
-    users_game_collection = get_users_collection(user)
-    if users_game_collection is None:
-        raise UserIsNoneError(
-            "Invalid username specified.  Please enter a valid https://boardgamegeek.com/ username."
-        )
-    else:
-        id_list = []
-        for game in users_game_collection:
-            id_list.append(game["@objectid"])
-        return id_list
+def get_users_game_ids(user: str) -> list[str]:
+    users_game_collection = get_collection(user)
+    id_list = []
+    for game in users_game_collection:
+        id_list.append(game["@objectid"])
+    return id_list
 
 
-def get_random_game(user: str) -> Union[BoardGame, UserIsNoneError]:
-    try:
-        id_list = get_object_ids(user)
-    except UserIsNoneError as exc:
-        return exc
-    id_string = ",".join(id_list)
-    board_games = get_board_games(id_string)
-    if board_games is None:
-        raise BoardGameIsNoneError(
-            "A board game was passed that does not exist within BoardGameGeek."
-        )
-    for game in board_games:
-        if game.type != "boardgame":
-            board_games.remove(game)
-    game = random.choice(board_games)
+def get_random_game(user: str, maxplayers=None, exactplayers=None) -> BoardGame:
+    ids_list = get_users_game_ids(user)
+    board_games = get_board_games(tuple(ids_list))
+    game_filter = GameFilter(maxplayers=maxplayers, exactplayers=exactplayers)
+    filtered_board_games = FilterBoardGames(
+        board_games=board_games, game_filter=game_filter
+    )
+    game = random.choice(filtered_board_games.filter_games())
     return game
