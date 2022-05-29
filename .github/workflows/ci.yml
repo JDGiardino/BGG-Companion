@@ -1,0 +1,30 @@
+# This is a CI workflow for running pytests
+
+name: CI
+
+on:
+  # Trigger the workflow on push or pull request but only for the main branch
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  CI:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python binary
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.9.x'
+
+      - name: Display Python version
+        run: echo "The Python version is $(which python)"
+
+      - name: Run Pytest
+        run : pytest -vvvv
