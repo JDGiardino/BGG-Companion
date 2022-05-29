@@ -26,5 +26,8 @@ jobs:
       - name: Display Python version
         run: echo "The Python version is $(which python)"
 
+      - name: Install Python dependencies
+        run: pip install pytest
+
       - name: Run Pytest
         run : pytest -vvvv
