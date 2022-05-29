@@ -1,6 +1,6 @@
 # This is a CI workflow for running pytests
 
-name: CI
+name: CI - Python
 
 on:
   # Trigger the workflow on push or pull request but only for the main branch
@@ -16,6 +16,7 @@ jobs:
     name: Continuous Integration
     runs-on: ubuntu-latest
     steps:
+      - name: Check out Git repository
       - uses: actions/checkout@v2
 
       - name: Set up Python binary
@@ -26,8 +27,11 @@ jobs:
       - name: Display Python version
         run: echo "The Python version is $(which python)"
 
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.1.1
+
       - name: Install Python dependencies
-        run: pip install pytest
+        run: poetry install
 
       - name: Run Pytest
         run : pytest tests -vvvv
