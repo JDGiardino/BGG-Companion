@@ -30,4 +30,4 @@ jobs:
         run: pip install pytest
 
       - name: Run Pytest
-        run : pytest -vvvv
+        run : pytest tests -vvvv
