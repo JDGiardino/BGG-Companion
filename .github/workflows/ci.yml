@@ -1,6 +1,6 @@
 # This is a CI workflow for running pytests
 
-name: CI - Python
+name: CI
 
 on:
   # Trigger the workflow on push or pull request but only for the main branch
