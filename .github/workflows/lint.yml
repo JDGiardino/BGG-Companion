@@ -38,3 +38,13 @@ jobs:
         #with:
           #black : true
 
+  run-yaml-linter:
+    name: Run Yaml Linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Setup yaml-lint
+        uses: ibiqlik/action-yamllint@v3
