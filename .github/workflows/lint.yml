@@ -22,19 +22,18 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.9.x
-          
+
       - name: Display Python version
         run: echo "The Python version is $(which python)"
-        
+
       - name: Install Python dependencies
         run: pip install black
 
       - name : Run linter
         run: python -m black . --exclude gunicorn_config.py --check --diff
-        
-      # I want to use this action for linters but it doesn't seem to have any "--exclude" functionality 
+
+      # I want to use this action for linters but it doesn't seem to have any "--exclude" functionality
       #- name: Run linter
         #uses: wearerequired/lint-action@v2.0.0
         #with:
           #black : true
-
