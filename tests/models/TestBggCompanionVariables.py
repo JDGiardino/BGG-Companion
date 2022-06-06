@@ -55,8 +55,8 @@ class TestGetBoardGamesVariables:
     two_ids_response = (
         '<?xml version="1.0" encoding="utf-8"?><items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">'
         '<item type="boardgame" id="187645"><thumbnail>https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img'
-        '/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg</thumbnail><image>'
-        'https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/filters:'
+        "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg</thumbnail><image>"
+        "https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/filters:"
         'format(jpeg)/pic4325841.jpg</image><name type = "primary" sortindex = "1" value = "Star Wars: Rebellion"/>'
         '<name type="alternate" sortindex="1" value="Star Wars: Lázadás"/><description>StarWars:Rebellion is a board game'
         ' of epic conflict.</description><yearpublished value="2016"/><minplayers value="2"/><maxplayers value="4"/></item>'
@@ -64,46 +64,51 @@ class TestGetBoardGamesVariables:
         'The ultimate test of advanced territorial strategy.</description><yearpublished value="1989"/>'
         '<minplayers value="2"/><maxplayers value="2"/></item></items>'
     )
-    expected_two_ids = [BoardGame(
-        id=187645,
-        name="Star Wars: Rebellion",
-        type="boardgame",
-        description="StarWars:Rebellion is a board game of epic conflict.",
-        minplayers=2,
-        maxplayers=4,
-        thumbnail="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img"
-                  "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
-        image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
-              "filters:format(jpeg)/pic4325841.jpg"
-    ), BoardGame(
-        id=6902,
-        name="Tetris",
-        type="boardgame",
-        description="The ultimate test of advanced territorial strategy.",
-        minplayers=2,
-        maxplayers=2,
-        thumbnail=None,
-        image=None
-    )]
+    expected_two_ids = [
+        BoardGame(
+            id=187645,
+            name="Star Wars: Rebellion",
+            type="boardgame",
+            description="StarWars:Rebellion is a board game of epic conflict.",
+            minplayers=2,
+            maxplayers=4,
+            thumbnail="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img"
+            "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
+            image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
+            "filters:format(jpeg)/pic4325841.jpg",
+        ),
+        BoardGame(
+            id=6902,
+            name="Tetris",
+            type="boardgame",
+            description="The ultimate test of advanced territorial strategy.",
+            minplayers=2,
+            maxplayers=2,
+            thumbnail=None,
+            image=None,
+        ),
+    ]
     one_id_response = (
         '<?xml version="1.0" encoding="utf-8"?><items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">'
         '<item type="boardgame" id="187645"><thumbnail>https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img'
-        '/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg</thumbnail><image>'
-        'https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/filters:'
+        "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg</thumbnail><image>"
+        "https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/filters:"
         'format(jpeg)/pic4325841.jpg</image><name type = "primary" sortindex = "1" value = "Star Wars: Rebellion"/>'
         '<name type="alternate" sortindex="1" value="Star Wars: Lázadás"/><description>StarWars:Rebellion is a board game'
         ' of epic conflict.</description><yearpublished value="2016"/><minplayers value="2"/><maxplayers value="4"/></item>'
-        '</items>'
+        "</items>"
     )
-    expected_one_id = [BoardGame(
-        id=187645,
-        name="Star Wars: Rebellion",
-        type="boardgame",
-        description="StarWars:Rebellion is a board game of epic conflict.",
-        minplayers=2,
-        maxplayers=4,
-        thumbnail="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img"
-                  "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
-        image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
-              "filters:format(jpeg)/pic4325841.jpg"
-    )]
+    expected_one_id = [
+        BoardGame(
+            id=187645,
+            name="Star Wars: Rebellion",
+            type="boardgame",
+            description="StarWars:Rebellion is a board game of epic conflict.",
+            minplayers=2,
+            maxplayers=4,
+            thumbnail="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img"
+            "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
+            image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
+            "filters:format(jpeg)/pic4325841.jpg",
+        )
+    ]

@@ -16,4 +16,5 @@ class GameFilter:
             object.__setattr__(self, "maxplayers", int(self.maxplayers))
         if self.exactplayers is not None:
             object.__setattr__(self, "exactplayers", int(self.exactplayers))
+
     # This bypasses frozen=true by modifying the object class which all objects inherent from including dataclasses

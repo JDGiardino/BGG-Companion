@@ -47,7 +47,7 @@ class TestGetCollection(unittest.TestCase):
     @staticmethod
     def test_for_valid_user_with_no_game_collection():
         """Testing the get_collection function for requesting a BGG collection of a valid user that does not have a game
-         collection"""
+        collection"""
 
         test_variables = TestGetCollectionVariables()
 
@@ -72,7 +72,9 @@ class TestGetBoardGames:
         mock_request_client.request.return_value = mock_response
 
         bgg_companion_api = BggCompanionApi(mock_request_client)
-        actual_get_board_games = bgg_companion_api.get_board_games(tuple(['187645', '6902']))
+        actual_get_board_games = bgg_companion_api.get_board_games(
+            tuple(["187645", "6902"])
+        )
         expected_get_board_games = test_variables.expected_two_ids
 
         assert actual_get_board_games == expected_get_board_games
@@ -87,7 +89,7 @@ class TestGetBoardGames:
         mock_request_client.request.return_value = mock_response
 
         bgg_companion_api = BggCompanionApi(mock_request_client)
-        actual_get_board_games = bgg_companion_api.get_board_games(tuple(['6902']))
+        actual_get_board_games = bgg_companion_api.get_board_games(tuple(["6902"]))
         expected_get_board_games = test_variables.expected_one_id
 
         assert actual_get_board_games == expected_get_board_games

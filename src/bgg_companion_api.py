@@ -58,7 +58,9 @@ class BggCompanionApi(object):
         return board_games
 
     @staticmethod
-    def to_board_game(item: collections.OrderedDict) -> BoardGame: # make this priavte again and only test its caller
+    def to_board_game(
+        item: collections.OrderedDict,
+    ) -> BoardGame:  # make this priavte again and only test its caller
         id = item["@id"]
         type = item["@type"]
         description = item["description"]
