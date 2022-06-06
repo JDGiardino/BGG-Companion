@@ -1,6 +1,8 @@
+---
 name: Lint
 
-on:
+on:  # yamllint disable-line rule:truthy
+
   # Trigger the workflow on push or pull request but only for the main branch
   push:
     branches:
@@ -30,7 +32,7 @@ jobs:
         run: pip install black
 
       - name : Run linter
-        run: python -m black . --exclude gunicorn_config.py --check --diff
+        run: python -m black . --check --diff
 
       # I want to use this action for linters but it doesn't seem to have any "--exclude" functionality
       #- name: Run linter

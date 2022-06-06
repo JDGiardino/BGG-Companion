@@ -12,6 +12,13 @@ Flask = "^2.0.2"
 cachetools = "^5.0.0"
 gunicorn = "^20.1.0"
 self = "^2020.12.3"
+yamllint = "^1.26.3"
+black = "^22.3.0"
+
+[tool.black]
+line-length = 88
+target-version = ['py37']
+extend-exclude = '/gunicorn_config.py'
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

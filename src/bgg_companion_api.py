@@ -4,7 +4,7 @@ import xmltodict
 
 from src.models.BoardGame import BoardGame
 from src.models.GameFilter import GameFilter
-from src.exceptions import UserIsNoneError, BoardGameIsNoneError
+from src.exceptions import UserIsNoneError, BoardGameIsNoneError, UserHasNoCollection
 from src.utils.requests_retry_client import RequestsRetryClient
 from src.bgg_companion_game_filter import FilterBoardGames
 
@@ -13,11 +13,8 @@ from cachetools import cached, TTLCache
 
 
 class BggCompanionApi(object):
-    def __init__(self, request_client=None):
-        if request_client is None:
-            self.request_client = RequestsRetryClient()
-        else:
-            self.request_client = request_client
+    def __init__(self, request_client):
+        self.request_client = request_client
 
     def request(self, url: str):
         response = self.request_client.request(method="GET", url=url)
@@ -36,10 +33,15 @@ class BggCompanionApi(object):
             raise UserIsNoneError(
                 "Invalid username specified.  Please enter a valid https://boardgamegeek.com/ username."
             )
+        if xml_parse["items"]["@totalitems"] == "0":
+            raise UserHasNoCollection(
+                "This user does not have a game collection on BoardGameGeek."
+            )
         users_game_collection = xml_parse["items"]["item"]
         return users_game_collection
 
     @cached(cache=TTLCache(maxsize=500, ttl=300))
+    # testing this should be how many ids passed vs how many board games were in the list.  id doesn't exist error, 2 ids 2 games. no ids no games. 1 id 1 games.  exception is raised only if all ids are not exists and this is not obvious so should be a rtesrt.  why is behavior different. 1 real 1 not
     def get_board_games(self, ids: tuple[str]) -> list[BoardGame]:
         string_xml = self.request(
             f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}'
@@ -56,7 +58,7 @@ class BggCompanionApi(object):
         return board_games
 
     @staticmethod
-    def to_board_game(item: collections.OrderedDict) -> BoardGame:
+    def to_board_game(item: collections.OrderedDict) -> BoardGame: # make this priavte again and only test its caller
         id = item["@id"]
         type = item["@type"]
         description = item["description"]
@@ -109,6 +111,6 @@ class BggCompanionApi(object):
 
 
 # LEAVE BELOW COMMENTED : Used for development testing
-# if __name__ == "__main__":
-#     bgg_companion_api = BggCompanionApi()
-#     print(bgg_companion_api.get_random_game("ewkjfbwkejbgfkwjerbgkjrw"))
+if __name__ == "__main__":
+    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+    print(bgg_companion_api.get_random_game("omaryahir"))

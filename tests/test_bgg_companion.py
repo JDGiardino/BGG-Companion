@@ -2,10 +2,10 @@ import unittest.mock
 import pytest
 
 from src.bgg_companion_api import BggCompanionApi
-from src.exceptions import UserIsNoneError
+from src.exceptions import UserIsNoneError, UserHasNoCollection
 from tests.models.TestBggCompanionVariables import (
     TestGetCollectionVariables,
-    TestToBoardGameVariables,
+    TestGetBoardGamesVariables,
 )
 
 
@@ -14,7 +14,7 @@ from tests.models.TestBggCompanionVariables import (
 
 class TestGetCollection(unittest.TestCase):
     @staticmethod
-    def test_get_request_for_users_collection():
+    def test_for_valid_user():
         """Testing the get_collection function for requesting a BGG collection of a valid user"""
         test_variables = TestGetCollectionVariables()
 
@@ -30,78 +30,64 @@ class TestGetCollection(unittest.TestCase):
         assert actual_get_collection == expected_get_collection
 
     @staticmethod
-    def test_exception_for_invalid_user():
+    def test_for_invalid_user():
         """Testing the get_collection function for requesting a BGG collection of an invalid user"""
 
-    test_variables = TestGetCollectionVariables()
+        test_variables = TestGetCollectionVariables()
 
-    mock_response = unittest.mock.Mock(spec=["text"])
-    mock_response.text = test_variables.invalid_user_response
-    mock_request_client = unittest.mock.Mock(spec=["request"])
-    mock_request_client.request.return_value = mock_response
+        mock_response = unittest.mock.Mock(spec=["text"])
+        mock_response.text = test_variables.invalid_user_response
+        mock_request_client = unittest.mock.Mock(spec=["request"])
+        mock_request_client.request.return_value = mock_response
 
-    bgg_companion_api = BggCompanionApi(mock_request_client)
-    with pytest.raises(UserIsNoneError):
-        bgg_companion_api.get_collection("test__invalid_user")
-
-
-class TestToBoardGame:
-    @staticmethod
-    def test_item_mapping_to_boardgame_THUMBNAIL_TRUE():
-        """Testing the to_board_game function for mapping a given item that has a thumbnail to the BoardGame data
-        class"""
-        test_variables = TestToBoardGameVariables()
-
-        bgg_companion_api = BggCompanionApi()
-        test_item = test_variables.item_thumbnail_true
-        test_boardgame = test_variables.boardgame_thumbnail_true
-
-        actual_to_board_game = bgg_companion_api.to_board_game(test_item)
-        expected_to_board_game = test_boardgame
-
-        assert actual_to_board_game == expected_to_board_game
+        bgg_companion_api = BggCompanionApi(mock_request_client)
+        with pytest.raises(UserIsNoneError):
+            bgg_companion_api.get_collection("test_invalid_user")
 
     @staticmethod
-    def test_item_mapping_to_boardgame_THUMBNAIL_FALSE():
-        """Testing the to_board_game function for mapping a given item that doesn't have a thumbnail to the BoardGame
-        data class"""
-        test_variables = TestToBoardGameVariables()
+    def test_for_valid_user_with_no_game_collection():
+        """Testing the get_collection function for requesting a BGG collection of a valid user that does not have a game
+         collection"""
 
-        bgg_companion_api = BggCompanionApi()
-        test_item = test_variables.item_thumbnail_false
-        test_boardgame = test_variables.boardgame_thumbnail_false
+        test_variables = TestGetCollectionVariables()
 
-        actual_to_board_game = bgg_companion_api.to_board_game(test_item)
-        expected_to_board_game = test_boardgame
+        mock_response = unittest.mock.Mock(spec=["text"])
+        mock_response.text = test_variables.user_no_collection_response
+        mock_request_client = unittest.mock.Mock(spec=["request"])
+        mock_request_client.request.return_value = mock_response
 
-        assert actual_to_board_game == expected_to_board_game
+        bgg_companion_api = BggCompanionApi(mock_request_client)
+        with pytest.raises(UserHasNoCollection):
+            bgg_companion_api.get_collection("test_user_no_collection")
+
+
+class TestGetBoardGames:
+    @staticmethod
+    def test_get_board_games_with_2_ids():
+        test_variables = TestGetBoardGamesVariables()
+
+        mock_response = unittest.mock.Mock(spec=["text"])
+        mock_response.text = test_variables.two_ids_response
+        mock_request_client = unittest.mock.Mock(spec=["request"])
+        mock_request_client.request.return_value = mock_response
+
+        bgg_companion_api = BggCompanionApi(mock_request_client)
+        actual_get_board_games = bgg_companion_api.get_board_games(tuple(['187645', '6902']))
+        expected_get_board_games = test_variables.expected_two_ids
+
+        assert actual_get_board_games == expected_get_board_games
 
     @staticmethod
-    def test_item_mapping_to_boardgame_NAME_IS_DICT():
-        """Testing the to_board_game function for mapping a given item where the ["name"] value is a type OrderedDict
-        to the BoardGame data class"""
-        test_variables = TestToBoardGameVariables()
+    def test_get_board_games_with_1_id():
+        test_variables = TestGetBoardGamesVariables()
 
-        bgg_companion_api = BggCompanionApi()
-        test_item = test_variables.item_thumbnail_true
-        test_boardgame = test_variables.boardgame_thumbnail_true
+        mock_response = unittest.mock.Mock(spec=["text"])
+        mock_response.text = test_variables.one_id_response
+        mock_request_client = unittest.mock.Mock(spec=["request"])
+        mock_request_client.request.return_value = mock_response
 
-        actual_to_board_game = bgg_companion_api.to_board_game(test_item)
-        expected_to_board_game = test_boardgame
+        bgg_companion_api = BggCompanionApi(mock_request_client)
+        actual_get_board_games = bgg_companion_api.get_board_games(tuple(['6902']))
+        expected_get_board_games = test_variables.expected_one_id
 
-        assert actual_to_board_game == expected_to_board_game
-
-    @staticmethod
-    def test_item_mapping_to_boardgame_NAME_IS_LIST():
-        """Testing the to_board_game function for mapping a given item where the ["name"] value is a type list to the
-        BoardGame data class"""
-        test_variables = TestToBoardGameVariables()
-
-        bgg_companion_api = BggCompanionApi()
-        test_item = test_variables.item_thumbnail_false
-        test_boardgame = test_variables.boardgame_thumbnail_false
-
-        actual_to_board_game = bgg_companion_api.to_board_game(test_item)
-        expected_to_board_game = test_boardgame
-
-        assert actual_to_board_game == expected_to_board_game
+        assert actual_get_board_games == expected_get_board_games

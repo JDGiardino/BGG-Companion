@@ -1,7 +1,8 @@
 import dataclasses
 
-from src.bgg_companion_api import get_random_game
+from src.bgg_companion_api import BggCompanionApi
 from src.exceptions import UserIsNoneError
+from src.utils.requests_retry_client import RequestsRetryClient
 
 from flask import Flask, request, Response, abort, jsonify, render_template
 from typing import Union
@@ -14,8 +15,9 @@ app = Flask(__name__)
 def post_random_game() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
+    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
     try:
-        return jsonify(dataclasses.asdict(get_random_game(user)))
+        return jsonify(dataclasses.asdict(bgg_companion_api.get_random_game(user)))
     except UserIsNoneError as exc:
         return abort(Response(response=str(exc), status=404))
     except Exception as exc:
