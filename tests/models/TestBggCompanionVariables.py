@@ -112,6 +112,4 @@ class TestGetBoardGamesVariables:
             "filters:format(jpeg)/pic4325841.jpg",
         )
     ]
-    invalid_id_response = (
-        '<?xml version="1.0" encoding="utf-8"?><items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse"></items>'
-    )
+    invalid_id_response = '<?xml version="1.0" encoding="utf-8"?><items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse"></items>'

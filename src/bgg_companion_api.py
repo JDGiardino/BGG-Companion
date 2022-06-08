@@ -50,7 +50,7 @@ class BggCompanionApi(object):
             raise BoardGameIsNoneError(
                 "There were no board games passed that exist within BoardGameGeek."
             )  # Exception is only raised when NONE of the ids can be found, and is not raised if 1+ ids can be found.
-               # This shouldn't ever be raised since the ids are coming from get collection Board Game Geek API call.
+            # This shouldn't ever be raised since the ids are coming from get collection Board Game Geek API call.
         items = xml_parse["items"]["item"]
         if isinstance(items, OrderedDict):
             # If there is only a single game in the response make it a list as we expect later when iterating over items
