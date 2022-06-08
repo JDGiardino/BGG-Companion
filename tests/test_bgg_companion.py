@@ -2,7 +2,7 @@ import unittest.mock
 import pytest
 
 from src.bgg_companion_api import BggCompanionApi
-from src.exceptions import UserIsNoneError, UserHasNoCollection
+from src.exceptions import UserIsNoneError, UserHasNoCollection, BoardGameIsNoneError
 from tests.models.TestBggCompanionVariables import (
     TestGetCollectionVariables,
     TestGetBoardGamesVariables,
@@ -64,6 +64,7 @@ class TestGetCollection(unittest.TestCase):
 class TestGetBoardGames:
     @staticmethod
     def test_get_board_games_with_2_ids():
+        """Testing the get_board_games function when 2 ids are passed in"""
         test_variables = TestGetBoardGamesVariables()
 
         mock_response = unittest.mock.Mock(spec=["text"])
@@ -81,6 +82,7 @@ class TestGetBoardGames:
 
     @staticmethod
     def test_get_board_games_with_1_id():
+        """Testing the get_board_games function when 1 id is passed in"""
         test_variables = TestGetBoardGamesVariables()
 
         mock_response = unittest.mock.Mock(spec=["text"])
@@ -89,7 +91,21 @@ class TestGetBoardGames:
         mock_request_client.request.return_value = mock_response
 
         bgg_companion_api = BggCompanionApi(mock_request_client)
-        actual_get_board_games = bgg_companion_api.get_board_games(tuple(["6902"]))
+        actual_get_board_games = bgg_companion_api.get_board_games(tuple(["187645"]))
         expected_get_board_games = test_variables.expected_one_id
 
         assert actual_get_board_games == expected_get_board_games
+
+    @staticmethod
+    def test_get_board_games_with_invalid_id():
+        """Testing the get_board_games function when none of the ids passed in are valid in Board Game Geek"""
+        test_variables = TestGetBoardGamesVariables()
+
+        mock_response = unittest.mock.Mock(spec=["text"])
+        mock_response.text = test_variables.invalid_id_response
+        mock_request_client = unittest.mock.Mock(spec=["request"])
+        mock_request_client.request.return_value = mock_response
+
+        bgg_companion_api = BggCompanionApi(mock_request_client)
+        with pytest.raises(BoardGameIsNoneError):
+            bgg_companion_api.get_board_games(tuple(["111111111", "222222222"]))

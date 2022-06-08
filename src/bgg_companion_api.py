@@ -41,7 +41,6 @@ class BggCompanionApi(object):
         return users_game_collection
 
     @cached(cache=TTLCache(maxsize=500, ttl=300))
-    # testing this should be how many ids passed vs how many board games were in the list.  id doesn't exist error, 2 ids 2 games. no ids no games. 1 id 1 games.  exception is raised only if all ids are not exists and this is not obvious so should be a rtesrt.  why is behavior different. 1 real 1 not
     def get_board_games(self, ids: tuple[str]) -> list[BoardGame]:
         string_xml = self.request(
             f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}'
@@ -49,18 +48,22 @@ class BggCompanionApi(object):
         xml_parse = xmltodict.parse(string_xml)
         if "item" not in xml_parse["items"]:
             raise BoardGameIsNoneError(
-                "A board game was passed that does not exist within BoardGameGeek."
-            )
+                "There were no board games passed that exist within BoardGameGeek."
+            )  # Exception is only raised when NONE of the ids can be found, and is not raised if 1+ ids can be found.
+               # This shouldn't ever be raised since the ids are coming from get collection Board Game Geek API call.
         items = xml_parse["items"]["item"]
+        if isinstance(items, OrderedDict):
+            # If there is only a single game in the response make it a list as we expect later when iterating over items
+            items = [items]
         board_games = []
         for item in items:
-            board_games.append(self.to_board_game(item))
+            board_games.append(self.__to_board_game(item))
         return board_games
 
     @staticmethod
-    def to_board_game(
+    def __to_board_game(
         item: collections.OrderedDict,
-    ) -> BoardGame:  # make this priavte again and only test its caller
+    ) -> BoardGame:
         id = item["@id"]
         type = item["@type"]
         description = item["description"]
@@ -115,4 +118,4 @@ class BggCompanionApi(object):
 # LEAVE BELOW COMMENTED : Used for development testing
 if __name__ == "__main__":
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
-    print(bgg_companion_api.get_random_game("omaryahir"))
+    print(bgg_companion_api.get_random_game("JDGiardino_dev"))
