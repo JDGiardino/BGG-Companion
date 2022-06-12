@@ -4,7 +4,7 @@ from collections import OrderedDict
 from src.models.BoardGame import BoardGame
 
 
-class TestGetCollectionVariables:
+class TestGetCollectionData:
     user_collection_response = (
         '<?xml version="1.0" encoding="utf-8" standalone="yes"?><items totalitems="2"><item '
         'objecttype="thing" objectid="275213" subtype="boardgame" collid="92810535"><name '
@@ -51,7 +51,7 @@ class TestGetCollectionVariables:
     )
 
 
-class TestGetBoardGamesVariables:
+class TestGetBoardGamesData:
     two_ids_response = (
         '<?xml version="1.0" encoding="utf-8"?><items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">'
         '<item type="boardgame" id="187645"><thumbnail>https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img'
