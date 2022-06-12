@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass(frozen=True)
@@ -9,8 +10,8 @@ class BoardGame:
     description: str
     minplayers: int
     maxplayers: int
-    thumbnail: str
-    image: str
+    thumbnail: Optional[str] = None
+    image: Optional[str] = None
 
     def __post_init__(self):
         object.__setattr__(self, "id", int(self.id))

@@ -11,9 +11,10 @@ class GameFilter:
 
     def __post_init__(self):
         if self.minplayers is not None:
-            (object.__setattr__(self, "minplayers", int(self.minplayers)))
+            object.__setattr__(self, "minplayers", int(self.minplayers))
         if self.maxplayers is not None:
             object.__setattr__(self, "maxplayers", int(self.maxplayers))
         if self.exactplayers is not None:
             object.__setattr__(self, "exactplayers", int(self.exactplayers))
-        # This bypasses frozen=true by modifying the object class which all objects inherent from including dataclasses
+
+    # This bypasses frozen=true by modifying the object class which all objects inherent from including dataclasses
