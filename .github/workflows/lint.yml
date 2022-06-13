@@ -40,10 +40,10 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.9.x
+          python-version: 3.9x
 
       - name: Install linter
         run: pip install --user yamllint
