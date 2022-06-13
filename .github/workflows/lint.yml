@@ -40,13 +40,5 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: Setup Python
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.9x
-
-      - name: Install linter
-        run: pip install --user yamllint
-
-      - name: Run linter
-        uses: yamllint .
+      - name: Setup yaml-lint
+        uses: ibiqlik/action-yamllint@v3
