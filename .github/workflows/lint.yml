@@ -45,5 +45,8 @@ jobs:
         with:
           python-version: 3.9.x
 
+      - name: Install linter
+        run: pip install --user yamllint
+
       - name: Setup yaml-lint
         uses: ibiqlik/action-yamllint@v3
