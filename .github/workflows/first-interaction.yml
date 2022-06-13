@@ -1,3 +1,4 @@
+---
 name: First interaction
 
 on: # yamllint disable-line rule:truthy
