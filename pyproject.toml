@@ -16,7 +16,7 @@ yamllint = "^1.26.3"
 black = "^22.3.0"
 
 [tool.black]
-line-length = 88
+line-length = 100
 target-version = ['py37']
 extend-exclude = '/gunicorn_config.py'
 

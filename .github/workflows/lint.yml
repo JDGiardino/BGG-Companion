@@ -1,7 +1,7 @@
 ---
 name: Lint
 
-on: # yamllint disable-line rule:truthy
+on: #  yamllint disable-line rule:truthy
   push:
     branches:
       - main
@@ -26,10 +26,10 @@ jobs:
       - name: Display Python version
         run: echo "The Python version is $(which python)"
 
-      - name: Install Python dependencies
+      - name: Install linter
         run: pip install black
 
-      - name : Run linter
+      - name: Run linter
         run: python -m black . --check --diff
 
   run-yaml-linter:
@@ -40,5 +40,13 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: Setup yaml-lint
-        uses: ibiqlik/action-yamllint@v3
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9.x
+
+      - name: Install linter
+        run: brew install yamllint
+
+      - name: Run linter
+        uses: yamllint .
