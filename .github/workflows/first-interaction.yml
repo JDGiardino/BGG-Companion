@@ -16,5 +16,5 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: '#### Hi 👋 Thank you for opening your first issue in BGG-Companion!  
           Feel free to reach out to JDGiardino for pressing issues.'
-          pr-message: '#### Hi 👋 Thank you for opening your first pull request in BGG-Companion! Be sure to checkout the
-          [contributing guide](https://github.com/JDGiardino/BGG-Companion/blob/main/README.md#contributing)'
+          pr-message: '#### Hi 👋 Thank you for opening your first pull request in BGG-Companion! Be sure to checkout 
+          the [contributing guide](https://github.com/JDGiardino/BGG-Companion/blob/main/README.md#contributing)'
