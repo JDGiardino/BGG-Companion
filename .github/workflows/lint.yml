@@ -49,4 +49,4 @@ jobs:
         run: pip install --user yamllint
 
       - name: Setup yaml-lint
-        uses: ibiqlik/action-yamllint@v3
+        run: yamllint .
