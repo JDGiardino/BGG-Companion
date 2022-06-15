@@ -22,9 +22,7 @@ class BggCompanionApi(object):
 
     @cached(cache=TTLCache(maxsize=500, ttl=300))
     def get_collection(self, user: str) -> dict:
-        string_xml = self.request(
-            f"https://boardgamegeek.com/xmlapi2/collection?username={user}"
-        )
+        string_xml = self.request(f"https://boardgamegeek.com/xmlapi2/collection?username={user}")
         xml_parse = xmltodict.parse(string_xml)
         if (
             "errors" in xml_parse
@@ -34,17 +32,13 @@ class BggCompanionApi(object):
                 "Invalid username specified.  Please enter a valid https://boardgamegeek.com/ username."
             )
         if xml_parse["items"]["@totalitems"] == "0":
-            raise UserHasNoCollection(
-                "This user does not have a game collection on BoardGameGeek."
-            )
+            raise UserHasNoCollection("This user does not have a game collection on BoardGameGeek.")
         users_game_collection = xml_parse["items"]["item"]
         return users_game_collection
 
     @cached(cache=TTLCache(maxsize=500, ttl=300))
     def get_board_games(self, ids: tuple[str]) -> list[BoardGame]:
-        string_xml = self.request(
-            f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}'
-        )
+        string_xml = self.request(f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}')
         xml_parse = xmltodict.parse(string_xml)
         if "item" not in xml_parse["items"]:
             raise BoardGameIsNoneError(

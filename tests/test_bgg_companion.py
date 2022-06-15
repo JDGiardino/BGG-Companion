@@ -73,9 +73,7 @@ class TestGetBoardGames:
         mock_request_client.request.return_value = mock_response
 
         bgg_companion_api = BggCompanionApi(mock_request_client)
-        actual_get_board_games = bgg_companion_api.get_board_games(
-            tuple(["187645", "6902"])
-        )
+        actual_get_board_games = bgg_companion_api.get_board_games(tuple(["187645", "6902"]))
         expected_get_board_games = test_data.expected_two_ids
 
         assert actual_get_board_games == expected_get_board_games
