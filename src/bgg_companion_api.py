@@ -112,7 +112,8 @@ class BggCompanionApi(object):
     ) -> list[BoardGame]:
         users_board_games = self.get_users_board_games(user)
         filtered_board_games = FilterBoardGames(
-            board_games=users_board_games, game_filter=GameFilter(maxplayers=maxplayers, exactplayers=exactplayers)
+            board_games=users_board_games,
+            game_filter=GameFilter(maxplayers=maxplayers, exactplayers=exactplayers),
         )
         return filtered_board_games.filter_games()
 
