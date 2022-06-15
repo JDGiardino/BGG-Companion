@@ -102,20 +102,22 @@ class BggCompanionApi(object):
             id_list.append(game["@objectid"])
         return id_list
 
-    def get_random_game(
-        self, user: str, maxplayers=None, exactplayers=None
-    ) -> BoardGame:
+    def get_users_board_games(self, user: str) -> list[BoardGame]:
         ids_list = self.get_users_game_ids(user)
-        board_games = self.get_board_games(tuple(ids_list))
-        game_filter = GameFilter(maxplayers=maxplayers, exactplayers=exactplayers)
+        users_board_games = self.get_board_games(tuple(ids_list))
+        return users_board_games
+
+    def get_users_filtered_board_games(
+        self, user: str, maxplayers=None, exactplayers=None
+    ) -> list[BoardGame]:
+        users_board_games = self.get_users_board_games(user)
         filtered_board_games = FilterBoardGames(
-            board_games=board_games, game_filter=game_filter
+            board_games=users_board_games, game_filter=GameFilter(maxplayers=maxplayers, exactplayers=exactplayers)
         )
-        game = random.choice(filtered_board_games.filter_games())
-        return game
+        return filtered_board_games.filter_games()
 
 
 # LEAVE BELOW COMMENTED : Used for development testing
-if __name__ == "__main__":
-    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
-    print(bgg_companion_api.get_random_game("JDGiardino_dev"))
+# if __name__ == "__main__":
+#     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+#     print(bgg_companion_api.get_users_filtered_board_games("JDGiardino"))
