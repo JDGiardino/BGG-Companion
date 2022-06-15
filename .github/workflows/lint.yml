@@ -2,8 +2,6 @@
 name: Lint
 
 on:  # yamllint disable-line rule:truthy
-
-  # Trigger the workflow on push or pull request but only for the main branch
   push:
     branches:
       - main
@@ -13,7 +11,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   run-python-linter:
-    name: Run Python linter
+    name: Python linter
     runs-on: ubuntu-latest
 
     steps:
@@ -28,14 +26,27 @@ jobs:
       - name: Display Python version
         run: echo "The Python version is $(which python)"
 
-      - name: Install Python dependencies
+      - name: Install linter
         run: pip install black
 
-      - name : Run linter
+      - name: Run linter
         run: python -m black . --check --diff
 
-      # I want to use this action for linters but it doesn't seem to have any "--exclude" functionality
-      #- name: Run linter
-        #uses: wearerequired/lint-action@v2.0.0
-        #with:
-          #black : true
+  run-yaml-linter:
+    name: Yaml Linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9.x
+
+      - name: Install linter
+        run: pip install --user yamllint
+
+      - name: Setup yaml-lint
+        run: yamllint .
