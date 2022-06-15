@@ -13,6 +13,7 @@ async function get_random_game() {
                 const game = await response.json();
                 const game_field = document.getElementById("game-name");
                 game_field.innerHTML += game.name.link("https://boardgamegeek.com/boardgame/" + game.id);
+                game_field.innerHTML += `  (${game.yearpublished})`;
 
                 const img = document.getElementById("game-thumbnail");
                 img.src = game.image;
