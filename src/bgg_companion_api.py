@@ -63,6 +63,7 @@ class BggCompanionApi(object):
         description = item["description"]
         minplayers = item["minplayers"]["@value"]
         maxplayers = item["maxplayers"]["@value"]
+        yearpublished = item["yearpublished"]["@value"]
         if "thumbnail" in item and "image" in item:
             thumbnail = item["thumbnail"]
             image = item["image"]
@@ -85,6 +86,7 @@ class BggCompanionApi(object):
             type=type,
             minplayers=minplayers,
             maxplayers=maxplayers,
+            yearpublished=yearpublished,
             thumbnail=thumbnail,
             image=image,
         )
