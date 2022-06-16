@@ -5,7 +5,6 @@ from src.exceptions import UserIsNoneError
 from src.utils.requests_retry_client import RequestsRetryClient
 
 from flask import Flask, request, Response, abort, jsonify, render_template
-from flask_cors import cross_origin
 from typing import Union
 
 app = Flask(__name__)
@@ -13,7 +12,6 @@ app = Flask(__name__)
 
 
 @app.route("/random_game")
-@cross_origin(origins="http://localhost:3000")
 def post_random_game() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
