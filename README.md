@@ -19,6 +19,8 @@ Interested in making code changes or suggesting improvements?  All changes follo
 
 Instructions for local development setup can be found in [the wiki here](https://github.com/JDGiardino/BGG-Companion/wiki/Development-Setup-Instructions).
 
+Alias commands used for development can be found in [the wiki here](https://github.com/JDGiardino/BGG-Companion/wiki/Development-Alias-Commands).
+
 ## Errors
 Running into issues using BGG Companion?  Seeing unexpected error from commands?  Is something unclear?  
 
