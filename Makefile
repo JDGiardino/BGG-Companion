@@ -8,7 +8,3 @@ run-dev:		## Command for running a local dev instance of the flask application
 .PHONY:
 run-tests:		## Command for running all pytests
 		poetry run pytest -vvvv
-
-.PHONY:
-test:			## Command for running all pytests
-		poetry run pytest -vvvv
