@@ -11,17 +11,11 @@ from flask import (
     abort,
     jsonify,
     render_template,
-    send_from_directory,
 )
 from typing import Union
 
-app = Flask(__name__, static_folder="frontend/build", static_url_path="/")
+app = Flask(__name__)
 # Run this by poetry run flask run
-
-
-@app.route("/", defaults={"path": ""})
-def serve(path):
-    return send_from_directory(app.static_folder, "index.html")
 
 
 @app.route("/random_game")
