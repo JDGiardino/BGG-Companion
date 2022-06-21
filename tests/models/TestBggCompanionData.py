@@ -72,6 +72,7 @@ class TestGetBoardGamesData:
             description="StarWars:Rebellion is a board game of epic conflict.",
             minplayers=2,
             maxplayers=4,
+            yearpublished=2016,
             thumbnail="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img"
             "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
             image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
@@ -84,6 +85,7 @@ class TestGetBoardGamesData:
             description="The ultimate test of advanced territorial strategy.",
             minplayers=2,
             maxplayers=2,
+            yearpublished=1989,
             thumbnail=None,
             image=None,
         ),
@@ -106,6 +108,7 @@ class TestGetBoardGamesData:
             description="StarWars:Rebellion is a board game of epic conflict.",
             minplayers=2,
             maxplayers=4,
+            yearpublished=2016,
             thumbnail="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img"
             "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
             image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
