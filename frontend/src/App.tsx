@@ -11,13 +11,12 @@ type GameT = {
   type: string;
 }
 function App() {
-  const [randomGame, setRandomGame] = useState<GameT | undefined>()
+  const [randomGame, setRandomGame] = useState<GameT | undefined>();
   useEffect(() => {
     fetch('/random_game?user=JDGiardino').then(response => response.json())
     .then(data => {
-      console.log(data);
       setRandomGame(data);
-    })
+    });
   }, [])
 
   return (
