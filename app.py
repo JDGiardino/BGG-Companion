@@ -1,10 +1,19 @@
 import dataclasses
+import random
 
 from src.bgg_companion_api import BggCompanionApi
 from src.exceptions import UserIsNoneError
 from src.utils.requests_retry_client import RequestsRetryClient
 
-from flask import Flask, request, Response, abort, jsonify, render_template, make_response
+from flask import (
+    Flask,
+    request,
+    Response,
+    abort,
+    jsonify,
+    render_template,
+    make_response,
+)
 from typing import Union
 
 app = Flask(__name__)
@@ -12,12 +21,13 @@ app = Flask(__name__)
 
 
 @app.route("/random_game")
-def post_random_game() -> Union[str, Response]:
+def post_random_game_from_users_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
     try:
-        resp = jsonify(dataclasses.asdict(bgg_companion_api.get_random_game(user)))
+        filtered_board_games = bgg_companion_api.get_users_filtered_board_games(user)
+        resp = jsonify(dataclasses.asdict(random.choice(filtered_board_games)))
         resp.set_cookie('username', user)
         return resp
     except UserIsNoneError as exc:
