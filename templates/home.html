@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script type=text/javascript src="{{ url_for('static', filename='app.js') }}" defer></script>
     <title>BGGC Random Game</title>
 </head>
 <body>
@@ -12,7 +13,6 @@
         <p id="page-visits">
         </p>
     </div>
-    <script type=text/javascript src="{{ url_for('static', filename='page_visits.js') }}"></script>
     <nav>
         <table>
             <tbody>
@@ -28,7 +28,6 @@
         <h2>Random Game</h2>
         <label for="user">Enter a <a href="https://boardgamegeek.com/" target="_blank">BoardGameGeek</a> user to choose a random game from their collection</label>
         <input type="text" name="user" id="user" required>
-        <script type=text/javascript src="{{ url_for('static', filename='last_username.js') }}"></script>
         <br>
         <br>
         <input type="submit" value="Submit" id="submit">
@@ -40,6 +39,5 @@
         <p id="game-error">
         </p>
     </div>
-    <script type=text/javascript src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>

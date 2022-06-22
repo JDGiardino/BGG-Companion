@@ -49,11 +49,9 @@ def page_visit_counter():
 
 @app.route("/last_username")
 def last_username():
-    return request.cookies.get("username")
+    return request.cookies.get("username", "")
 
 
 @app.route("/home")
 def home():
-    page_visit_counter()
-    last_username()
     return render_template("home.html")
