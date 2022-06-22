@@ -28,7 +28,7 @@ def post_random_game_from_users_collection() -> Union[str, Response]:
     try:
         filtered_board_games = bgg_companion_api.get_users_filtered_board_games(user)
         resp = jsonify(dataclasses.asdict(random.choice(filtered_board_games)))
-        resp.set_cookie('username', user)
+        resp.set_cookie("username", user)
         return resp
     except UserIsNoneError as exc:
         return abort(Response(response=str(exc), status=404))
@@ -38,18 +38,18 @@ def post_random_game_from_users_collection() -> Union[str, Response]:
 
 @app.route("/page_visit_counter")
 def page_visit_counter():
-    count = int(request.cookies.get('visit-count', 0))
+    count = int(request.cookies.get("visit-count", 0))
     count += 1
-    message = f'You have visited BGG-Companion ' + str(count) + ' times!'
+    message = f"You have visited BGG-Companion " + str(count) + " times!"
 
     resp = make_response(message)
-    resp.set_cookie('visit-count', str(count))
+    resp.set_cookie("visit-count", str(count))
     return resp
 
 
 @app.route("/last_username")
 def last_username():
-    return request.cookies.get('username')
+    return request.cookies.get("username")
 
 
 @app.route("/home")
