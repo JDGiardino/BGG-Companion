@@ -8,6 +8,11 @@
     <img src= https://user-images.githubusercontent.com/14614633/154339148-fdd2fcdc-41d6-49d6-b7d0-8a2c2d3a48b7.jpg alt="BGG Image" height="100" width="300"/>
     <hr>
     <h1>BGG Companion</h1>
+    <div id="page-visit-counter">
+        <p id="page-visits">
+        </p>
+    </div>
+    <script type=text/javascript src="{{ url_for('static', filename='page_visits.js') }}"></script>
     <nav>
         <table>
             <tbody>
@@ -22,7 +27,8 @@
     <div id="random-game-request">
         <h2>Random Game</h2>
         <label for="user">Enter a <a href="https://boardgamegeek.com/" target="_blank">BoardGameGeek</a> user to choose a random game from their collection</label>
-        <input type="text" name="user" id="user" value="JDGiardino" required>
+        <input type="text" name="user" id="user" required>
+        <script type=text/javascript src="{{ url_for('static', filename='last_username.js') }}"></script>
         <br>
         <br>
         <input type="submit" value="Submit" id="submit">
