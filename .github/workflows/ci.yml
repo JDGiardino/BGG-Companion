@@ -53,7 +53,7 @@ jobs:
 
         - name: Run Front End Tests
           run: |
-          cd frontend/
-          npm install
-          npm run test
+            cd frontend/
+            npm install
+            npm run test
 
