@@ -44,3 +44,16 @@ jobs:
         run: |
           source .venv/bin/activate
           pytest tests/
+  FrontEndCI:
+    name: Front End Continous integration
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+        - uses: actions/setup-node@v3
+
+        - name: Run Front End Tests
+          run: |
+          cd frontend/
+          npm install
+          npm run test
+
