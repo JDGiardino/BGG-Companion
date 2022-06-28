@@ -1,4 +1,5 @@
-function clear_random_game_response_elements() {
+(async () => {
+  function clear_random_game_response_elements() {
     document.getElementById("game-name").innerHTML = "";
     document.getElementById("game-thumbnail").src = "";
     document.getElementById("game-error").innerHTML = "";
@@ -26,5 +27,34 @@ async function get_random_game() {
         });
 }
 
+async function last_username(){
+      fetch('last_username')
+            .then(async response => {
+                if (response.ok) {
+                    document.getElementById("user").value = await response.text();
+                } else {
+                    const error_field = document.getElementById("user");
+                    error_field.innerText = await response.text();
+                }
+            });
+}
+
+async function page_visits(){
+      fetch('page_visit_counter')
+        .then(async response => {
+            if (response.ok) {
+                const page_visits = await response.text();
+                const page_visits_field = document.getElementById("page-visits");
+                page_visits_field.innerHTML = page_visits;
+            } else {
+                const error_field = document.getElementById("page-visits");
+                error_field.innerText = await response.text();
+            }
+        });
+}
 const submit_button = document.getElementById("submit");
 submit_button.addEventListener("click",  () => get_random_game());
+
+await last_username();
+await page_visits();
+})();
