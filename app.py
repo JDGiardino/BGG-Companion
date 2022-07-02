@@ -38,6 +38,22 @@ def post_random_game_from_users_collection() -> Union[str, Response]:
         return abort(Response(response=str(exc), status=500))
 
 
+@app.route("/all_games")
+def post_all_games_from_users_collection() -> Union[str, Response]:
+    args = request.args
+    user = args.get("user")
+    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+    try:
+        board_games = bgg_companion_api.get_users_board_games(user)
+        resp = jsonify(board_games)
+        resp.set_cookie(key=USERNAME_COOKIE_NAME, value=user)
+        return resp
+    except UserIsNoneError as exc:
+        return abort(Response(response=str(exc), status=404))
+    except Exception as exc:
+        return abort(Response(response=str(exc), status=500))
+
+
 @app.route("/page_visit_counter")
 def page_visit_counter():
     count = int(request.cookies.get(VISIT_COUNT_COOKIE_NAME, 0))
@@ -57,3 +73,8 @@ def last_username():
 @app.route("/home")
 def home():
     return render_template("home.html")
+
+
+@app.route("/collection")
+def collection():
+    return render_template("collection.html")
