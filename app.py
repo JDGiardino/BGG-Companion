@@ -3,7 +3,7 @@ import random
 
 from src.bgg_companion_api import BggCompanionApi
 from src.exceptions import UserIsNoneError
-from src.utils.requests_retry_client import RequestsRetryClient
+from src.utils.requests_retry_client import RequestsRetryClient, make_retry_strategy, DEFAULT_HTTP_RETRY_CODES
 
 from flask import (
     Flask,
@@ -26,7 +26,12 @@ VISIT_COUNT_COOKIE_NAME = "visit-count"
 def post_random_game_from_users_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
-    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+
+    # BGG's API usually responds with a 202 and retrying gets the 200
+    retry_codes = list(DEFAULT_HTTP_RETRY_CODES) + [202]
+    retry = make_retry_strategy(retry_codes=retry_codes)
+    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(retry_strategy=retry))
+
     try:
         filtered_board_games = bgg_companion_api.get_users_filtered_board_games(user)
         resp = jsonify(dataclasses.asdict(random.choice(filtered_board_games)))
