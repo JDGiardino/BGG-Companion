@@ -1,6 +1,6 @@
 import collections
-import random
 import xmltodict
+import time
 
 from src.models.BoardGame import BoardGame
 from src.models.GameFilter import GameFilter
@@ -18,6 +18,11 @@ class BggCompanionApi(object):
 
     def request(self, url: str):
         response = self.request_client.request(method="GET", url=url)
+        if response.text == '<?xml version="1.0" encoding="utf-8" standalone="yes"?>\n<message>\n\tYour request for ' \
+                            'this collection has been accepted and will be processed.  Please try again later for ' \
+                            'access.\n</message>':
+            time.sleep(5)
+            response = self.request_client.request(method="GET", url=url)
         return response.text
 
     @cached(cache=TTLCache(maxsize=500, ttl=300))
@@ -117,4 +122,4 @@ class BggCompanionApi(object):
 # LEAVE BELOW COMMENTED : Used for development testing
 # if __name__ == "__main__":
 #     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
-#     print(bgg_companion_api.get_users_filtered_board_games("JDGiardino"))
+#     print(bgg_companion_api.get_users_filtered_board_games("Havox"))
