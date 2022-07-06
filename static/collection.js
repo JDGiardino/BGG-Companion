@@ -1,22 +1,27 @@
 (async () => {
+    function clear_all_games_table(){
+        const table = document.getElementById('table');
+        table.innerHTML = "";
+    }
+
 async function create_all_games_table() {
+    clear_all_games_table();
     const user = document.getElementById("user").value;
     fetch('/all_games?user=' + user)
         .then(async response => {
             if (response.ok) {
                 const games = await response.json();
+                const table = document.getElementById('table')
+                games.forEach(addGamesToTable)
 
-                const table_element = document.getElementById("table");
-                let table = '';
-
-                for(let i=0; i < games.length; i++) {
-                    table += '<tr>'
-                    table += '<td>' + `${games[i].name} (${games[i].yearpublished})` + '</td>';
-                    table += '<td>' + `${games[i].minplayers} - ${games[i].maxplayers} players` + '</td>';
-                    table += '</tr>'
+                function addGamesToTable(game, index){
+                    const row = table.insertRow(index);
+                    const cell_one = row.insertCell(0);
+                    cell_one.innerHTML = `${game.name} (${game.yearpublished})`
+                    const cell_two = row.insertCell(1);
+                    cell_two.innerHTML = `${game.minplayers} - ${game.maxplayers} players`
                 }
 
-                table_element.innerHTML += table
             } else {
                 const error_field = document.getElementById("game-error");
                 error_field.innerText = await response.text();
