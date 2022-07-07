@@ -1,7 +1,7 @@
 (async () => {
     function clear_all_games_table(){
         const table = document.getElementById('table');
-        table.innerHTML = "";
+        table.innerText = "";
     }
 
 async function create_all_games_table() {
@@ -17,9 +17,9 @@ async function create_all_games_table() {
                 function addGamesToTable(game, index){
                     const row = table.insertRow(index);
                     const cell_one = row.insertCell(0);
-                    cell_one.innerHTML = `${game.name} (${game.yearpublished})`
+                    cell_one.innerText = `${game.name} (${game.yearpublished})`
                     const cell_two = row.insertCell(1);
-                    cell_two.innerHTML = `${game.minplayers} - ${game.maxplayers} players`
+                    cell_two.innerText = `${game.minplayers} - ${game.maxplayers} players`
                 }
 
             } else {

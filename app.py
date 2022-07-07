@@ -23,7 +23,7 @@ VISIT_COUNT_COOKIE_NAME = "visit-count"
 
 
 @app.route("/random_game")
-def post_random_game_from_users_collection() -> Union[str, Response]:
+def get_random_game_from_users_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
@@ -39,7 +39,7 @@ def post_random_game_from_users_collection() -> Union[str, Response]:
 
 
 @app.route("/all_games")
-def post_all_games_from_users_collection() -> Union[str, Response]:
+def get_all_games_from_users_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
