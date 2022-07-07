@@ -115,6 +115,6 @@ class BggCompanionApi(object):
 
 
 # LEAVE BELOW COMMENTED : Used for development testing
-if __name__ == "__main__":
-    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
-    print(bgg_companion_api.get_users_filtered_board_games("MeeplesOnTheGround"))
+# if __name__ == "__main__":
+#     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+#     print(bgg_companion_api.get_users_filtered_board_games("JDGiardino"))
