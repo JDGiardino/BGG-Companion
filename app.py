@@ -3,7 +3,11 @@ import random
 
 from src.bgg_companion_api import BggCompanionApi
 from src.exceptions import UserIsNoneError
-from src.utils.requests_retry_client import RequestsRetryClient, make_retry_strategy, DEFAULT_HTTP_RETRY_CODES
+from src.utils.requests_retry_client import (
+    RequestsRetryClient,
+    make_retry_strategy,
+    DEFAULT_HTTP_RETRY_CODES,
+)
 
 from flask import (
     Flask,
