@@ -1,8 +1,8 @@
 (async () => {
   function clear_random_game_response_elements() {
-    document.getElementById("game-name").innerHTML = "";
+    document.getElementById("game-name").innerText = "";
     document.getElementById("game-thumbnail").src = "";
-    document.getElementById("game-error").innerHTML = "";
+    document.getElementById("game-error").innerText = "";
 }
 
 async function get_random_game() {
@@ -13,8 +13,8 @@ async function get_random_game() {
             if (response.ok) {
                 const game = await response.json();
                 const game_field = document.getElementById("game-name");
-                game_field.innerHTML += game.name.link("https://boardgamegeek.com/boardgame/" + game.id);
-                game_field.innerHTML += `  (${game.yearpublished})`;
+                game_field.innerText += game.name.link("https://boardgamegeek.com/boardgame/" + game.id);
+                game_field.innerText += `  (${game.yearpublished})`;
 
                 const img = document.getElementById("game-thumbnail");
                 img.src = game.image;
@@ -45,7 +45,7 @@ async function page_visits(){
             if (response.ok) {
                 const page_visits = await response.text();
                 const page_visits_field = document.getElementById("page-visits");
-                page_visits_field.innerHTML = page_visits;
+                page_visits_field.innerText = page_visits;
             } else {
                 const error_field = document.getElementById("page-visits");
                 error_field.innerText = await response.text();
