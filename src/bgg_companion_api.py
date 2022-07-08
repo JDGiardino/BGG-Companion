@@ -1,6 +1,5 @@
 import collections
 import xmltodict
-import time
 
 from src.models.BoardGame import BoardGame
 from src.models.GameFilter import GameFilter
