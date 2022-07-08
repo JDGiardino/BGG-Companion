@@ -37,7 +37,9 @@ class BggCompanionApi(object):
 
     @cached(cache=TTLCache(maxsize=500, ttl=300))
     def get_board_games(self, ids: tuple[str]) -> list[BoardGame]:
-        string_xml = self.request(f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}&stats=1')
+        string_xml = self.request(
+            f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}&stats=1'
+        )
         xml_parse = xmltodict.parse(string_xml)
         if "item" not in xml_parse["items"]:
             raise BoardGameIsNoneError(
@@ -126,6 +128,6 @@ class BggCompanionApi(object):
 
 
 # LEAVE BELOW COMMENTED : Used for development testing
-if __name__ == "__main__":
-    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
-    print(bgg_companion_api.get_users_filtered_board_games("JDGiardino"))
+# if __name__ == "__main__":
+#     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+#     print(bgg_companion_api.get_users_filtered_board_games("JDGiardino"))
