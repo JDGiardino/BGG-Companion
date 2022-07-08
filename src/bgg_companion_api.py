@@ -1,5 +1,4 @@
 import collections
-import random
 import xmltodict
 
 from src.models.BoardGame import BoardGame
@@ -38,7 +37,7 @@ class BggCompanionApi(object):
 
     @cached(cache=TTLCache(maxsize=500, ttl=300))
     def get_board_games(self, ids: tuple[str]) -> list[BoardGame]:
-        string_xml = self.request(f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}')
+        string_xml = self.request(f'https://api.geekdo.com/xmlapi2/thing?id={",".join(ids)}&stats=1')
         xml_parse = xmltodict.parse(string_xml)
         if "item" not in xml_parse["items"]:
             raise BoardGameIsNoneError(
@@ -64,12 +63,21 @@ class BggCompanionApi(object):
         minplayers = item["minplayers"]["@value"]
         maxplayers = item["maxplayers"]["@value"]
         yearpublished = item["yearpublished"]["@value"]
+        averagerating = item["statistics"]["ratings"]["average"]["@value"]
+        complexity = item["statistics"]["ratings"]["averageweight"]["@value"]
         if "thumbnail" in item and "image" in item:
             thumbnail = item["thumbnail"]
             image = item["image"]
         else:
             thumbnail = None
             image = None
+        if isinstance(item["statistics"]["ratings"]["ranks"]["rank"], OrderedDict):
+            overallrank = item["statistics"]["ratings"]["ranks"]["rank"]["@value"]
+        elif isinstance(item["statistics"]["ratings"]["ranks"]["rank"], list):
+            for a_dict in item["statistics"]["ratings"]["ranks"]["rank"]:
+                if a_dict["@type"] == "subtype":
+                    overallrank = a_dict["@value"]
+                    break
         if isinstance(item["name"], OrderedDict):
             name = item["name"]["@value"]
         elif isinstance(item["name"], list):
@@ -87,6 +95,9 @@ class BggCompanionApi(object):
             minplayers=minplayers,
             maxplayers=maxplayers,
             yearpublished=yearpublished,
+            averagerating=averagerating,
+            complexity=complexity,
+            overallrank=overallrank,
             thumbnail=thumbnail,
             image=image,
         )
@@ -115,6 +126,6 @@ class BggCompanionApi(object):
 
 
 # LEAVE BELOW COMMENTED : Used for development testing
-# if __name__ == "__main__":
-#     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
-#     print(bgg_companion_api.get_users_filtered_board_games("JDGiardino"))
+if __name__ == "__main__":
+    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+    print(bgg_companion_api.get_users_filtered_board_games("JDGiardino"))
