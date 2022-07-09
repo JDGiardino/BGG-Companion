@@ -66,7 +66,7 @@ class TestGetBoardGamesData:
         'The ultimate test of advanced territorial strategy.</description><yearpublished value="1989"/>'
         '<minplayers value="2"/><maxplayers value="2"/><statistics page="1"><ratings><average value="5.63488" /><ranks>'
         ' <rank type="subtype" id="1" name="boardgame" value="17645"/></ranks><averageweight value="1.625"/>'
-        ' </ratings></statistics></item></items>'
+        " </ratings></statistics></item></items>"
     )
     expected_two_ids = [
         BoardGame(
@@ -81,9 +81,9 @@ class TestGetBoardGamesData:
             complexity=3.733,
             overallrank=8,
             thumbnail="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img"
-                      "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
+            "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
             image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
-                  "filters:format(jpeg)/pic4325841.jpg",
+            "filters:format(jpeg)/pic4325841.jpg",
         ),
         BoardGame(
             id=6902,
@@ -124,9 +124,9 @@ class TestGetBoardGamesData:
             complexity=3.733,
             overallrank=8,
             thumbnail="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img"
-                      "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
+            "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
             image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
-                  "filters:format(jpeg)/pic4325841.jpg",
+            "filters:format(jpeg)/pic4325841.jpg",
         )
     ]
     invalid_id_response = '<?xml version="1.0" encoding="utf-8"?><items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse"></items>'
