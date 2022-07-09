@@ -30,11 +30,7 @@ VISIT_COUNT_COOKIE_NAME = "visit-count"
 def get_random_game_from_users_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
-
-    # BGG's API usually responds with a 202 and retrying gets the 200
-    retry_codes = list(DEFAULT_HTTP_RETRY_CODES) + [202]
-    retry = make_retry_strategy(retry_codes=retry_codes)
-    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(retry_strategy=retry))
+    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
 
     try:
         filtered_board_games = bgg_companion_api.get_users_filtered_board_games(user)
@@ -51,10 +47,7 @@ def get_random_game_from_users_collection() -> Union[str, Response]:
 def get_all_games_from_users_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
-
-    retry_codes = list(DEFAULT_HTTP_RETRY_CODES) + [202]
-    retry = make_retry_strategy(retry_codes=retry_codes)
-    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(retry_strategy=retry))
+    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
 
     try:
         board_games = bgg_companion_api.get_users_board_games(user)
