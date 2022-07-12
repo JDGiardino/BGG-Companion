@@ -27,6 +27,10 @@ DEFAULT_HTTP_RETRY_CODES: tuple[int, ...] = (
     511,  # network auth
 )
 
+BGG_API_HTTP_RETRY_CODES: tuple[int, ...] = (
+    202,  # BGG's API response always returns a 202 asking to please try again later for access
+)
+
 
 def make_retry_strategy(
     backoff_factor: Optional[int] = None,
@@ -39,7 +43,7 @@ def make_retry_strategy(
     if not backoff_factor:
         backoff_factor = 3
     if not retry_codes:
-        retry_codes = list(DEFAULT_HTTP_RETRY_CODES)
+        retry_codes = list(DEFAULT_HTTP_RETRY_CODES + BGG_API_HTTP_RETRY_CODES)
     if not methods:
         methods = list(DEFAULT_HTTP_METHODS)
 

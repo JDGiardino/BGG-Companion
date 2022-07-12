@@ -3,7 +3,11 @@ import random
 
 from src.bgg_companion_api import BggCompanionApi
 from src.exceptions import UserIsNoneError
-from src.utils.requests_retry_client import RequestsRetryClient
+from src.utils.requests_retry_client import (
+    RequestsRetryClient,
+    make_retry_strategy,
+    DEFAULT_HTTP_RETRY_CODES,
+)
 
 from flask import (
     Flask,
@@ -27,6 +31,7 @@ def get_random_game_from_users_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+
     try:
         filtered_board_games = bgg_companion_api.get_users_filtered_board_games(user)
         resp = jsonify(dataclasses.asdict(random.choice(filtered_board_games)))
@@ -43,6 +48,7 @@ def get_all_games_from_users_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+
     try:
         board_games = bgg_companion_api.get_users_board_games(user)
         resp = jsonify(board_games)
