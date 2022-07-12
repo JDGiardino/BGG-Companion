@@ -29,3 +29,7 @@ class BoardGame:
         else:
             object.__setattr__(self, "overallrank", float(self.overallrank))
         # This bypasses frozen=true by modifying the object class which all objects inherent from including dataclasses
+
+    def __getitem__(self, item):
+        return getattr(self, item)
+
