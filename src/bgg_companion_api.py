@@ -1,6 +1,8 @@
 import collections
 import xmltodict
+import logging
 
+from logging import StreamHandler
 from src.models.BoardGame import BoardGame
 from src.models.GameFilter import GameFilter
 from src.exceptions import UserIsNoneError, BoardGameIsNoneError, UserHasNoCollection
@@ -10,6 +12,11 @@ from src.bgg_companion_game_filter import FilterBoardGames
 from typing import OrderedDict
 from cachetools import cached, TTLCache
 
+logger = logging.getLogger(__name__)
+
+# Logging
+    # Start with the Logger Object which takes a message and info.  This calls the Handler which knows what to do with the message (email, file, etc.) finally the OFrmatter formats the log
+
 
 class BggCompanionApi(object):
     def __init__(self, request_client):
@@ -17,6 +24,7 @@ class BggCompanionApi(object):
 
     def request(self, url: str):
         response = self.request_client.request(method="GET", url=url)
+        logging.info(f"Made a request to {url}")
         return response.text
 
     @cached(cache=TTLCache(maxsize=500, ttl=300))
