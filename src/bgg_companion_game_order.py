@@ -7,14 +7,41 @@ class OrderBoardGames:
         self.order_by = order_by
 
     def order_games(self) -> list[BoardGame]:
-        ordered_board_games = []
-        if self.order_by == "rank":
-            ordered_board_games = self.__order_by_rank(ordered_board_games)
+        if self.order_by == "alphabet":
+            ordered_board_games = self.__order_by_alphabet()
+            return ordered_board_games
+        elif self.order_by == "rank":
+            ordered_board_games = self.__order_by_rank()
+            return ordered_board_games
+        elif self.order_by == "rating":
+            ordered_board_games = self.__order_by_rating()
+            return ordered_board_games
+        elif self.order_by == "complexity":
+            ordered_board_games = self.__order_by_complexity()
+            return ordered_board_games
+        else:
+            ordered_board_games = self.__order_by_alphabet()
             return ordered_board_games
 
-    def __order_by_rank(self, ordered_board_games: list) -> list[BoardGame]:
+    def __order_by_alphabet(self) -> list[BoardGame]:
+        ordered_board_games = self.board_games
+        ordered_board_games.sort(key=lambda x: x.name)
+        return ordered_board_games
+
+    def __order_by_rank(self) -> list[BoardGame]:
+        ordered_board_games = []
         for game in self.board_games:
-            if isinstance(game["overallrank"], float): # think through again, check if attribute is a float or always make it a float and look for -1 or obvious variable name for what is equal
+            if isinstance(game["overallrank"], float):
                 ordered_board_games.append(game)
         ordered_board_games.sort(key=lambda x: x.overallrank)
+        return ordered_board_games
+
+    def __order_by_rating(self) -> list[BoardGame]:
+        ordered_board_games = self.board_games
+        ordered_board_games.sort(key=lambda x: x.averagerating, reverse=True)
+        return ordered_board_games
+
+    def __order_by_complexity(self) -> list[BoardGame]:
+        ordered_board_games = self.board_games
+        ordered_board_games.sort(key=lambda x: x.complexity, reverse=True)
         return ordered_board_games

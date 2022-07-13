@@ -43,14 +43,15 @@ def get_random_game_from_users_collection() -> Union[str, Response]:
         return abort(Response(response=str(exc), status=500))
 
 
-@app.route("/all_games")
-def get_all_games_from_users_collection() -> Union[str, Response]:
+@app.route("/ordered_games")
+def get_users_ordered_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
+    order_by = args.get("orderby")
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
 
     try:
-        board_games = bgg_companion_api.get_users_board_games(user)
+        board_games = bgg_companion_api.get_users_ordered_board_games(user, order_by)
         resp = jsonify(board_games)
         resp.set_cookie(key=USERNAME_COOKIE_NAME, value=user)
         return resp

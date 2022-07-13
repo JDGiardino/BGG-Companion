@@ -130,8 +130,6 @@ class BggCompanionApi(object):
     def get_users_ordered_board_games(self, user: str, order_by=None) -> list[BoardGame]:
         users_board_games = self.get_users_board_games(user)
         ordered_board_games = OrderBoardGames(users_board_games, order_by).order_games()
-        print(users_board_games)
-        print(f"ordered board game are {ordered_board_games}")
         return ordered_board_games
 
 
@@ -140,6 +138,6 @@ class BggCompanionApi(object):
 #     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
 #     print(bgg_companion_api.get_users_filtered_board_games("JDGiardino"))
 
-if __name__ == "__main__":
-    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
-    print(bgg_companion_api.get_users_ordered_board_games(user="JDGiardino", order_by="rank"))
+# if __name__ == "__main__":
+#     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+#     print(bgg_companion_api.get_users_ordered_board_games(user="JDGiardino", order_by="rank"))
