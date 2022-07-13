@@ -8,7 +8,7 @@ from src.utils.requests_retry_client import RequestsRetryClient
 from src.bgg_companion_game_filter import FilterBoardGames
 from src.bgg_companion_game_order import OrderBoardGames
 
-from typing import OrderedDict, Callable, List
+from typing import OrderedDict
 from cachetools import cached, TTLCache
 
 
