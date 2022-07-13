@@ -33,4 +33,3 @@ class BoardGame:
     # BoardGame object must be subscriptable in order to preform indexing on object's attributes
     def __getitem__(self, item):
         return getattr(self, item)
-

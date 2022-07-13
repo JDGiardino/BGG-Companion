@@ -2,7 +2,7 @@ from src.models.BoardGame import BoardGame
 
 
 class OrderBoardGames:
-    def __init__(self,  board_games: list[BoardGame], order_by: str):
+    def __init__(self, board_games: list[BoardGame], order_by: str):
         self.board_games = board_games
         self.order_by = order_by
 
