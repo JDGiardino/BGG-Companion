@@ -16,9 +16,9 @@ class TestGameMatchesFilterData:
             complexity=3.733,
             overallrank=8,
             thumbnail="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img"
-                      "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
+            "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
             image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
-                  "filters:format(jpeg)/pic4325841.jpg",
+            "filters:format(jpeg)/pic4325841.jpg",
         ),
         BoardGame(
             id=148228,
@@ -32,9 +32,9 @@ class TestGameMatchesFilterData:
             complexity=1.7896,
             overallrank=193.0,
             thumbnail="https://cf.geekdo-images.com/rwOMxx4q5yuElIvo-1-OFw__thumb/img/D4hkkHfOgu22PwgJomjplWAveuo"
-                      "=/fit-in/200x150/filters:strip_icc()/pic1904079.jpg",
+            "=/fit-in/200x150/filters:strip_icc()/pic1904079.jpg",
             image="https://cf.geekdo-images.com/rwOMxx4q5yuElIvo-1-OFw__original/img/Y2tUGY2nPTGd_epJYKQXPkQD8AM=/0x0"
-                  "/filters:format(jpeg)/pic1904079.jpg",
+            "/filters:format(jpeg)/pic1904079.jpg",
         ),
         BoardGame(
             id=266192,
@@ -48,9 +48,9 @@ class TestGameMatchesFilterData:
             complexity=2.4474,
             overallrank=24.0,
             thumbnail="https://cf.geekdo-images.com/yLZJCVLlIx4c7eJEWUNJ7w__thumb/img/VNToqgS2-pOGU6MuvIkMPKn_y-s"
-                      "=/fit-in/200x150/filters:strip_icc()/pic4458123.jpg",
+            "=/fit-in/200x150/filters:strip_icc()/pic4458123.jpg",
             image="https://cf.geekdo-images.com/yLZJCVLlIx4c7eJEWUNJ7w__original/img/cI782Zis9cT66j2MjSHKJGnFPNw=/0x0"
-                  "/filters:format(jpeg)/pic4458123.jpg",
+            "/filters:format(jpeg)/pic4458123.jpg",
         ),
         BoardGame(
             id=2655,
@@ -64,9 +64,9 @@ class TestGameMatchesFilterData:
             complexity=2.3243,
             overallrank=267.0,
             thumbnail="https://cf.geekdo-images.com/fQe85tsBZoH6ibPnm1k1UA__thumb/img/8ULXa8v7095ohgXMMmNlCGrC7zU"
-                      "=/fit-in/200x150/filters:strip_icc()/pic791151.jpg",
+            "=/fit-in/200x150/filters:strip_icc()/pic791151.jpg",
             image="https://cf.geekdo-images.com/fQe85tsBZoH6ibPnm1k1UA__original/img/eqUVrCJKcMBGBhw4Gfc9_9JabYE=/0x0"
-                  "/filters:format(jpeg)/pic791151.jpg",
+            "/filters:format(jpeg)/pic791151.jpg",
         ),
         BoardGame(
             id=6902,
@@ -109,7 +109,7 @@ class TestGameMatchesFilterData:
             overallrank=1234.0,
             thumbnail=None,
             image=None,
-        )
+        ),
     ]
     default_filter = GameFilter(
         minimum_maxplayers=None,
@@ -128,9 +128,9 @@ class TestGameMatchesFilterData:
             complexity=3.733,
             overallrank=8,
             thumbnail="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img"
-                      "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
+            "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
             image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
-                  "filters:format(jpeg)/pic4325841.jpg",
+            "filters:format(jpeg)/pic4325841.jpg",
         ),
         BoardGame(
             id=148228,
@@ -144,9 +144,9 @@ class TestGameMatchesFilterData:
             complexity=1.7896,
             overallrank=193.0,
             thumbnail="https://cf.geekdo-images.com/rwOMxx4q5yuElIvo-1-OFw__thumb/img/D4hkkHfOgu22PwgJomjplWAveuo"
-                      "=/fit-in/200x150/filters:strip_icc()/pic1904079.jpg",
+            "=/fit-in/200x150/filters:strip_icc()/pic1904079.jpg",
             image="https://cf.geekdo-images.com/rwOMxx4q5yuElIvo-1-OFw__original/img/Y2tUGY2nPTGd_epJYKQXPkQD8AM=/0x0"
-                  "/filters:format(jpeg)/pic1904079.jpg",
+            "/filters:format(jpeg)/pic1904079.jpg",
         ),
         BoardGame(
             id=266192,
@@ -160,9 +160,9 @@ class TestGameMatchesFilterData:
             complexity=2.4474,
             overallrank=24.0,
             thumbnail="https://cf.geekdo-images.com/yLZJCVLlIx4c7eJEWUNJ7w__thumb/img/VNToqgS2-pOGU6MuvIkMPKn_y-s"
-                      "=/fit-in/200x150/filters:strip_icc()/pic4458123.jpg",
+            "=/fit-in/200x150/filters:strip_icc()/pic4458123.jpg",
             image="https://cf.geekdo-images.com/yLZJCVLlIx4c7eJEWUNJ7w__original/img/cI782Zis9cT66j2MjSHKJGnFPNw=/0x0"
-                  "/filters:format(jpeg)/pic4458123.jpg",
+            "/filters:format(jpeg)/pic4458123.jpg",
         ),
         BoardGame(
             id=2655,
@@ -176,9 +176,9 @@ class TestGameMatchesFilterData:
             complexity=2.3243,
             overallrank=267.0,
             thumbnail="https://cf.geekdo-images.com/fQe85tsBZoH6ibPnm1k1UA__thumb/img/8ULXa8v7095ohgXMMmNlCGrC7zU"
-                      "=/fit-in/200x150/filters:strip_icc()/pic791151.jpg",
+            "=/fit-in/200x150/filters:strip_icc()/pic791151.jpg",
             image="https://cf.geekdo-images.com/fQe85tsBZoH6ibPnm1k1UA__original/img/eqUVrCJKcMBGBhw4Gfc9_9JabYE=/0x0"
-                  "/filters:format(jpeg)/pic791151.jpg",
+            "/filters:format(jpeg)/pic791151.jpg",
         ),
         BoardGame(
             id=6902,
@@ -193,7 +193,7 @@ class TestGameMatchesFilterData:
             overallrank=17645,
             thumbnail=None,
             image=None,
-        )
+        ),
     ]
     minimum_maxplayers_filter = GameFilter(
         minimum_maxplayers=4,
@@ -212,9 +212,9 @@ class TestGameMatchesFilterData:
             complexity=3.733,
             overallrank=8,
             thumbnail="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__thumb/img"
-                      "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
+            "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
             image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
-                  "filters:format(jpeg)/pic4325841.jpg",
+            "filters:format(jpeg)/pic4325841.jpg",
         ),
         BoardGame(
             id=148228,
@@ -228,9 +228,9 @@ class TestGameMatchesFilterData:
             complexity=1.7896,
             overallrank=193.0,
             thumbnail="https://cf.geekdo-images.com/rwOMxx4q5yuElIvo-1-OFw__thumb/img/D4hkkHfOgu22PwgJomjplWAveuo"
-                      "=/fit-in/200x150/filters:strip_icc()/pic1904079.jpg",
+            "=/fit-in/200x150/filters:strip_icc()/pic1904079.jpg",
             image="https://cf.geekdo-images.com/rwOMxx4q5yuElIvo-1-OFw__original/img/Y2tUGY2nPTGd_epJYKQXPkQD8AM=/0x0"
-                  "/filters:format(jpeg)/pic1904079.jpg",
+            "/filters:format(jpeg)/pic1904079.jpg",
         ),
         BoardGame(
             id=266192,
@@ -244,10 +244,10 @@ class TestGameMatchesFilterData:
             complexity=2.4474,
             overallrank=24.0,
             thumbnail="https://cf.geekdo-images.com/yLZJCVLlIx4c7eJEWUNJ7w__thumb/img/VNToqgS2-pOGU6MuvIkMPKn_y-s"
-                      "=/fit-in/200x150/filters:strip_icc()/pic4458123.jpg",
+            "=/fit-in/200x150/filters:strip_icc()/pic4458123.jpg",
             image="https://cf.geekdo-images.com/yLZJCVLlIx4c7eJEWUNJ7w__original/img/cI782Zis9cT66j2MjSHKJGnFPNw=/0x0"
-                  "/filters:format(jpeg)/pic4458123.jpg",
-        )
+            "/filters:format(jpeg)/pic4458123.jpg",
+        ),
     ]
     exact_players_filter = GameFilter(
         minimum_maxplayers=None,
@@ -266,9 +266,9 @@ class TestGameMatchesFilterData:
             complexity=2.3243,
             overallrank=267.0,
             thumbnail="https://cf.geekdo-images.com/fQe85tsBZoH6ibPnm1k1UA__thumb/img/8ULXa8v7095ohgXMMmNlCGrC7zU"
-                      "=/fit-in/200x150/filters:strip_icc()/pic791151.jpg",
+            "=/fit-in/200x150/filters:strip_icc()/pic791151.jpg",
             image="https://cf.geekdo-images.com/fQe85tsBZoH6ibPnm1k1UA__original/img/eqUVrCJKcMBGBhw4Gfc9_9JabYE=/0x0"
-                  "/filters:format(jpeg)/pic791151.jpg",
+            "/filters:format(jpeg)/pic791151.jpg",
         ),
         BoardGame(
             id=6902,
@@ -283,5 +283,5 @@ class TestGameMatchesFilterData:
             overallrank=17645,
             thumbnail=None,
             image=None,
-        )
+        ),
     ]

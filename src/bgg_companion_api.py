@@ -122,7 +122,9 @@ class BggCompanionApi(object):
         users_board_games = self.get_users_board_games(user)
         filtered_board_games = FilterBoardGames(
             board_games=users_board_games,
-            game_filter=GameFilter(minimum_maxplayers=minimum_maxplayers, exactplayers=exactplayers),
+            game_filter=GameFilter(
+                minimum_maxplayers=minimum_maxplayers, exactplayers=exactplayers
+            ),
         )
         return filtered_board_games.filter_games()
 

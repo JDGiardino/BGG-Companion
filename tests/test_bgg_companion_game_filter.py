@@ -14,7 +14,9 @@ class TestFilterGames:
         boardgames which removes any boardgame-expansion types."""
         test_data = TestGameMatchesFilterData()
 
-        filtered_board_games = FilterBoardGames(board_games=test_data.board_games, game_filter=test_data.default_filter)
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games, game_filter=test_data.default_filter
+        )
         actual_game_matches_filter = filtered_board_games.filter_games()
         expected_game_matches_filter = test_data.expected_default_filter
 
@@ -26,8 +28,9 @@ class TestFilterGames:
         the list should only contain games with a maxplayers of AT LEAST 4."""
         test_data = TestGameMatchesFilterData()
 
-        filtered_board_games = FilterBoardGames(board_games=test_data.board_games,
-                                                game_filter=test_data.minimum_maxplayers_filter)
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games, game_filter=test_data.minimum_maxplayers_filter
+        )
         actual_game_matches_filter = filtered_board_games.filter_games()
         expected_game_matches_filter = test_data.expected_minimum_maxplayers_filter
 
@@ -39,10 +42,10 @@ class TestFilterGames:
         contain games that only support exactly 2 players."""
         test_data = TestGameMatchesFilterData()
 
-        filtered_board_games = FilterBoardGames(board_games=test_data.board_games,
-                                                game_filter=test_data.exact_players_filter)
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games, game_filter=test_data.exact_players_filter
+        )
         actual_exact_players_filter = filtered_board_games.filter_games()
         expected_exact_players_filter = test_data.expected_exact_players_filter
 
         assert actual_exact_players_filter == expected_exact_players_filter
-
