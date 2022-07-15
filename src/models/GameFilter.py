@@ -6,14 +6,14 @@ from typing import Optional
 class GameFilter:
     gameType: str = "boardgame"
     minplayers: Optional[int] = None
-    maxplayers: Optional[int] = None
+    minimum_maxplayers: Optional[int] = None
     exactplayers: Optional[int] = None
 
     def __post_init__(self):
         if self.minplayers is not None:
             object.__setattr__(self, "minplayers", int(self.minplayers))
-        if self.maxplayers is not None:
-            object.__setattr__(self, "maxplayers", int(self.maxplayers))
+        if self.minimum_maxplayers is not None:
+            object.__setattr__(self, "maxplayers", int(self.minimum_maxplayers))
         if self.exactplayers is not None:
             object.__setattr__(self, "exactplayers", int(self.exactplayers))
 
