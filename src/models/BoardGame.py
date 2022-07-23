@@ -33,7 +33,3 @@ class BoardGame:
         else:
             object.__setattr__(self, "overallrank", float(self.overallrank))
         # This bypasses frozen=true by modifying the object class which all objects inherent from including dataclasses
-
-    # BoardGame object must be subscriptable in order to preform indexing on object's attributes
-    def __getitem__(self, item):
-        return getattr(self, item)
