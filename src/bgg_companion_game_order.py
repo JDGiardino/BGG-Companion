@@ -29,10 +29,7 @@ class OrderBoardGames:
         return ordered_board_games
 
     def __order_by_rank(self) -> list[BoardGame]:
-        ordered_board_games = []
-        for game in self.board_games:
-            if isinstance(game["overallrank"], float):
-                ordered_board_games.append(game)
+        ordered_board_games = self.board_games
         ordered_board_games.sort(key=lambda x: x.overallrank)
         return ordered_board_games
 

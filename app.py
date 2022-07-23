@@ -4,6 +4,7 @@ import random
 from src.bgg_companion_api import BggCompanionApi
 from src.exceptions import UserIsNoneError
 from src.utils.requests_retry_client import RequestsRetryClient
+from src.utils.serialize_to_json import SerializeToJson
 
 from flask import (
     Flask,
@@ -47,8 +48,8 @@ def get_users_ordered_collection() -> Union[str, Response]:
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
 
     try:
-        board_games = bgg_companion_api.get_users_ordered_board_games(user, order_by)
-        resp = jsonify(board_games)
+        ordered_board_games = bgg_companion_api.get_users_ordered_board_games(user, order_by)
+        resp = jsonify(SerializeToJson.serialize_ordered_board_games(ordered_board_games))
         resp.set_cookie(key=USERNAME_COOKIE_NAME, value=user)
         return resp
     except UserIsNoneError as exc:
