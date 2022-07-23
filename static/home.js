@@ -1,12 +1,12 @@
 (async () => {
-  function clear_random_game_response_elements() {
+  function clearRandomGameResponseElements() {
     document.getElementById("game-name").innerText = "";
     document.getElementById("game-thumbnail").src = "";
     document.getElementById("game-error").innerText = "";
 }
 
-    async function get_random_game() {
-        clear_random_game_response_elements();
+    async function getRandomGame() {
+        clearRandomGameResponseElements();
         const user = document.getElementById("user").value;
         const response = await fetch('/random_game?user=' + user)
         if (response.ok) {
@@ -25,7 +25,7 @@
         }
   }
 
-    async function last_username(){
+    async function lastUsername(){
         const response = await fetch('last_username')
         if (response.ok) {
                 document.getElementById("user").value = await response.text();
@@ -35,7 +35,7 @@
         }
   }
 
-    async function page_visits(){
+    async function pageVisits(){
         const response = await fetch('page_visit_counter')
             if (response.ok) {
                 const page_visits = await response.text();
@@ -47,8 +47,8 @@
             }
   }
 const submit_button = document.getElementById("submit");
-submit_button.addEventListener("click",  () => get_random_game());
+submit_button.addEventListener("click",  () => getRandomGame());
 
-await last_username();
-await page_visits();
+await lastUsername();
+await pageVisits();
 })();

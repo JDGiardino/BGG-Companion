@@ -1,10 +1,10 @@
 (async () => {
-    function clear_table(){
+    function clearTable(){
         const table = document.getElementById('table');
         table.innerText = "";
     }
 
-    async function create_table(games){
+    async function createTable(games){
         const table = document.getElementById('table')
         const header = table.createTHead();
         const row = header.insertRow();
@@ -15,7 +15,7 @@
         row.insertCell().innerText = "Players"
         games.forEach(addGamesToTable)
 
-        function addGamesToTable(game, index){
+        function addGamesToTable(game){
             const row = table.insertRow();
             row.insertCell().innerText = `${game.name} (${game.yearpublished})`
             row.insertCell().innerText = `${game.overallrank}`
@@ -25,19 +25,19 @@
         }
     }
 
-    async function get_game_collection(order_by) {
-        clear_table();
+    async function getGameCollectionTable(order_by) {
+        clearTable();
         const user = document.getElementById("user").value;
         const response = await fetch(`/ordered_games?user=${user}&orderby=${order_by}`)
         if (response.ok) {
             const games = await response.json();
-            await create_table(games);
+            await createTable(games);
         } else {
             const error_field = document.getElementById("game-error");
             error_field.innerText = await response.text();
         }
     }
-    async function last_username(){
+    async function lastUsername(){
         const response = await fetch ('last_username')
         if (response.ok) {
             document.getElementById("user").value = await response.text();
@@ -51,10 +51,10 @@
     const overall_rank_button = document.getElementById("overall_rank");
     const average_rating_button = document.getElementById("average_rating");
     const complexity_button = document.getElementById("complexity");
-    alphabetical_button.addEventListener("click",  () => get_game_collection("alphabet"));
-    overall_rank_button.addEventListener("click",  () => get_game_collection("rank"));
-    average_rating_button.addEventListener("click",  () => get_game_collection("rating"));
-    complexity_button.addEventListener("click",  () => get_game_collection("complexity"));
+    alphabetical_button.addEventListener("click",  () => getGameCollectionTable("alphabet"));
+    overall_rank_button.addEventListener("click",  () => getGameCollectionTable("rank"));
+    average_rating_button.addEventListener("click",  () => getGameCollectionTable("rating"));
+    complexity_button.addEventListener("click",  () => getGameCollectionTable("complexity"));
 
-    await last_username();
+    await lastUsername();
 })();
