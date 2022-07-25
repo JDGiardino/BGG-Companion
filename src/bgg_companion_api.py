@@ -117,17 +117,19 @@ class BggCompanionApi(object):
         return users_board_games
 
     def get_users_filtered_board_games(
-        self, user: str, maxplayers=None, exactplayers=None
+        self, user: str, minimum_maxplayers=None, exactplayers=None
     ) -> list[BoardGame]:
         users_board_games = self.get_users_board_games(user)
         filtered_board_games = FilterBoardGames(
             board_games=users_board_games,
-            game_filter=GameFilter(maxplayers=maxplayers, exactplayers=exactplayers),
+            game_filter=GameFilter(
+                minimum_maxplayers=minimum_maxplayers, exactplayers=exactplayers
+            ),
         )
         return filtered_board_games.filter_games()
 
 
 # LEAVE BELOW COMMENTED : Used for development testing
-# if __name__ == "__main__":
-#     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
-#     print(bgg_companion_api.get_users_filtered_board_games("JDGiardino"))
+if __name__ == "__main__":
+    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+    print(bgg_companion_api.get_users_filtered_board_games("JDGiardino"))
