@@ -1,47 +1,60 @@
 (async () => {
-    function clear_all_games_table(){
+    function clearTable(){
         const table = document.getElementById('table');
         table.innerText = "";
     }
 
-async function create_all_games_table() {
-    clear_all_games_table();
-    const user = document.getElementById("user").value;
-    fetch('/all_games?user=' + user)
-        .then(async response => {
-            if (response.ok) {
-                const games = await response.json();
-                const table = document.getElementById('table')
-                games.forEach(addGamesToTable)
+    async function createTable(games){
+        const table = document.getElementById('table')
+        const header = table.createTHead();
+        const row = header.insertRow();
+        row.insertCell().innerText = "Game Name (released year)"
+        row.insertCell().innerText = "Overall Rank"
+        row.insertCell().innerText = "Average Rating"
+        row.insertCell().innerText = "Complexity"
+        row.insertCell().innerText = "Players"
+        games.forEach(addGamesToTable)
 
-                function addGamesToTable(game, index){
-                    const row = table.insertRow(index);
-                    const cell_one = row.insertCell(0);
-                    cell_one.innerText = `${game.name} (${game.yearpublished})`
-                    const cell_two = row.insertCell(1);
-                    cell_two.innerText = `${game.minplayers} - ${game.maxplayers} players`
-                }
+        function addGamesToTable(game){
+            const row = table.insertRow();
+            row.insertCell().innerText = `${game.name} (${game.yearpublished})`
+            row.insertCell().innerText = `${game.overallrank}`
+            row.insertCell().innerText = `${game.averagerating}`
+            row.insertCell().innerText = `${game.complexity}`
+            row.insertCell().innerText = `${game.minplayers} - ${game.maxplayers} players`
+        }
+    }
 
-            } else {
-                const error_field = document.getElementById("game-error");
-                error_field.innerText = await response.text();
-            }
-        });
-}
-async function last_username(){
-      fetch('last_username')
-            .then(async response => {
-                if (response.ok) {
-                    document.getElementById("user").value = await response.text();
-                } else {
-                    const error_field = document.getElementById("user");
-                    error_field.innerText = await response.text();
-                }
-            });
-}
+    async function getGameCollectionTable(order_by) {
+        clearTable();
+        const user = document.getElementById("user").value;
+        const response = await fetch(`/ordered_games?user=${user}&orderby=${order_by}`)
+        if (response.ok) {
+            const games = await response.json();
+            await createTable(games);
+        } else {
+            const error_field = document.getElementById("game-error");
+            error_field.innerText = await response.text();
+        }
+    }
+    async function lastUsername(){
+        const response = await fetch ('last_username')
+        if (response.ok) {
+            document.getElementById("user").value = await response.text();
+        } else {
+            const error_field = document.getElementById("user");
+            error_field.innerText = await response.text();
+        }
+    }
 
-const submit_button = document.getElementById("submit");
-submit_button.addEventListener("click",  () => create_all_games_table());
+    const alphabetical_button = document.getElementById("alphabetical");
+    const overall_rank_button = document.getElementById("overall_rank");
+    const average_rating_button = document.getElementById("average_rating");
+    const complexity_button = document.getElementById("complexity");
+    alphabetical_button.addEventListener("click",  () => getGameCollectionTable("alphabet"));
+    overall_rank_button.addEventListener("click",  () => getGameCollectionTable("rank"));
+    average_rating_button.addEventListener("click",  () => getGameCollectionTable("rating"));
+    complexity_button.addEventListener("click",  () => getGameCollectionTable("complexity"));
 
-await last_username();
+    await lastUsername();
 })();

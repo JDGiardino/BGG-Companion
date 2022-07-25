@@ -2,12 +2,14 @@ import dataclasses
 import random
 
 from src.bgg_companion_api import BggCompanionApi
+from src.utils.serialize_to_json import SerializeToJson
 from src.exceptions import UserIsNoneError, UserHasNoCollection
 from src.utils.requests_retry_client import (
     RequestsRetryClient,
     make_retry_strategy,
     DEFAULT_HTTP_RETRY_CODES,
 )
+
 from logging.config import dictConfig
 from flask import (
     Flask,
@@ -70,16 +72,17 @@ def get_random_game_from_users_collection() -> Union[str, Response]:
         return abort(Response(response=str(exc), status=500))
 
 
-@app.route("/all_games")
-def get_all_games_from_users_collection() -> Union[str, Response]:
+@app.route("/ordered_games")
+def get_users_ordered_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
+    order_by = args.get("orderby")
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
 
     try:
-        board_games = bgg_companion_api.get_users_board_games(user)
+        ordered_board_games = bgg_companion_api.get_users_ordered_board_games(user, order_by)
         app.logger.info(f"Board game collection has been ordered")
-        resp = jsonify(board_games)
+        resp = jsonify(SerializeToJson.serialize_ordered_board_games(ordered_board_games))
         resp.set_cookie(key=USERNAME_COOKIE_NAME, value=user)
         return resp
     except UserIsNoneError as exc:
