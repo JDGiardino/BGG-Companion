@@ -1,6 +1,8 @@
 import collections
 import xmltodict
+import logging
 
+from logging import StreamHandler
 from src.models.BoardGame import BoardGame
 from src.models.GameFilter import GameFilter
 from src.exceptions import UserIsNoneError, BoardGameIsNoneError, UserHasNoCollection
@@ -11,6 +13,8 @@ from src.bgg_companion_game_order import OrderBoardGames
 from typing import OrderedDict
 from cachetools import cached, TTLCache
 
+logger = logging.getLogger(__name__)
+
 
 class BggCompanionApi(object):
     def __init__(self, request_client):
@@ -18,6 +22,7 @@ class BggCompanionApi(object):
 
     def request(self, url: str):
         response = self.request_client.request(method="GET", url=url)
+        logging.info(f"Made a request to {url}")
         return response.text
 
     @cached(cache=TTLCache(maxsize=500, ttl=300))
@@ -34,6 +39,7 @@ class BggCompanionApi(object):
         if xml_parse["items"]["@totalitems"] == "0":
             raise UserHasNoCollection("This user does not have a game collection on BoardGameGeek.")
         users_game_collection = xml_parse["items"]["item"]
+        logging.info("Returning user's game collection")
         return users_game_collection
 
     @cached(cache=TTLCache(maxsize=500, ttl=300))
@@ -53,6 +59,7 @@ class BggCompanionApi(object):
             items = [items]
         board_games = []
         for item in items:
+            logging.info(f"Assigning {item} to the BoardGame class...")
             board_games.append(self.__to_board_game(item))
         return board_games
 
@@ -110,11 +117,13 @@ class BggCompanionApi(object):
         id_list = []
         for game in users_game_collection:
             id_list.append(game["@objectid"])
+        logging.info("Returning id list")
         return id_list
 
     def get_users_board_games(self, user: str) -> list[BoardGame]:
         ids_list = self.get_users_game_ids(user)
         users_board_games = self.get_board_games(tuple(ids_list))
+        logging.info("Returning user's board games list")
         return users_board_games
 
     def get_users_filtered_board_games(
@@ -127,6 +136,7 @@ class BggCompanionApi(object):
                 minimum_maxplayers=minimum_maxplayers, exactplayers=exactplayers
             ),
         )
+        logging.info("Returning filtered board games")
         return filtered_board_games.filter_games()
 
     def get_users_ordered_board_games(self, user: str, order_by=None) -> list[BoardGame]:
