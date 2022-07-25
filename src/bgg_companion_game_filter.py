@@ -27,7 +27,10 @@ class FilterBoardGames:
 
     @staticmethod
     def __maxplayers_gt(game: BoardGame, gamefilter: GameFilter) -> bool:
-        return gamefilter.maxplayers is None or game.maxplayers >= gamefilter.maxplayers
+        return (
+            gamefilter.minimum_maxplayers is None
+            or game.maxplayers >= gamefilter.minimum_maxplayers
+        )
 
     @staticmethod
     def __exactplayers(game: BoardGame, gamefilter: GameFilter) -> bool:

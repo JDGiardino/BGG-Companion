@@ -118,12 +118,14 @@ class BggCompanionApi(object):
         return users_board_games
 
     def get_users_filtered_board_games(
-        self, user: str, maxplayers=None, exactplayers=None
+        self, user: str, minimum_maxplayers=None, exactplayers=None
     ) -> list[BoardGame]:
         users_board_games = self.get_users_board_games(user)
         filtered_board_games = FilterBoardGames(
             board_games=users_board_games,
-            game_filter=GameFilter(maxplayers=maxplayers, exactplayers=exactplayers),
+            game_filter=GameFilter(
+                minimum_maxplayers=minimum_maxplayers, exactplayers=exactplayers
+            ),
         )
         return filtered_board_games.filter_games()
 
