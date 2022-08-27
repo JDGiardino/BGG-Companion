@@ -44,7 +44,7 @@ dictConfig(
 )
 
 app = Flask(__name__)
-app.config['PROFILE'] = True
+app.config["PROFILE"] = True
 app.wsgi_app = ProfilerMiddleware(app.wsgi_app, profile_dir="profile_data", stream=None)
 
 # Run this by poetry run flask run
