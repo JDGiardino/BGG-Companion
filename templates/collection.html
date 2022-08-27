@@ -25,11 +25,15 @@
     </nav>
     <div id="all-games-request">
         <h2>Game Collection</h2>
-        <label for="user">Enter a <a href="https://boardgamegeek.com/" target="_blank">BoardGameGeek</a> user to view their entire collection</label>
+        <label for="user">Enter a <a href="https://boardgamegeek.com/" target="_blank">BoardGameGeek</a> user to view their collection</label>
         <input type="text" name="user" id="user" required>
         <br>
         <br>
-        <input type="submit" value="All Games" id="submit">
+        <p> Order their collection by...</p>
+        <input type="submit" value="Alphabetical" id="alphabetical">
+        <input type="submit" value="Overall Rank" id="overall_rank">
+        <input type="submit" value="Average Rating" id="average_rating">
+        <input type="submit" value="Complexity" id="complexity">
     </div>
     <table id="table" border="1">
     </table>

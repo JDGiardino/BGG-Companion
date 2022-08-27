@@ -8,6 +8,7 @@ from src.models.GameFilter import GameFilter
 from src.exceptions import UserIsNoneError, BoardGameIsNoneError, UserHasNoCollection
 from src.utils.requests_retry_client import RequestsRetryClient
 from src.bgg_companion_game_filter import FilterBoardGames
+from src.bgg_companion_game_order import OrderBoardGames
 
 from typing import OrderedDict
 from cachetools import cached, TTLCache
@@ -138,8 +139,13 @@ class BggCompanionApi(object):
         logging.info("Returning filtered board games")
         return filtered_board_games.filter_games()
 
+    def get_users_ordered_board_games(self, user: str, order_by=None) -> list[BoardGame]:
+        users_board_games = self.get_users_board_games(user)
+        ordered_board_games = OrderBoardGames(users_board_games, order_by).order_games()
+        return ordered_board_games
+
 
 # LEAVE BELOW COMMENTED : Used for development testing
 if __name__ == "__main__":
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
-    print(bgg_companion_api.get_users_filtered_board_games("JDGiardino"))
+    print(bgg_companion_api.get_users_ordered_board_games("JDGiardino", "rank"))
