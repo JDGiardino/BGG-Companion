@@ -3,7 +3,7 @@ import pytest
 
 from src.bgg_companion_api import BggCompanionApi
 from src.exceptions import UserIsNoneError, UserHasNoCollection, BoardGameIsNoneError
-from tests.models.TestBggCompanionData import (
+from tests.models.TestBggCompanionApiData import (
     TestGetCollectionData,
     TestGetBoardGamesData,
 )
