@@ -1,6 +1,7 @@
 import dataclasses
 import random
 
+
 from src.bgg_companion_api import BggCompanionApi
 from src.exceptions import UserIsNoneError
 from src.utils.requests_retry_client import RequestsRetryClient
@@ -16,8 +17,12 @@ from flask import (
     make_response,
 )
 from typing import Union
+from werkzeug.middleware.profiler import ProfilerMiddleware
 
 app = Flask(__name__)
+app.config['PROFILE'] = True
+app.wsgi_app = ProfilerMiddleware(app.wsgi_app, profile_dir="profile_data", stream=None)
+
 # Run this by poetry run flask run
 USERNAME_COOKIE_NAME = "username"
 VISIT_COUNT_COOKIE_NAME = "visit-count"
@@ -82,3 +87,6 @@ def home():
 @app.route("/collection")
 def collection():
     return render_template("collection.html")
+
+
+app.run()
