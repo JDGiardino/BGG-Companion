@@ -64,6 +64,9 @@ jobs:
         with:
           node-version: 12
 
+      - name: Install ESLint
+        run: npm install eslint
+
       - name: Run javascript linter
         uses: wearerequired/lint-action@v2
         with:
