@@ -4,7 +4,7 @@
 <img src= https://user-images.githubusercontent.com/14614633/154339148-fdd2fcdc-41d6-49d6-b7d0-8a2c2d3a48b7.jpg alt="BGG Image"/>
 </p>
 
-###### Authors [JDGiardino](https://github.com/JDGiardino) and [halo123u](https://github.com/halo123u)
+###### Authors [JDGiardino](https://github.com/JDGiardino)
 
 ## Overview 
 BGG-Companion is a companion application for board games using the BoardGameGeek API. Using information from a BoardGameGeek user the application can help generate a random game from collection based on number of players, download the user's board game collection as a spreadsheet, and more!
