@@ -86,7 +86,7 @@ def get_users_ordered_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
     order_by = args.get("orderby")
-    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=cache)
 
     try:
         ordered_board_games = bgg_companion_api.get_users_ordered_board_games(user, order_by)

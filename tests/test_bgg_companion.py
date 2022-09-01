@@ -23,7 +23,7 @@ class TestGetCollection:
         mock_request_client = unittest.mock.Mock(spec=["request"])
         mock_request_client.request.return_value = mock_response
 
-        bgg_companion_api = BggCompanionApi(mock_request_client, None)
+        bgg_companion_api = BggCompanionApi(request_client=mock_request_client, cache={})
         actual_get_collection = bgg_companion_api.get_collection("test_user")
         expected_get_collection = test_data.expected_get_collection
 
@@ -40,7 +40,7 @@ class TestGetCollection:
         mock_request_client = unittest.mock.Mock(spec=["request"])
         mock_request_client.request.return_value = mock_response
 
-        bgg_companion_api = BggCompanionApi(mock_request_client, None)
+        bgg_companion_api = BggCompanionApi(request_client=mock_request_client, cache={})
         with pytest.raises(UserIsNoneError):
             bgg_companion_api.get_collection("test_invalid_user")
 
@@ -56,7 +56,7 @@ class TestGetCollection:
         mock_request_client = unittest.mock.Mock(spec=["request"])
         mock_request_client.request.return_value = mock_response
 
-        bgg_companion_api = BggCompanionApi(mock_request_client, None)
+        bgg_companion_api = BggCompanionApi(request_client=mock_request_client, cache={})
         with pytest.raises(UserHasNoCollection):
             bgg_companion_api.get_collection("test_user_no_collection")
 
@@ -72,7 +72,7 @@ class TestGetBoardGames:
         mock_request_client = unittest.mock.Mock(spec=["request"])
         mock_request_client.request.return_value = mock_response
 
-        bgg_companion_api = BggCompanionApi(mock_request_client, None)
+        bgg_companion_api = BggCompanionApi(request_client=mock_request_client, cache={})
         actual_get_board_games = bgg_companion_api.get_board_games(tuple(["187645", "6902"]))
         expected_get_board_games = test_data.expected_two_ids
 
@@ -88,7 +88,7 @@ class TestGetBoardGames:
         mock_request_client = unittest.mock.Mock(spec=["request"])
         mock_request_client.request.return_value = mock_response
 
-        bgg_companion_api = BggCompanionApi(mock_request_client, None)
+        bgg_companion_api = BggCompanionApi(request_client=mock_request_client, cache={})
         actual_get_board_games = bgg_companion_api.get_board_games(tuple(["187645"]))
         expected_get_board_games = test_data.expected_one_id
 
@@ -104,6 +104,6 @@ class TestGetBoardGames:
         mock_request_client = unittest.mock.Mock(spec=["request"])
         mock_request_client.request.return_value = mock_response
 
-        bgg_companion_api = BggCompanionApi(mock_request_client, None)
+        bgg_companion_api = BggCompanionApi(request_client=mock_request_client, cache={})
         with pytest.raises(BoardGameIsNoneError):
             bgg_companion_api.get_board_games(tuple(["111111111", "222222222"]))
