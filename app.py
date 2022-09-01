@@ -42,7 +42,7 @@ dictConfig(
 
 config = {
     "CACHE_TYPE": "SimpleCache",  # [TO DO] This is temp, look into what type of caches later
-    "CACHE_DEFAULT_TIMEOUT": 300
+    "CACHE_DEFAULT_TIMEOUT": 300,
 }
 
 app = Flask(__name__)
