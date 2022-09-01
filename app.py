@@ -5,11 +5,7 @@ import random
 from src.bgg_companion_api import BggCompanionApi
 from src.utils.serialize_to_json import SerializeToJson
 from src.exceptions import UserIsNoneError, UserHasNoCollection
-from src.utils.requests_retry_client import (
-    RequestsRetryClient,
-    make_retry_strategy,
-    DEFAULT_HTTP_RETRY_CODES,
-)
+from src.utils.requests_retry_client import RequestsRetryClient
 
 from logging.config import dictConfig
 from flask import (
@@ -21,6 +17,7 @@ from flask import (
     render_template,
     make_response,
 )
+from flask_caching import Cache
 from typing import Union
 from werkzeug.middleware.profiler import ProfilerMiddleware
 
@@ -43,9 +40,17 @@ dictConfig(
     }
 )
 
+config = {
+    "CACHE_TYPE": "SimpleCache",  # [TO DO] This is temp, look into what type of caches later
+    "CACHE_DEFAULT_TIMEOUT": 300
+}
+
 app = Flask(__name__)
 app.config["PROFILE"] = True
+app.config.from_mapping(config)
 app.wsgi_app = ProfilerMiddleware(app.wsgi_app, profile_dir="profile_data", stream=None)
+
+cache = Cache(app)
 
 # Run this by poetry run flask run
 USERNAME_COOKIE_NAME = "username"
@@ -56,7 +61,7 @@ VISIT_COUNT_COOKIE_NAME = "visit-count"
 def get_random_game_from_users_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
-    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=cache)
 
     try:
         filtered_board_games = bgg_companion_api.get_users_filtered_board_games(user)
@@ -73,7 +78,6 @@ def get_random_game_from_users_collection() -> Union[str, Response]:
         return abort(Response(response=str(exc), status=404))
     # TO DO: The below return should be removed to hide unhandled exceptions from users. Keeping for now for development
     except Exception as exc:
-        app.logger.info(f"Uh oh error called {exc} happened")
         return abort(Response(response=str(exc), status=500))
 
 
