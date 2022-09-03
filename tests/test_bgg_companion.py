@@ -10,11 +10,10 @@ from tests.models.TestBggCompanionApiData import (
 
 from flask_caching import Cache
 from flask import Flask
-
+test_cache = Cache(config={"CACHE_NO_NULL_WARNING": True})
 test_app = Flask(__name__)
 
-test_cache = Cache(test_app)
-
+test_cache.init_app(test_app)
 # Tests are ran with poetry run pytest -vvvv or poetry run pytest -k test_function_name
 
 
