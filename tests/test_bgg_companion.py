@@ -10,6 +10,7 @@ from tests.models.TestBggCompanionApiData import (
 
 from flask_caching import Cache
 from flask import Flask
+
 test_cache = Cache(config={"CACHE_NO_NULL_WARNING": True})
 test_app = Flask(__name__)
 
