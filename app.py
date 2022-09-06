@@ -41,7 +41,7 @@ dictConfig(
 )
 
 config = {
-    "CACHE_TYPE": "SimpleCache",  # [TO DO] This is temp, look into what type of caches later
+    "CACHE_TYPE": "SimpleCache",
     "CACHE_DEFAULT_TIMEOUT": 600,  # 10 minutes
 }
 
