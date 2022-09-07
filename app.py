@@ -62,7 +62,9 @@ def get_random_game_from_users_collection() -> Union[str, Response]:
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
 
     try:
-        filtered_board_games = bgg_companion_api.get_users_filtered_board_games(user=user, minplayers=minplayers, maxplayers=maxplayers, playerrangetype=playerrangetype)
+        filtered_board_games = bgg_companion_api.get_users_filtered_board_games(
+            user=user, minplayers=minplayers, maxplayers=maxplayers, playerrangetype=playerrangetype
+        )
         app.logger.info(f"Random board game was selected")
         resp = jsonify(dataclasses.asdict(random.choice(filtered_board_games)))
         resp.set_cookie(key=USERNAME_COOKIE_NAME, value=user)
