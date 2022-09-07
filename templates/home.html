@@ -33,6 +33,59 @@
         <input type="text" name="user" id="user" required>
         <br>
         <br>
+        <details>
+            <summary>
+                Advanced Randomizer
+                <span class="icon">👇</span>
+             </summary>
+             <p>
+                <table border="1">
+                    <tr>
+                        <td><b># of Players Range</b></td>
+                        <td>
+                            <label for="number-of-players-min"></label>
+                            <select id="number-of-players-min" name="minplayers" size="1">
+                                <option></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                            to
+                            <label for="number-of-players-max"></label>
+                            <select id="number-of-players-max" name="maxplayers" size="1">
+                                <option></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input id="normal-range-players" type="radio" name="playerrangetype" value="normal" checked>
+                            <label for="normal-range-players">Normal (include all games for this range)</label>
+                            <br>
+                            <br>
+                            <input id="exact-range-players" type="radio" name="playerrangetype" value="exact">
+                            <label for="exact-range-players">Exact (include games that only support exactly this range)</label>
+                        </td>
+                    </tr>
+                </table>
+             </p>
+        </details>
+        <br>
         <input type="submit" value="Submit" id="submit">
     </div>
     <div id="random-game-response">

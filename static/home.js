@@ -8,7 +8,15 @@
     async function getRandomGame() {
         clearRandomGameResponseElements();
         const user = document.getElementById("user").value;
-        const response = await fetch('/random_game?user=' + user)
+        const minplayers = document.getElementById("number-of-players-min").value;
+        const maxplayers = document.getElementById("number-of-players-max").value;
+        const playerrangetype = "normal"
+        if(document.getElementById("normal-range-players").checked){
+            const playerrangetype = "normal"
+        }else if(document.getElementById("exact-range-players").checked) {
+            const playerrangetype = "exact"
+        }
+        const response = await fetch(`/random_game?user=${user}&minplayers=${minplayers}&maxplayers=${maxplayers}&playerrangetype=${playerrangetype}`)
         if (response.ok) {
             const game = await response.json();
             const game_field = document.getElementById("game-name");
