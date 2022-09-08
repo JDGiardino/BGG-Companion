@@ -5,11 +5,7 @@ import random
 from src.bgg_companion_api import BggCompanionApi
 from src.utils.serialize_to_json import SerializeToJson
 from src.exceptions import UserIsNoneError, UserHasNoCollection
-from src.utils.requests_retry_client import (
-    RequestsRetryClient,
-    make_retry_strategy,
-    DEFAULT_HTTP_RETRY_CODES,
-)
+from src.utils.requests_retry_client import RequestsRetryClient
 
 from logging.config import dictConfig
 from flask import (
@@ -21,6 +17,7 @@ from flask import (
     render_template,
     make_response,
 )
+from flask_caching import Cache
 from typing import Union
 from werkzeug.middleware.profiler import ProfilerMiddleware
 
@@ -43,9 +40,17 @@ dictConfig(
     }
 )
 
+config = {
+    "CACHE_TYPE": "SimpleCache",
+    "CACHE_DEFAULT_TIMEOUT": 600,  # 10 minutes
+}
+
 app = Flask(__name__)
 app.config["PROFILE"] = True
+app.config.from_mapping(config)
 app.wsgi_app = ProfilerMiddleware(app.wsgi_app, profile_dir="profile_data", stream=None)
+
+cache = Cache(app)
 
 # Run this by poetry run flask run
 USERNAME_COOKIE_NAME = "username"
@@ -65,7 +70,7 @@ def get_random_game_from_users_collection() -> Union[str, Response]:
     else:
         maxplayers = args.get("maxplayers")
     playerrangetype = args.get("playerrangetype")
-    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=cache)
 
     try:
         filtered_board_games = bgg_companion_api.get_users_filtered_board_games(
@@ -85,7 +90,6 @@ def get_random_game_from_users_collection() -> Union[str, Response]:
         return abort(Response(response=str(exc), status=404))
     # TO DO: The below return should be removed to hide unhandled exceptions from users. Keeping for now for development
     except Exception as exc:
-        app.logger.info(f"Uh oh error called {exc} happened")
         return abort(Response(response=str(exc), status=500))
 
 
@@ -94,7 +98,7 @@ def get_users_ordered_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
     order_by = args.get("orderby")
-    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient())
+    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=cache)
 
     try:
         ordered_board_games = bgg_companion_api.get_users_ordered_board_games(user, order_by)
