@@ -1,0 +1,25 @@
+{
+  "name": "bgg-companion",
+  "version": "1.0.0",
+  "description": "Support the front end of BGG Companion ",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JDGiardino/BGG-Companion.git"
+  },
+  "author": "JDGiardino",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JDGiardino/BGG-Companion/issues"
+  },
+  "homepage": "https://github.com/JDGiardino/BGG-Companion#readme",
+  "dependencies": {
+    "eslint": "^8.23.0"
+  }
+}

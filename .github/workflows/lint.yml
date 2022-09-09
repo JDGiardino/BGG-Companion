@@ -59,8 +59,11 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
       - name: Run ESLint
-        uses: stefanoeb/eslint-action@1.0.2
+        uses: npx eslint .
 #      - name: Set up Node.js
 #        uses: actions/setup-node@v1
 #        with:

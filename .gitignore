@@ -5,3 +5,4 @@ src/__pycache_/
 src/utils/__pycache__/
 *.pyc
 profile_data/
+node_modules/
