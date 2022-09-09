@@ -16,6 +16,7 @@ yamllint = "^1.26.3"
 black = "^22.3.0"
 pytest = "^7.1.2"
 snakeviz = "^2.1.1"
+Flask-Caching = "^2.0.1"
 
 [tool.black]
 line-length = 100
