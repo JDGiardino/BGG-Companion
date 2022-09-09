@@ -63,7 +63,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Run ESLint
-        uses: npx eslint .
+        run: npx eslint .
 #      - name: Set up Node.js
 #        uses: actions/setup-node@v1
 #        with:
