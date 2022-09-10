@@ -1,4 +1,10 @@
 {
+    "env": {
+        "es2021": true,
+        "node": true,
+        "jest": true,
+        "browser": true
+    },
     "rules": {
         "semi": ["error", "always"],
         "quotes": ["error", "double"]

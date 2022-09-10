@@ -1,34 +1,34 @@
 (async () => {
     function clearTable(){
-        const table = document.getElementById('table');
+        const table = document.getElementById("table");
         table.innerText = "";
     }
 
     async function createTable(games){
-        const table = document.getElementById('table')
+        const table = document.getElementById("table");
         const header = table.createTHead();
         const row = header.insertRow();
-        row.insertCell().innerText = "Game Name (released year)"
-        row.insertCell().innerText = "Overall Rank"
-        row.insertCell().innerText = "Average Rating"
-        row.insertCell().innerText = "Complexity"
-        row.insertCell().innerText = "Players"
-        games.forEach(addGamesToTable)
+        row.insertCell().innerText = "Game Name (released year)";
+        row.insertCell().innerText = "Overall Rank";
+        row.insertCell().innerText = "Average Rating";
+        row.insertCell().innerText = "Complexity";
+        row.insertCell().innerText = "Players";
+        games.forEach(addGamesToTable);
 
         function addGamesToTable(game){
             const row = table.insertRow();
-            row.insertCell().innerText = `${game.name} (${game.yearpublished})`
-            row.insertCell().innerText = `${game.overallrank}`
-            row.insertCell().innerText = `${game.averagerating}`
-            row.insertCell().innerText = `${game.complexity}`
-            row.insertCell().innerText = `${game.minplayers} - ${game.maxplayers} players`
+            row.insertCell().innerText = `${game.name} (${game.yearpublished})`;
+            row.insertCell().innerText = `${game.overallrank}`;
+            row.insertCell().innerText = `${game.averagerating}`;
+            row.insertCell().innerText = `${game.complexity}`;
+            row.insertCell().innerText = `${game.minplayers} - ${game.maxplayers} players`;
         }
     }
 
     async function getGameCollectionTable(order_by) {
         clearTable();
         const user = document.getElementById("user").value;
-        const response = await fetch(`/ordered_games?user=${user}&orderby=${order_by}`)
+        const response = await fetch(`/ordered_games?user=${user}&orderby=${order_by}`);
         if (response.ok) {
             const games = await response.json();
             await createTable(games);
@@ -38,7 +38,7 @@
         }
     }
     async function lastUsername(){
-        const response = await fetch ('last_username')
+        const response = await fetch ("last_username");
         if (response.ok) {
             document.getElementById("user").value = await response.text();
         } else {

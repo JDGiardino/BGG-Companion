@@ -11,7 +11,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   run-python-linter:
-    name: Python linter
+    name: Python Linter
     runs-on: ubuntu-latest
 
     steps:
@@ -64,15 +64,3 @@ jobs:
 
       - name: Run ESLint
         run: npx eslint .
-#      - name: Set up Node.js
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: 12
-#
-#      - name: Install ESLint
-#        run: npm install eslint
-#
-#      - name: Run javascript linter
-#        uses: wearerequired/lint-action@v2
-#        with:
-#          eslint: true

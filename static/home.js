@@ -8,7 +8,7 @@
     async function getRandomGame() {
         clearRandomGameResponseElements();
         const user = document.getElementById("user").value;
-        const response = await fetch('/random_game?user=' + user)
+        const response = await fetch("/random_game?user=" + user);
         if (response.ok) {
             const game = await response.json();
             const game_field = document.getElementById("game-name");
@@ -26,7 +26,7 @@
   }
 
     async function lastUsername(){
-        const response = await fetch('last_username')
+        const response = await fetch("last_username");
         if (response.ok) {
                 document.getElementById("user").value = await response.text();
             } else {
@@ -36,7 +36,8 @@
   }
 
     async function pageVisits(){
-        const response = await fetch('page_visit_counter')
+        const response = await fetch("page_visit_counter");
+
             if (response.ok) {
                 const page_visits = await response.text();
                 const page_visits_field = document.getElementById("page-visits");

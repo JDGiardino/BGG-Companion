@@ -1,5 +1,5 @@
 ---
-name: First interaction
+name: Github
 
 on:  # yamllint disable-line rule:truthy
   pull_request:
@@ -7,7 +7,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   first-interaction:
-    name: First interaction
+    name: First Interaction
     runs-on: ubuntu-latest
 
     steps:
