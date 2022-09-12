@@ -4,7 +4,7 @@
         table.innerText = "";
     }
 
-    async function createTable(games){
+    function createTable(games){
         const table = document.getElementById("table");
         const header = table.createTHead();
         const row = header.insertRow();

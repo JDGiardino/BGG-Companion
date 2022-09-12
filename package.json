@@ -21,5 +21,11 @@
   "homepage": "https://github.com/JDGiardino/BGG-Companion#readme",
   "dependencies": {
     "eslint": "^8.23.0"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.1",
+    "prettier": "2.7.1"
   }
 }
