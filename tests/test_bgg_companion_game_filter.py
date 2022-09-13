@@ -2,7 +2,7 @@ import unittest.mock
 import pytest
 
 from src.bgg_companion_game_filter import FilterBoardGames
-from tests.models.TestBggCompanionGameFilterData import TestGameMatchesFilterData
+from tests.models.TestBggCompanionGameFilterData import TestFilterGamesData
 
 # Tests are ran with poetry run pytest -vvvv or poetry run pytest -k test_function_name
 
@@ -12,40 +12,102 @@ class TestFilterGames:
     def test_default_filter_board_games():
         """Testing the default filter.  By default, without any other filter values, gameType is filtered for
         boardgames which removes any boardgame-expansion types."""
-        test_data = TestGameMatchesFilterData()
+        test_data = TestFilterGamesData()
 
         filtered_board_games = FilterBoardGames(
             board_games=test_data.board_games, game_filter=test_data.default_filter
         )
-        actual_game_matches_filter = filtered_board_games.filter_games()
-        expected_game_matches_filter = test_data.expected_default_filter
+        actual_filtered_board_games = filtered_board_games.filter_games()
+        expected_filtered_board_games = test_data.expected_default_filter_list
 
-        assert actual_game_matches_filter == expected_game_matches_filter
-
-    @staticmethod
-    def test_minimum_maxplayers_filter():
-        """Testing the filter for the minimum maxplayers amount a game should have.  If there are 4 players,
-        the list should only contain games with a maxplayers of AT LEAST 4."""
-        test_data = TestGameMatchesFilterData()
-
-        filtered_board_games = FilterBoardGames(
-            board_games=test_data.board_games, game_filter=test_data.minimum_maxplayers_filter
-        )
-        actual_game_matches_filter = filtered_board_games.filter_games()
-        expected_game_matches_filter = test_data.expected_minimum_maxplayers_filter
-
-        assert actual_game_matches_filter == expected_game_matches_filter
+        assert actual_filtered_board_games == expected_filtered_board_games
 
     @staticmethod
-    def test_exact_players_filter():
-        """Testing the filter for the exact players a game supports.  If there are 2 players, the list should only
-        contain games that only support exactly 2 players."""
-        test_data = TestGameMatchesFilterData()
+    def test_minplayers_in_range_filter_01():
+        """Testing in-range filter for minimum players.  Example : If a (1 min - 4 max) player range is specified,
+        games with a (2 min - 4 max) player range will not be present in the BoardGame list.
+        Because if you only had 1 player, they could not play the 2 minimum players game therefore it's out of range."""
+        test_data = TestFilterGamesData()
 
         filtered_board_games = FilterBoardGames(
-            board_games=test_data.board_games, game_filter=test_data.exact_players_filter
+            board_games=test_data.board_games, game_filter=test_data.minplayers_in_range_filter_01
         )
-        actual_exact_players_filter = filtered_board_games.filter_games()
-        expected_exact_players_filter = test_data.expected_exact_players_filter
+        actual_filtered_board_games = filtered_board_games.filter_games()
+        expected_filtered_board_games = test_data.expected_minplayers_in_range_filter_list_01
 
-        assert actual_exact_players_filter == expected_exact_players_filter
+        assert actual_filtered_board_games == expected_filtered_board_games
+
+    @staticmethod
+    def test_minplayers_in_range_filter_02():
+        """Testing in-range filter for minimum players.  Example : If a (2 min - 4 max) player range is specified,
+        games with a (1 min - 4 max) player range will be present in the BoardGame list.
+        Because if you only had 2 players, they could still play the 1 minimum players game therefore it's in range."""
+        test_data = TestFilterGamesData()
+
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games, game_filter=test_data.minplayers_in_range_filter_02
+        )
+        actual_filtered_board_games = filtered_board_games.filter_games()
+        expected_filtered_board_games = test_data.expected_minplayers_in_range_filter_list_02
+
+        assert actual_filtered_board_games == expected_filtered_board_games
+
+    @staticmethod
+    def test_maxplayers_in_range_filter_01():
+        """Testing in-range for maximum players.  Example: If a (1 min - 5 max) player range is specified,
+        games with a (1 min - 4 max) player range will not be present in the BoardGame list.
+        Because if you have 5 players total, they could not play the 4 maximum player game therefore it's out of range."""
+        test_data = TestFilterGamesData()
+
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games, game_filter=test_data.maxplayers_in_range_filter_01
+        )
+        actual_filtered_board_games = filtered_board_games.filter_games()
+        expected_filtered_board_games = test_data.expected_maxplayers_in_range_filter_list_01
+
+        assert actual_filtered_board_games == expected_filtered_board_games
+
+    @staticmethod
+    def test_maxplayers_in_range_filter_02():
+        """Testing in-range for maximum players.  Example: If a (1 min - 4 max) player range is specified,
+        games with a (1 min - 5 max) player range will be present in the BoardGame list.
+        Because if you have 4 players total, they could still play the 5 maximum player game therefore it's in range."""
+        test_data = TestFilterGamesData()
+
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games, game_filter=test_data.maxplayers_in_range_filter_02
+        )
+        actual_filtered_board_games = filtered_board_games.filter_games()
+        expected_filtered_board_games = test_data.expected_maxplayers_in_range_filter_list_02
+
+        assert actual_filtered_board_games == expected_filtered_board_games
+
+    @staticmethod
+    def test_minplayers_exact_filter():
+        """Testing exact range filter for minimum players.  Example : If 2 minimum players is specified,
+        games with 1 minimum players will not be present in the BoardGame list.
+        Because the game's range needs to match the filtered range exactly"""
+        test_data = TestFilterGamesData()
+
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games, game_filter=test_data.minplayers_exact_filter
+        )
+        actual_filtered_board_games = filtered_board_games.filter_games()
+        expected_filtered_board_games = test_data.minplayers_exact_filter_list
+
+        assert actual_filtered_board_games == expected_filtered_board_games
+
+    @staticmethod
+    def test_maxplayers_exact_filter():
+        """Testing exact range filter for maximum players.  Example : If 4 maximum players is specified,
+        games with 3 maximum players will not be present in the BoardGame list.
+        Because the game's range needs to match the filtered range exactly"""
+        test_data = TestFilterGamesData()
+
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games, game_filter=test_data.maxplayers_exact_filter
+        )
+        actual_filtered_board_games = filtered_board_games.filter_games()
+        expected_filtered_board_games = test_data.maxplayers_exact_filter_list
+
+        assert actual_filtered_board_games == expected_filtered_board_games
