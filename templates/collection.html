@@ -1,41 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <script type=text/javascript src="{{ url_for('static', filename='collection.js') }}" defer></script>
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='collection.js') }}"
+      defer
+    ></script>
     <title>BGG | Home</title>
-    <link rel="icon" type="image/x-icon" href="https://cf.geekdo-static.com/icons/favicon2.ico">
-</head>
-<body>
-    <img src= https://user-images.githubusercontent.com/14614633/154339148-fdd2fcdc-41d6-49d6-b7d0-8a2c2d3a48b7.jpg alt="BGG Image" height="100" width="300"/>
-    <hr>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://cf.geekdo-static.com/icons/favicon2.ico"
+    />
+  </head>
+  <body>
+    <img src=
+    https://user-images.githubusercontent.com/14614633/154339148-fdd2fcdc-41d6-49d6-b7d0-8a2c2d3a48b7.jpg
+    alt="BGG Image" height="100" width="300"/>
+    <hr />
     <h1>BGG Companion</h1>
     <nav>
-        <table>
-            <tbody>
-                <tr>
-                    <td> <a href="./home">Random Game</a> </td>
-                    <td> | </td>
-                    <td> <a href="./collection">View Collection</a> </td>
-                    <td> | </td>
-                    <td> <a href="./leaderboards">Leaderboards</a> </td>
-                </tr>
-            </tbody>
-        </table>
+      <table>
+        <tbody>
+          <tr>
+            <td><a href="./home">Random Game</a></td>
+            <td>|</td>
+            <td><a href="./collection">View Collection</a></td>
+            <td>|</td>
+            <td><a href="./leaderboards">Leaderboards</a></td>
+          </tr>
+        </tbody>
+      </table>
     </nav>
     <div id="all-games-request">
-        <h2>Game Collection</h2>
-        <label for="user">Enter a <a href="https://boardgamegeek.com/" target="_blank">BoardGameGeek</a> user to view their collection</label>
-        <input type="text" name="user" id="user" required>
-        <br>
-        <br>
-        <p> Order their collection by...</p>
-        <input type="submit" value="Alphabetical" id="alphabetical">
-        <input type="submit" value="Overall Rank" id="overall_rank">
-        <input type="submit" value="Average Rating" id="average_rating">
-        <input type="submit" value="Complexity" id="complexity">
+      <h2>Game Collection</h2>
+      <label for="user"
+        >Enter a
+        <a href="https://boardgamegeek.com/" target="_blank">BoardGameGeek</a>
+        user to view their collection</label
+      >
+      <input type="text" name="user" id="user" required />
+      <br />
+      <br />
+      <p>Order their collection by...</p>
+      <input type="submit" value="Alphabetical" id="alphabetical" />
+      <input type="submit" value="Overall Rank" id="overall_rank" />
+      <input type="submit" value="Average Rating" id="average_rating" />
+      <input type="submit" value="Complexity" id="complexity" />
     </div>
-    <table id="table" border="1">
-    </table>
-</body>
+    <table id="table" border="1"></table>
+  </body>
 </html>
