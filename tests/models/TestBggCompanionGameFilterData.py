@@ -107,7 +107,9 @@ class TestFilterGamesData:
             overallrank=4,
         ),
     ]
-    minplayers_in_range_filter_01 = GameFilter(minplayers=1, maxplayers=None, playerrangetype="normal")
+    minplayers_in_range_filter_01 = GameFilter(
+        minplayers=1, maxplayers=None, playerrangetype="normal"
+    )
     expected_minplayers_in_range_filter_list_01 = [
         BoardGame(
             id=1,
@@ -132,7 +134,9 @@ class TestFilterGamesData:
             overallrank=3,
         ),
     ]
-    minplayers_in_range_filter_02 = GameFilter(minplayers=2, maxplayers=None, playerrangetype="normal")
+    minplayers_in_range_filter_02 = GameFilter(
+        minplayers=2, maxplayers=None, playerrangetype="normal"
+    )
     expected_minplayers_in_range_filter_list_02 = [
         BoardGame(
             id=1,
@@ -179,7 +183,9 @@ class TestFilterGamesData:
             overallrank=4,
         ),
     ]
-    maxplayers_in_range_filter_01 = GameFilter(minplayers=None, maxplayers=5, playerrangetype="normal")
+    maxplayers_in_range_filter_01 = GameFilter(
+        minplayers=None, maxplayers=5, playerrangetype="normal"
+    )
     expected_maxplayers_in_range_filter_list_01 = [
         BoardGame(
             id=3,
@@ -193,7 +199,9 @@ class TestFilterGamesData:
             overallrank=3,
         ),
     ]
-    maxplayers_in_range_filter_02 = GameFilter(minplayers=None, maxplayers=4, playerrangetype="normal")
+    maxplayers_in_range_filter_02 = GameFilter(
+        minplayers=None, maxplayers=4, playerrangetype="normal"
+    )
     expected_maxplayers_in_range_filter_list_02 = [
         BoardGame(
             id=1,
