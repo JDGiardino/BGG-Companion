@@ -1,7 +1,7 @@
 ---
 name: CI
 
-on:  # yamllint disable-line rule:truthy
+on: # yamllint disable-line rule:truthy
   push:
     branches:
       - main
@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python binary
         uses: actions/setup-python@v1
         with:
-          python-version: '3.9.x'
+          python-version: "3.9.x"
 
       - name: Install Poetry
         uses: snok/install-poetry@v1

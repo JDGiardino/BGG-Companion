@@ -1,7 +1,7 @@
 ---
 name: Lint
 
-on:  # yamllint disable-line rule:truthy
+on: # yamllint disable-line rule:truthy
   push:
     branches:
       - main
@@ -11,7 +11,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   run-python-linter:
-    name: Python linter
+    name: Python Linter
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +29,7 @@ jobs:
       - name: Install linter
         run: pip install black
 
-      - name: Run linter
+      - name: Run python linter
         run: python -m black . --check --diff
 
   run-yaml-linter:
@@ -48,5 +48,33 @@ jobs:
       - name: Install linter
         run: pip install --user yamllint
 
-      - name: Setup yaml-lint
+      - name: Run yaml linter
         run: yamllint .
+
+  run-javascript-linter:
+    name: JavaScript Linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Run ESLint
+        run: npx eslint .
+
+  run-prettier-formatter:
+    name: Prettier Formatter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Run Prettier
+        run: npx prettier --check .
