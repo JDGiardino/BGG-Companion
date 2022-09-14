@@ -13,7 +13,9 @@ class TestOrderGames:
         """Testing ordering a board game collection alphabetically."""
         test_data = TestOrderGamesData()
 
-        ordered_board_games = OrderBoardGames(board_games=test_data.board_games, order_by="alphabet")
+        ordered_board_games = OrderBoardGames(
+            board_games=test_data.board_games, order_by="alphabet"
+        )
         actual_order_games = ordered_board_games.order_games()
         expected_order_games = test_data.expected_order_games_by_alphabet
 
@@ -46,7 +48,9 @@ class TestOrderGames:
         """Testing ordering a board game collection by their complexity."""
         test_data = TestOrderGamesData()
 
-        ordered_board_games = OrderBoardGames(board_games=test_data.board_games, order_by="complexity")
+        ordered_board_games = OrderBoardGames(
+            board_games=test_data.board_games, order_by="complexity"
+        )
         actual_order_games = ordered_board_games.order_games()
         expected_order_games = test_data.expected_order_games_by_complexity
 
