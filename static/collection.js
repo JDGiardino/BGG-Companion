@@ -1,5 +1,4 @@
 (async () => {
-
   function clearTable() {
     const table = document.getElementById("table");
     table.innerText = "";
@@ -67,10 +66,14 @@
     getGameCollectionTable("complexity")
   );
 
-  const table2excel = new Table2Excel()
-  const export_collection_excel_button = document.getElementById("downloadexcel");
-  export_collection_excel_button.addEventListener("click", function(){
-    table2excel.export(document.querySelectorAll("table"), "BoardGame Collection");
+  const table2excel = new Table2Excel();
+  const export_collection_excel_button =
+    document.getElementById("downloadexcel");
+  export_collection_excel_button.addEventListener("click", function () {
+    table2excel.export(
+      document.querySelectorAll("table"),
+      "BoardGame Collection"
+    );
   });
 
   await lastUsername();
