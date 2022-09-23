@@ -71,7 +71,7 @@
     document.getElementById("downloadexcel");
   export_collection_excel_button.addEventListener("click", function () {
     table2excel.export(
-      document.querySelectorAll("table"),
+      document.querySelectorAll("#table"),
       "BoardGame Collection"
     );
   });
