@@ -15,26 +15,43 @@ class FilterBoardGames:
         return filtered_board_games
 
     def game_matches_filter(self, game: BoardGame) -> bool:
-        return (
-            self.__game_type(game=game, gamefilter=self.game_filter)
-            and self.__maxplayers_gt(game=game, gamefilter=self.game_filter)
-            and self.__exactplayers(game=game, gamefilter=self.game_filter)
-        )
+        if self.game_filter.playerrangetype == "normal":
+            return (
+                self.__game_type(game=game, gamefilter=self.game_filter)
+                and self.__minplayers_in_range(game=game, gamefilter=self.game_filter)
+                and self.__maxplayers_in_range(game=game, gamefilter=self.game_filter)
+            )
+        elif self.game_filter.playerrangetype == "exact":
+            return (
+                self.__game_type(game=game, gamefilter=self.game_filter)
+                and self.__minplayers_exact(game=game, gamefilter=self.game_filter)
+                and self.__maxplayers_exact(game=game, gamefilter=self.game_filter)
+            )
+        else:
+            return self.__game_type(game=game, gamefilter=self.game_filter)
 
     @staticmethod
     def __game_type(game: BoardGame, gamefilter: GameFilter) -> bool:
         return game.type == gamefilter.gameType
 
     @staticmethod
-    def __maxplayers_gt(game: BoardGame, gamefilter: GameFilter) -> bool:
+    def __minplayers_in_range(game: BoardGame, gamefilter: GameFilter) -> bool:
         return (
-            gamefilter.minimum_maxplayers is None
-            or game.maxplayers >= gamefilter.minimum_maxplayers
+            gamefilter.minplayers is None
+            or game.maxplayers >= gamefilter.minplayers >= game.minplayers
         )
 
     @staticmethod
-    def __exactplayers(game: BoardGame, gamefilter: GameFilter) -> bool:
-        return gamefilter.exactplayers is None or (
-            game.maxplayers == gamefilter.exactplayers
-            and game.minplayers == gamefilter.exactplayers
+    def __maxplayers_in_range(game: BoardGame, gamefilter: GameFilter) -> bool:
+        return (
+            gamefilter.maxplayers is None
+            or game.maxplayers >= gamefilter.maxplayers >= game.minplayers
         )
+
+    @staticmethod
+    def __minplayers_exact(game: BoardGame, gamefilter: GameFilter) -> bool:
+        return gamefilter.minplayers is None or game.minplayers == gamefilter.minplayers
+
+    @staticmethod
+    def __maxplayers_exact(game: BoardGame, gamefilter: GameFilter) -> bool:
+        return gamefilter.maxplayers is None or game.maxplayers == gamefilter.maxplayers
