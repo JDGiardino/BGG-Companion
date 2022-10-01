@@ -61,10 +61,22 @@ VISIT_COUNT_COOKIE_NAME = "visit-count"
 def get_random_game_from_users_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
+    if args.get("minplayers") == "":
+        minplayers = None
+    else:
+        minplayers = args.get("maxplayers")
+    if args.get("maxplayers") == "":
+        maxplayers = None
+    else:
+        maxplayers = args.get("maxplayers")
+    playerrangetype = args.get("playerrangetype")
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=cache)
 
     try:
-        filtered_board_games = bgg_companion_api.get_users_filtered_board_games(user)
+        filtered_board_games = bgg_companion_api.get_users_filtered_board_games(
+            user=user, minplayers=minplayers, maxplayers=maxplayers, playerrangetype=playerrangetype
+        )
+        # python package called wt forms.  https://flask.palletsprojects.com/en/2.2.x/patterns/wtforms/
         app.logger.info(f"Random board game was selected")
         resp = jsonify(dataclasses.asdict(random.choice(filtered_board_games)))
         resp.set_cookie(key=USERNAME_COOKIE_NAME, value=user)
