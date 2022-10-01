@@ -2,11 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script
-      type="text/javascript"
-      src="{{ url_for('static', filename='collection.js') }}"
-      defer
-    ></script>
+    <script src="/static/vendor/table2excel.js"></script>
+    <script type="text/javascript" src="/static/collection.js" defer></script>
     <title>BGG | Home</title>
     <link
       rel="icon"
@@ -50,5 +47,7 @@
       <input type="submit" value="Complexity" id="complexity" />
     </div>
     <table id="table" border="1"></table>
+    <br />
+    <button id="downloadexcel">Export Collection to Excel</button>
   </body>
 </html>

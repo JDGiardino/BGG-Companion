@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/JDGiardino/BGG-Companion#readme",
   "dependencies": {
-    "eslint": "^8.23.0"
+    "eslint": "^8.23.0",
+    "table2excel": "^1.0.4"
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.5.0",
