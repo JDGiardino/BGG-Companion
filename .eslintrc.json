@@ -13,5 +13,6 @@
     "prettier/prettier": ["error"]
   },
   "extends": ["eslint:recommended", "prettier", "plugin:promise/recommended"],
-  "plugins": ["prettier"]
+  "plugins": ["prettier"],
+  "ignorePatterns": ["**/vendor/*.js"]
 }
