@@ -66,7 +66,8 @@
     getGameCollectionTable("complexity")
   );
 
-  const table2excel = new Table2Excel(); // eslint-disable-line no-use-before-define
+  // eslint-disable-next-line no-use-before-define
+  const table2excel = new Table2Excel();
   const export_collection_excel_button =
     document.getElementById("downloadexcel");
   export_collection_excel_button.addEventListener("click", function () {
