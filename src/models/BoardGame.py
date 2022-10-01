@@ -8,12 +8,12 @@ class BoardGame:
     id: int
     name: str
     type: str
-    description: str
     minplayers: int
     maxplayers: int
     yearpublished: int
     averagerating: float
     complexity: float
+    description: Optional[str] = None
     overallrank: Optional[float] = None
     thumbnail: Optional[str] = None
     image: Optional[str] = None
