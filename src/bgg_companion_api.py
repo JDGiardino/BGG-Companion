@@ -29,7 +29,7 @@ class BggCompanionApi(object):
     def get_collection(self, user: str) -> dict:
         cached_users_collection = self.cache.get(user)
 
-        if self.cache.get(user) is not None:
+        if cached_users_collection is not None:
             return cached_users_collection
 
         string_xml = self.request(f"https://boardgamegeek.com/xmlapi2/collection?username={user}")
