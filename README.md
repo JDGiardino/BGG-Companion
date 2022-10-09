@@ -29,4 +29,3 @@ Running into issues using BGG Companion? Seeing unexpected error from commands? 
 Feel free to [create a Github issue](https://github.com/JDGiardino/BGG-Companion/issues) detailing the problem!
 
 # CURRENTLY IN DEVELOPMENT AND STILL A WORK IN PROGRESS
-
