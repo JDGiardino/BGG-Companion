@@ -19,7 +19,6 @@ from flask import (
 )
 from flask_caching import Cache
 from typing import Union
-from werkzeug.middleware.profiler import ProfilerMiddleware
 
 dictConfig(
     {
@@ -46,9 +45,7 @@ config = {
 }
 
 app = Flask(__name__)
-app.config["PROFILE"] = True
 app.config.from_mapping(config)
-app.wsgi_app = ProfilerMiddleware(app.wsgi_app, profile_dir="profile_data", stream=None)
 
 cache = Cache(app)
 
@@ -143,4 +140,5 @@ def collection():
     return render_template("collection.html")
 
 
-app.run()
+if __name__ == "__main__":
+    app.run()

@@ -8,6 +8,8 @@ from src.models.GameFilter import GameFilter
 from src.exceptions import UserIsNoneError, BoardGameIsNoneError, UserHasNoCollection
 from src.bgg_companion_game_filter import FilterBoardGames
 from src.bgg_companion_game_order import OrderBoardGames
+from src.utils.requests_retry_client import RequestsRetryClient
+from src.cache.DummyCache import DummyCache
 
 from typing import OrderedDict
 
@@ -158,4 +160,4 @@ class BggCompanionApi(object):
 
 # LEAVE BELOW COMMENTED : Used for development testing
 # if __name__ == "__main__":
-#     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=None)
+#     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=DummyCache())
