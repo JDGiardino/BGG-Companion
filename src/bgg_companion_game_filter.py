@@ -55,7 +55,3 @@ class FilterBoardGames:
     @staticmethod
     def __maxplayers_exact(game: BoardGame, gamefilter: GameFilter) -> bool:
         return gamefilter.maxplayers is None or game.maxplayers == gamefilter.maxplayers
-
-    @staticmethod
-    def __complexity_range(game: BoardGame, gamefilter: GameFilter) -> bool:
-        return game

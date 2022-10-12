@@ -141,7 +141,4 @@ def collection():
 
 
 if __name__ == "__main__":
-    #app.run()
-    print(f"__name__ in app.py is {__name__}")
-else:
-    print(f"__name__ in app.py is {__name__}")
+    app.run()
