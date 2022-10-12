@@ -16,22 +16,20 @@ class FilterBoardGames:
 
     def game_matches_filter(self, game: BoardGame) -> bool:
         return (
-                self.__game_type(game=game, gamefilter=self.game_filter)
-                and self.__player_range_type(game=game)
-                and self.__cooperative_type(game=game)
+            self.__game_type(game=game, gamefilter=self.game_filter)
+            and self.__player_range_type(game=game)
+            and self.__cooperative_type(game=game)
         )
 
     def __player_range_type(self, game: BoardGame) -> bool:
         if self.game_filter.playerrangetype == "normal":
-            return (
-                self.__minplayers_in_range(game=game, gamefilter=self.game_filter)
-                and self.__maxplayers_in_range(game=game, gamefilter=self.game_filter)
-            )
+            return self.__minplayers_in_range(
+                game=game, gamefilter=self.game_filter
+            ) and self.__maxplayers_in_range(game=game, gamefilter=self.game_filter)
         elif self.game_filter.playerrangetype == "exact":
-            return (
-                self.__minplayers_exact(game=game, gamefilter=self.game_filter)
-                and self.__maxplayers_exact(game=game, gamefilter=self.game_filter)
-            )
+            return self.__minplayers_exact(
+                game=game, gamefilter=self.game_filter
+            ) and self.__maxplayers_exact(game=game, gamefilter=self.game_filter)
         else:
             return True
 

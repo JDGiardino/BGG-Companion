@@ -151,7 +151,10 @@ class BggCompanionApi(object):
         filter_board_games = FilterBoardGames(
             board_games=users_board_games,
             game_filter=GameFilter(
-                minplayers=minplayers, maxplayers=maxplayers, playerrangetype=playerrangetype, cooperative=cooperative
+                minplayers=minplayers,
+                maxplayers=maxplayers,
+                playerrangetype=playerrangetype,
+                cooperative=cooperative,
             ),
         )
         logging.info("Returning filtered board games")
