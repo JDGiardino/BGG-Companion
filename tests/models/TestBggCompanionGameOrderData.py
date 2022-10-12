@@ -15,6 +15,7 @@ class TestOrderGamesData:
             averagerating=8.41956,
             complexity=3.733,
             overallrank=8,
+            cooperative=False,
         ),
         BoardGame(
             id=2,
@@ -26,6 +27,7 @@ class TestOrderGamesData:
             averagerating=7.43335,
             complexity=1.7896,
             overallrank=193.0,
+            cooperative=False,
         ),
         BoardGame(
             id=3,
@@ -37,6 +39,7 @@ class TestOrderGamesData:
             averagerating=8.08769,
             complexity=2.4474,
             overallrank=24.0,
+            cooperative=False,
         ),
         BoardGame(
             id=4,
@@ -48,6 +51,7 @@ class TestOrderGamesData:
             averagerating=7.32193,
             complexity=2.3243,
             overallrank=267.0,
+            cooperative=False,
         ),
         BoardGame(
             id=5,
@@ -59,6 +63,7 @@ class TestOrderGamesData:
             averagerating=5.63488,
             complexity=1.625,
             overallrank=17645,
+            cooperative=False,
         ),
         BoardGame(
             id=6,
@@ -70,6 +75,7 @@ class TestOrderGamesData:
             averagerating=8.33706,
             complexity=2.7333,
             overallrank=math.inf,
+            cooperative=False,
         ),
     ]
     expected_order_games_by_alphabet = [
@@ -83,6 +89,7 @@ class TestOrderGamesData:
             averagerating=8.33706,
             complexity=2.7333,
             overallrank=math.inf,
+            cooperative=False,
         ),
         BoardGame(
             id=4,
@@ -94,6 +101,7 @@ class TestOrderGamesData:
             averagerating=7.32193,
             complexity=2.3243,
             overallrank=267.0,
+            cooperative=False,
         ),
         BoardGame(
             id=2,
@@ -105,6 +113,7 @@ class TestOrderGamesData:
             averagerating=7.43335,
             complexity=1.7896,
             overallrank=193.0,
+            cooperative=False,
         ),
         BoardGame(
             id=1,
@@ -116,6 +125,7 @@ class TestOrderGamesData:
             averagerating=8.41956,
             complexity=3.733,
             overallrank=8,
+            cooperative=False,
         ),
         BoardGame(
             id=5,
@@ -127,6 +137,7 @@ class TestOrderGamesData:
             averagerating=5.63488,
             complexity=1.625,
             overallrank=17645,
+            cooperative=False,
         ),
         BoardGame(
             id=3,
@@ -138,6 +149,7 @@ class TestOrderGamesData:
             averagerating=8.08769,
             complexity=2.4474,
             overallrank=24.0,
+            cooperative=False,
         ),
     ]
     expected_order_games_by_rank = [
@@ -151,6 +163,7 @@ class TestOrderGamesData:
             averagerating=8.41956,
             complexity=3.733,
             overallrank=8,
+            cooperative=False,
         ),
         BoardGame(
             id=3,
@@ -162,6 +175,7 @@ class TestOrderGamesData:
             averagerating=8.08769,
             complexity=2.4474,
             overallrank=24.0,
+            cooperative=False,
         ),
         BoardGame(
             id=2,
@@ -173,6 +187,7 @@ class TestOrderGamesData:
             averagerating=7.43335,
             complexity=1.7896,
             overallrank=193.0,
+            cooperative=False,
         ),
         BoardGame(
             id=4,
@@ -184,6 +199,7 @@ class TestOrderGamesData:
             averagerating=7.32193,
             complexity=2.3243,
             overallrank=267.0,
+            cooperative=False,
         ),
         BoardGame(
             id=5,
@@ -195,6 +211,7 @@ class TestOrderGamesData:
             averagerating=5.63488,
             complexity=1.625,
             overallrank=17645,
+            cooperative=False,
         ),
         BoardGame(
             id=6,
@@ -206,6 +223,7 @@ class TestOrderGamesData:
             averagerating=8.33706,
             complexity=2.7333,
             overallrank=math.inf,
+            cooperative=False,
         ),
     ]
     expected_order_games_by_rating = [
@@ -219,6 +237,7 @@ class TestOrderGamesData:
             averagerating=8.41956,
             complexity=3.733,
             overallrank=8,
+            cooperative=False,
         ),
         BoardGame(
             id=6,
@@ -230,6 +249,7 @@ class TestOrderGamesData:
             averagerating=8.33706,
             complexity=2.7333,
             overallrank=math.inf,
+            cooperative=False,
         ),
         BoardGame(
             id=3,
@@ -241,6 +261,7 @@ class TestOrderGamesData:
             averagerating=8.08769,
             complexity=2.4474,
             overallrank=24.0,
+            cooperative=False,
         ),
         BoardGame(
             id=2,
@@ -252,6 +273,7 @@ class TestOrderGamesData:
             averagerating=7.43335,
             complexity=1.7896,
             overallrank=193.0,
+            cooperative=False,
         ),
         BoardGame(
             id=4,
@@ -263,6 +285,7 @@ class TestOrderGamesData:
             averagerating=7.32193,
             complexity=2.3243,
             overallrank=267.0,
+            cooperative=False,
         ),
         BoardGame(
             id=5,
@@ -274,6 +297,7 @@ class TestOrderGamesData:
             averagerating=5.63488,
             complexity=1.625,
             overallrank=17645,
+            cooperative=False,
         ),
     ]
     expected_order_games_by_complexity = [
@@ -287,6 +311,7 @@ class TestOrderGamesData:
             averagerating=8.41956,
             complexity=3.733,
             overallrank=8,
+            cooperative=False,
         ),
         BoardGame(
             id=6,
@@ -298,6 +323,7 @@ class TestOrderGamesData:
             averagerating=8.33706,
             complexity=2.7333,
             overallrank=math.inf,
+            cooperative=False,
         ),
         BoardGame(
             id=3,
@@ -309,6 +335,7 @@ class TestOrderGamesData:
             averagerating=8.08769,
             complexity=2.4474,
             overallrank=24.0,
+            cooperative=False,
         ),
         BoardGame(
             id=4,
@@ -320,6 +347,7 @@ class TestOrderGamesData:
             averagerating=7.32193,
             complexity=2.3243,
             overallrank=267.0,
+            cooperative=False,
         ),
         BoardGame(
             id=2,
@@ -331,6 +359,7 @@ class TestOrderGamesData:
             averagerating=7.43335,
             complexity=1.7896,
             overallrank=193.0,
+            cooperative=False,
         ),
         BoardGame(
             id=5,
@@ -342,5 +371,6 @@ class TestOrderGamesData:
             averagerating=5.63488,
             complexity=1.625,
             overallrank=17645,
+            cooperative=False,
         ),
     ]

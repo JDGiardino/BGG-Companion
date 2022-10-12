@@ -111,3 +111,5 @@ class TestFilterGames:
         expected_filtered_board_games = test_data.maxplayers_exact_filter_list
 
         assert actual_filtered_board_games == expected_filtered_board_games
+
+

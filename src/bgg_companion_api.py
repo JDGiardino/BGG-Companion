@@ -108,6 +108,12 @@ class BggCompanionApi(object):
                     break
         else:
             name = None
+        cooperative = False
+        if "link" in item and isinstance(item["link"], list):
+            for a_dict in item["link"]:
+                if a_dict["@value"] == "Cooperative Game":
+                    cooperative = True
+                    break
         return BoardGame(
             id=id,
             name=name,
@@ -121,6 +127,7 @@ class BggCompanionApi(object):
             overallrank=overallrank,
             thumbnail=thumbnail,
             image=image,
+            cooperative=cooperative,
         )
 
     def get_users_game_ids(self, user: str) -> list[str]:
@@ -138,17 +145,17 @@ class BggCompanionApi(object):
         return users_board_games
 
     def get_users_filtered_board_games(
-        self, user: str, minplayers=None, maxplayers=None, playerrangetype=None
+        self, user: str, minplayers=None, maxplayers=None, playerrangetype=None, cooperative=None
     ) -> list[BoardGame]:
         users_board_games = self.get_users_board_games(user)
-        filtered_board_games = FilterBoardGames(
+        filter_board_games = FilterBoardGames(
             board_games=users_board_games,
             game_filter=GameFilter(
-                minplayers=minplayers, maxplayers=maxplayers, playerrangetype=playerrangetype
+                minplayers=minplayers, maxplayers=maxplayers, playerrangetype=playerrangetype, cooperative=cooperative
             ),
         )
         logging.info("Returning filtered board games")
-        return filtered_board_games.filter_games()
+        return filter_board_games.filter_games()
 
     def get_users_ordered_board_games(self, user: str, order_by=None) -> list[BoardGame]:
         users_board_games = self.get_users_board_games(user)

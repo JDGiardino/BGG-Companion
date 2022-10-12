@@ -15,20 +15,33 @@ class FilterBoardGames:
         return filtered_board_games
 
     def game_matches_filter(self, game: BoardGame) -> bool:
+        return (
+                self.__game_type(game=game, gamefilter=self.game_filter)
+                and self.__player_range_type(game=game)
+                and self.__cooperative_type(game=game)
+        )
+
+    def __player_range_type(self, game: BoardGame) -> bool:
         if self.game_filter.playerrangetype == "normal":
             return (
-                self.__game_type(game=game, gamefilter=self.game_filter)
-                and self.__minplayers_in_range(game=game, gamefilter=self.game_filter)
+                self.__minplayers_in_range(game=game, gamefilter=self.game_filter)
                 and self.__maxplayers_in_range(game=game, gamefilter=self.game_filter)
             )
         elif self.game_filter.playerrangetype == "exact":
             return (
-                self.__game_type(game=game, gamefilter=self.game_filter)
-                and self.__minplayers_exact(game=game, gamefilter=self.game_filter)
+                self.__minplayers_exact(game=game, gamefilter=self.game_filter)
                 and self.__maxplayers_exact(game=game, gamefilter=self.game_filter)
             )
         else:
-            return self.__game_type(game=game, gamefilter=self.game_filter)
+            return True
+
+    def __cooperative_type(self, game: BoardGame) -> bool:
+        if self.game_filter.cooperative == True:
+            return game.cooperative is True
+        elif self.game_filter.cooperative == False:
+            return game.cooperative is False
+        else:
+            return True
 
     @staticmethod
     def __game_type(game: BoardGame, gamefilter: GameFilter) -> bool:
