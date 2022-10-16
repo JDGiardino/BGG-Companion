@@ -34,12 +34,11 @@ class FilterBoardGames:
             return True
 
     def __cooperative_type(self, game: BoardGame) -> bool:
-        if self.game_filter.cooperative == True:
-            return game.cooperative is True
-        elif self.game_filter.cooperative == False:
-            return game.cooperative is False
-        else:
-            return True
+        return (
+            self.game_filter.cooperative is None
+            or self.game_filter.cooperative == game.cooperative
+            )
+
 
     @staticmethod
     def __game_type(game: BoardGame, gamefilter: GameFilter) -> bool:

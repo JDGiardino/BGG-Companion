@@ -111,3 +111,29 @@ class TestFilterGames:
         expected_filtered_board_games = test_data.maxplayers_exact_filter_list
 
         assert actual_filtered_board_games == expected_filtered_board_games
+
+    @staticmethod
+    def test_cooperative_true_filter():
+        """Testing when the cooperative is set to true in the game filter."""
+        test_data = TestFilterGamesData()
+
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games, game_filter=test_data.cooperative_true_filter
+        )
+        actual_filtered_board_games = filtered_board_games.filter_games()
+        expected_filtered_board_games = test_data.cooperative_true_filter_list
+
+        assert actual_filtered_board_games == expected_filtered_board_games
+
+    @staticmethod
+    def test_cooperative_false_filter():
+        """Testing when the cooperative is set to false in the game filter."""
+        test_data = TestFilterGamesData()
+
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games, game_filter=test_data.cooperative_false_filter
+        )
+        actual_filtered_board_games = filtered_board_games.filter_games()
+        expected_filtered_board_games = test_data.cooperative_false_filter_list
+
+        assert actual_filtered_board_games == expected_filtered_board_games
