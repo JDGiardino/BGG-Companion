@@ -173,4 +173,3 @@ class BggCompanionApi(object):
 #      bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=DummyCache())
 #      x = bgg_companion_api.get_users_filtered_board_games(user="JDGiardino")
 #      print(x)
-

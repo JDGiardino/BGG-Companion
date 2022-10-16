@@ -65,7 +65,9 @@ class TestFilterGamesData:
             cooperative=False,
         ),
     ]
-    default_filter = GameFilter(minplayers=None, maxplayers=None, playerrangetype=None, cooperative=None)
+    default_filter = GameFilter(
+        minplayers=None, maxplayers=None, playerrangetype=None, cooperative=None
+    )
     expected_default_filter_list = [
         BoardGame(
             id=1,
@@ -256,7 +258,9 @@ class TestFilterGamesData:
             cooperative=False,
         ),
     ]
-    minplayers_exact_filter = GameFilter(minplayers=2, maxplayers=None, playerrangetype="exact", cooperative=None)
+    minplayers_exact_filter = GameFilter(
+        minplayers=2, maxplayers=None, playerrangetype="exact", cooperative=None
+    )
     minplayers_exact_filter_list = [
         BoardGame(
             id=2,
@@ -283,7 +287,9 @@ class TestFilterGamesData:
             cooperative=False,
         ),
     ]
-    maxplayers_exact_filter = GameFilter(minplayers=None, maxplayers=4, playerrangetype="exact", cooperative=None)
+    maxplayers_exact_filter = GameFilter(
+        minplayers=None, maxplayers=4, playerrangetype="exact", cooperative=None
+    )
     maxplayers_exact_filter_list = [
         BoardGame(
             id=1,
@@ -310,7 +316,9 @@ class TestFilterGamesData:
             cooperative=True,
         ),
     ]
-    cooperative_true_filter = GameFilter(minplayers=None, maxplayers=None, playerrangetype=None, cooperative=True)
+    cooperative_true_filter = GameFilter(
+        minplayers=None, maxplayers=None, playerrangetype=None, cooperative=True
+    )
     cooperative_true_filter_list = [
         BoardGame(
             id=1,
@@ -337,7 +345,9 @@ class TestFilterGamesData:
             cooperative=True,
         ),
     ]
-    cooperative_false_filter = GameFilter(minplayers=None, maxplayers=None, playerrangetype=None, cooperative=False)
+    cooperative_false_filter = GameFilter(
+        minplayers=None, maxplayers=None, playerrangetype=None, cooperative=False
+    )
     cooperative_false_filter_list = [
         BoardGame(
             id=3,
