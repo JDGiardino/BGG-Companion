@@ -5,8 +5,7 @@
     document.getElementById("game-error").innerText = "";
   }
 
-  async function getRandomGame() {
-    clearRandomGameResponseElements();
+  async function assignRandomGamesParameters(){
     const user = document.getElementById("user").value;
     const minplayers = document.getElementById("number-of-players-min").value;
     const maxplayers = document.getElementById("number-of-players-max").value;
@@ -23,8 +22,15 @@
       playstyle = "cooperative";
     } else playstyle = "";
 
+    return [user, minplayers,maxplayers, playerrangetype, playstyle];
+  }
+
+  async function getRandomGame() {
+    clearRandomGameResponseElements();
+    let parameters = assignRandomGamesParameters();
+
     const response = await fetch(
-      `/random_game?user=${user}&minplayers=${minplayers}&maxplayers=${maxplayers}&playerrangetype=${playerrangetype}&playstyle=${playstyle}`
+      `/random_game?user=${parameters[0]}&minplayers=${parameters[1]}&maxplayers=${parameters[2]}&playerrangetype=${parameters[3]}&playstyle=${parameters[4]}`
     );
     if (response.ok) {
       const game = await response.json();
@@ -37,7 +43,9 @@
       img.src = game.image;
       img.height = "300";
       img.width = "300";
-    } else {
+    }
+
+      else {
       const error_field = document.getElementById("game-error");
       error_field.innerText = await response.text();
     }
