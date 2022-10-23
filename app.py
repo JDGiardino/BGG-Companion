@@ -78,7 +78,11 @@ def get_random_game_from_users_collection() -> Union[str, Response]:
 
     try:
         filtered_board_games = bgg_companion_api.get_users_filtered_board_games(
-            user=user, minplayers=minplayers, maxplayers=maxplayers, playerrangetype=playerrangetype, playstyle=playstyle
+            user=user,
+            minplayers=minplayers,
+            maxplayers=maxplayers,
+            playerrangetype=playerrangetype,
+            playstyle=playstyle,
         )
         # python package called wt forms.  https://flask.palletsprojects.com/en/2.2.x/patterns/wtforms/
         app.logger.info(f"Random board game was selected")

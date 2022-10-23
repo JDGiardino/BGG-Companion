@@ -34,9 +34,7 @@ class FilterBoardGames:
             return True
 
     def __playstyle_type(self, game: BoardGame) -> bool:
-        return (
-            self.game_filter.playstyle is None or self.game_filter.playstyle == game.playstyle
-        )
+        return self.game_filter.playstyle is None or self.game_filter.playstyle == game.playstyle
 
     @staticmethod
     def __game_type(game: BoardGame, gamefilter: GameFilter) -> bool:

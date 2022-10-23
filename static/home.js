@@ -15,15 +15,13 @@
       playerrangetype = "normal";
     } else if (document.getElementById("exact-range-players").checked) {
       playerrangetype = "exact";
-    }
-    else playerrangetype = "";
+    } else playerrangetype = "";
     let playstyle;
-    if (document.getElementById("competitive").checked){
+    if (document.getElementById("competitive").checked) {
       playstyle = "competitive";
-    } else if (document.getElementById("cooperative").checked){
+    } else if (document.getElementById("cooperative").checked) {
       playstyle = "cooperative";
-    }
-    else playstyle = "";
+    } else playstyle = "";
 
     const response = await fetch(
       `/random_game?user=${user}&minplayers=${minplayers}&maxplayers=${maxplayers}&playerrangetype=${playerrangetype}&playstyle=${playstyle}`
