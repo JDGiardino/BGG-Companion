@@ -111,3 +111,29 @@ class TestFilterGames:
         expected_filtered_board_games = test_data.maxplayers_exact_filter_list
 
         assert actual_filtered_board_games == expected_filtered_board_games
+
+    @staticmethod
+    def test_playstyle_filter_01():
+        """Testing when playstyle is set to cooperative in the game filter."""
+        test_data = TestFilterGamesData()
+
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games, game_filter=test_data.playstyle_cooperative_filter
+        )
+        actual_filtered_board_games = filtered_board_games.filter_games()
+        expected_filtered_board_games = test_data.playstyle_cooperative_filter_list
+
+        assert actual_filtered_board_games == expected_filtered_board_games
+
+    @staticmethod
+    def test_playstyle_filter_02():
+        """Testing when playstyle is set to competitive in the game filter."""
+        test_data = TestFilterGamesData()
+
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games, game_filter=test_data.playstyle_competitive_filter
+        )
+        actual_filtered_board_games = filtered_board_games.filter_games()
+        expected_filtered_board_games = test_data.playstyle_competitive_filter_list
+
+        assert actual_filtered_board_games == expected_filtered_board_games

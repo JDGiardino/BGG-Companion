@@ -108,6 +108,12 @@ class BggCompanionApi(object):
                     break
         else:
             name = None
+        playstyle = "competitive"
+        if "link" in item and isinstance(item["link"], list):
+            for a_dict in item["link"]:
+                if a_dict["@value"] == "Cooperative Game":
+                    playstyle = "cooperative"
+                    break
         return BoardGame(
             id=id,
             name=name,
@@ -121,6 +127,7 @@ class BggCompanionApi(object):
             overallrank=overallrank,
             thumbnail=thumbnail,
             image=image,
+            playstyle=playstyle,
         )
 
     def get_users_game_ids(self, user: str) -> list[str]:
@@ -138,17 +145,20 @@ class BggCompanionApi(object):
         return users_board_games
 
     def get_users_filtered_board_games(
-        self, user: str, minplayers=None, maxplayers=None, playerrangetype=None
+        self, user: str, minplayers=None, maxplayers=None, playerrangetype=None, playstyle=None
     ) -> list[BoardGame]:
         users_board_games = self.get_users_board_games(user)
-        filtered_board_games = FilterBoardGames(
+        filter_board_games = FilterBoardGames(
             board_games=users_board_games,
             game_filter=GameFilter(
-                minplayers=minplayers, maxplayers=maxplayers, playerrangetype=playerrangetype
+                minplayers=minplayers,
+                maxplayers=maxplayers,
+                playerrangetype=playerrangetype,
+                playstyle=playstyle,
             ),
         )
         logging.info("Returning filtered board games")
-        return filtered_board_games.filter_games()
+        return filter_board_games.filter_games()
 
     def get_users_ordered_board_games(self, user: str, order_by=None) -> list[BoardGame]:
         users_board_games = self.get_users_board_games(user)
@@ -159,6 +169,7 @@ class BggCompanionApi(object):
 
 
 # LEAVE BELOW COMMENTED : Used for development testing
-#if __name__ == "__main__":
-#     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=None)
-
+# if __name__ == "__main__":
+#      bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=DummyCache())
+#      x = bgg_companion_api.get_users_filtered_board_games(user="JDGiardino")
+#      print(x)

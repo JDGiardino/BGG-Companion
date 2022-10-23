@@ -13,6 +13,7 @@ class BoardGame:
     yearpublished: int
     averagerating: float
     complexity: float
+    playstyle: str
     description: Optional[str] = None
     overallrank: Optional[float] = None
     thumbnail: Optional[str] = None

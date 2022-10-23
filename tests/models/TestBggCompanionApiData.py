@@ -60,11 +60,13 @@ class TestGetBoardGamesData:
         'format(jpeg)/pic4325841.jpg</image><name type = "primary" sortindex = "1" value = "Star Wars: Rebellion"/>'
         '<name type="alternate" sortindex="1" value="Star Wars: Lázadás"/><description>StarWars:Rebellion is a board game'
         ' of epic conflict.</description><yearpublished value="2016"/><minplayers value="2"/><maxplayers value="4"/>'
+        '<link type="boardgamemechanic" id="2057" value="Chit-Pull System"/><link type="boardgamemechanic" id="2023" value="Cooperative Game"/>'
         ' <statistics page="1"><ratings><average value="8.41956"/><ranks><rank type="subtype" id="1" name="boardgame" value="8"/>'
         ' </ranks><averageweight value="3.733" /></ratings></statistics></item>'
         '<item type="boardgame" id="6902"><name type="primary" sortindex="1" value="Tetris"/><description>'
         'The ultimate test of advanced territorial strategy.</description><yearpublished value="1989"/>'
-        '<minplayers value="2"/><maxplayers value="2"/><statistics page="1"><ratings><average value="5.63488" /><ranks>'
+        '<minplayers value="2"/><maxplayers value="2"/><link type="boardgamemechanic" id="2057" value="Chit-Pull System"/>'
+        '<statistics page="1"><ratings><average value="5.63488" /><ranks>'
         ' <rank type="subtype" id="1" name="boardgame" value="17645"/></ranks><averageweight value="1.625"/>'
         " </ratings></statistics></item></items>"
     )
@@ -84,6 +86,7 @@ class TestGetBoardGamesData:
             "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
             image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
             "filters:format(jpeg)/pic4325841.jpg",
+            playstyle="cooperative",
         ),
         BoardGame(
             id=6902,
@@ -98,6 +101,7 @@ class TestGetBoardGamesData:
             overallrank=17645,
             thumbnail=None,
             image=None,
+            playstyle="competitive",
         ),
     ]
     one_id_response = (
@@ -127,6 +131,7 @@ class TestGetBoardGamesData:
             "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
             image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
             "filters:format(jpeg)/pic4325841.jpg",
+            playstyle="competitive",
         )
     ]
     invalid_id_response = '<?xml version="1.0" encoding="utf-8"?><items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse"></items>'

@@ -15,20 +15,26 @@ class FilterBoardGames:
         return filtered_board_games
 
     def game_matches_filter(self, game: BoardGame) -> bool:
+        return (
+            self.__game_type(game=game, gamefilter=self.game_filter)
+            and self.__player_range_type(game=game)
+            and self.__playstyle_type(game=game)
+        )
+
+    def __player_range_type(self, game: BoardGame) -> bool:
         if self.game_filter.playerrangetype == "normal":
-            return (
-                self.__game_type(game=game, gamefilter=self.game_filter)
-                and self.__minplayers_in_range(game=game, gamefilter=self.game_filter)
-                and self.__maxplayers_in_range(game=game, gamefilter=self.game_filter)
-            )
+            return self.__minplayers_in_range(
+                game=game, gamefilter=self.game_filter
+            ) and self.__maxplayers_in_range(game=game, gamefilter=self.game_filter)
         elif self.game_filter.playerrangetype == "exact":
-            return (
-                self.__game_type(game=game, gamefilter=self.game_filter)
-                and self.__minplayers_exact(game=game, gamefilter=self.game_filter)
-                and self.__maxplayers_exact(game=game, gamefilter=self.game_filter)
-            )
+            return self.__minplayers_exact(
+                game=game, gamefilter=self.game_filter
+            ) and self.__maxplayers_exact(game=game, gamefilter=self.game_filter)
         else:
-            return self.__game_type(game=game, gamefilter=self.game_filter)
+            return True
+
+    def __playstyle_type(self, game: BoardGame) -> bool:
+        return self.game_filter.playstyle is None or self.game_filter.playstyle == game.playstyle
 
     @staticmethod
     def __game_type(game: BoardGame, gamefilter: GameFilter) -> bool:
