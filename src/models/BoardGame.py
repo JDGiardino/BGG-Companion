@@ -13,7 +13,7 @@ class BoardGame:
     yearpublished: int
     averagerating: float
     complexity: float
-    cooperative: bool
+    playstyle: str
     description: Optional[str] = None
     overallrank: Optional[float] = None
     thumbnail: Optional[str] = None

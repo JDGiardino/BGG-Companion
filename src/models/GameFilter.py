@@ -8,7 +8,7 @@ class GameFilter:
     minplayers: Optional[int] = None
     maxplayers: Optional[int] = None
     playerrangetype: Optional[str] = None
-    cooperative: Optional[bool] = None
+    playstyle: Optional[str] = None
 
     def __post_init__(self):
         if self.minplayers is not None:
@@ -17,5 +17,7 @@ class GameFilter:
             object.__setattr__(self, "maxplayers", int(self.maxplayers))
         if self.playerrangetype is not None:
             object.__setattr__(self, "playerrangetype", str(self.playerrangetype))
+        if self.playstyle is not None:
+            object.__setattr__(self, "playerstyle", str(self.playstyle))
 
     # This bypasses frozen=true by modifying the object class which all objects inherent from including dataclasses

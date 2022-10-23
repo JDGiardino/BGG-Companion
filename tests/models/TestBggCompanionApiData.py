@@ -86,7 +86,7 @@ class TestGetBoardGamesData:
             "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
             image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
             "filters:format(jpeg)/pic4325841.jpg",
-            cooperative=True,
+            playstyle="cooperative",
         ),
         BoardGame(
             id=6902,
@@ -101,7 +101,7 @@ class TestGetBoardGamesData:
             overallrank=17645,
             thumbnail=None,
             image=None,
-            cooperative=False,
+            playstyle="competitive",
         ),
     ]
     one_id_response = (
@@ -131,7 +131,7 @@ class TestGetBoardGamesData:
             "/gAxzddRVQiRdjZHYFUZ2xc5Jlbw=/fit-in/200x150/filters:strip_icc()/pic4325841.jpg",
             image="https://cf.geekdo-images.com/7SrPNGBKg9IIsP4UQpOi8g__original/img/GKueTbkCk2Ramf6ai8mDj-BP6cI=/0x0/"
             "filters:format(jpeg)/pic4325841.jpg",
-            cooperative=False,
+            playstyle="competitive",
         )
     ]
     invalid_id_response = '<?xml version="1.0" encoding="utf-8"?><items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse"></items>'

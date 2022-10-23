@@ -18,7 +18,7 @@ class FilterBoardGames:
         return (
             self.__game_type(game=game, gamefilter=self.game_filter)
             and self.__player_range_type(game=game)
-            and self.__cooperative_type(game=game)
+            and self.__playstyle_type(game=game)
         )
 
     def __player_range_type(self, game: BoardGame) -> bool:
@@ -33,9 +33,9 @@ class FilterBoardGames:
         else:
             return True
 
-    def __cooperative_type(self, game: BoardGame) -> bool:
+    def __playstyle_type(self, game: BoardGame) -> bool:
         return (
-            self.game_filter.cooperative is None or self.game_filter.cooperative == game.cooperative
+            self.game_filter.playstyle is None or self.game_filter.playstyle == game.playstyle
         )
 
     @staticmethod
