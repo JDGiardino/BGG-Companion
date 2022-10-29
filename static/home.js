@@ -5,7 +5,7 @@
     document.getElementById("game-error").innerText = "";
   }
 
-  function assignRandomGamesParameters() {
+  function getRandomGameParameters() {
     const user = document.getElementById("user").value;
     const minplayers = document.getElementById("number-of-players-min").value;
     const maxplayers = document.getElementById("number-of-players-max").value;
@@ -33,7 +33,7 @@
 
   async function getRandomGame() {
     clearRandomGameResponseElements();
-    let parameters = assignRandomGamesParameters();
+    let parameters = getRandomGameParameters();
 
     const response = await fetch(
       `/random_game?user=${parameters.user}&minplayers=${parameters.minplayers}&maxplayers=${parameters.maxplayers}` +
