@@ -16,7 +16,7 @@ class FilterBoardGames:
 
     def game_matches_filter(self, game: BoardGame) -> bool:
         return (
-            self.__game_type(game=game, gamefilter=self.game_filter)
+            game.type == self.game_filter.gametype
             and self.__player_range_type(game=game)
             and self.__playstyle_type(game=game)
         )
@@ -35,10 +35,6 @@ class FilterBoardGames:
 
     def __playstyle_type(self, game: BoardGame) -> bool:
         return self.game_filter.playstyle is None or self.game_filter.playstyle == game.playstyle
-
-    @staticmethod
-    def __game_type(game: BoardGame, gamefilter: GameFilter) -> bool:
-        return game.type == gamefilter.gameType
 
     @staticmethod
     def __minplayers_in_range(game: BoardGame, gamefilter: GameFilter) -> bool:

@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass(frozen=True)
 class GameFilter:
-    gameType: str = "boardgame"
+    gametype: str = "boardgame"
     minplayers: Optional[int] = None
     maxplayers: Optional[int] = None
     playerrangetype: Optional[str] = None
