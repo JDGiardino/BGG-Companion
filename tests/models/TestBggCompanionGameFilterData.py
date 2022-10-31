@@ -14,7 +14,7 @@ class TestFilterGamesData:
             averagerating=1,
             complexity=1,
             overallrank=1,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
         BoardGame(
             id=2,
@@ -26,7 +26,7 @@ class TestFilterGamesData:
             averagerating=2,
             complexity=2,
             overallrank=2,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
         BoardGame(
             id=3,
@@ -38,7 +38,7 @@ class TestFilterGamesData:
             averagerating=3,
             complexity=3,
             overallrank=3,
-            playstyle="competitive",
+            playstyle="Competitive",
         ),
         BoardGame(
             id=4,
@@ -50,7 +50,7 @@ class TestFilterGamesData:
             averagerating=4,
             complexity=4,
             overallrank=4,
-            playstyle="competitive",
+            playstyle="Competitive",
         ),
         BoardGame(
             id=5,
@@ -62,11 +62,11 @@ class TestFilterGamesData:
             averagerating=5,
             complexity=5,
             overallrank=5,
-            playstyle="competitive",
+            playstyle="Competitive",
         ),
     ]
     default_filter = GameFilter(
-        minplayers=None, maxplayers=None, playerrangetype=None, playstyle=None
+        minplayers=None, maxplayers=None, playerrangetype=None, playstyle=None, gametype="boardgame"
     )
     expected_default_filter_list = [
         BoardGame(
@@ -79,7 +79,7 @@ class TestFilterGamesData:
             averagerating=1,
             complexity=1,
             overallrank=1,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
         BoardGame(
             id=2,
@@ -91,7 +91,7 @@ class TestFilterGamesData:
             averagerating=2,
             complexity=2,
             overallrank=2,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
         BoardGame(
             id=3,
@@ -103,7 +103,7 @@ class TestFilterGamesData:
             averagerating=3,
             complexity=3,
             overallrank=3,
-            playstyle="competitive",
+            playstyle="Competitive",
         ),
         BoardGame(
             id=4,
@@ -115,11 +115,15 @@ class TestFilterGamesData:
             averagerating=4,
             complexity=4,
             overallrank=4,
-            playstyle="competitive",
+            playstyle="Competitive",
         ),
     ]
     minplayers_in_range_filter_01 = GameFilter(
-        minplayers=1, maxplayers=None, playerrangetype="normal", playstyle=None
+        minplayers=1,
+        maxplayers=None,
+        playerrangetype="normal",
+        playstyle=None,
+        gametype="boardgame",
     )
     expected_minplayers_in_range_filter_list_01 = [
         BoardGame(
@@ -132,7 +136,7 @@ class TestFilterGamesData:
             averagerating=1,
             complexity=1,
             overallrank=1,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
         BoardGame(
             id=3,
@@ -144,11 +148,15 @@ class TestFilterGamesData:
             averagerating=3,
             complexity=3,
             overallrank=3,
-            playstyle="competitive",
+            playstyle="Competitive",
         ),
     ]
     minplayers_in_range_filter_02 = GameFilter(
-        minplayers=2, maxplayers=None, playerrangetype="normal", playstyle=None
+        minplayers=2,
+        maxplayers=None,
+        playerrangetype="normal",
+        playstyle=None,
+        gametype="boardgame",
     )
     expected_minplayers_in_range_filter_list_02 = [
         BoardGame(
@@ -161,7 +169,7 @@ class TestFilterGamesData:
             averagerating=1,
             complexity=1,
             overallrank=1,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
         BoardGame(
             id=2,
@@ -173,7 +181,7 @@ class TestFilterGamesData:
             averagerating=2,
             complexity=2,
             overallrank=2,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
         BoardGame(
             id=3,
@@ -185,7 +193,7 @@ class TestFilterGamesData:
             averagerating=3,
             complexity=3,
             overallrank=3,
-            playstyle="competitive",
+            playstyle="Competitive",
         ),
         BoardGame(
             id=4,
@@ -197,11 +205,15 @@ class TestFilterGamesData:
             averagerating=4,
             complexity=4,
             overallrank=4,
-            playstyle="competitive",
+            playstyle="Competitive",
         ),
     ]
     maxplayers_in_range_filter_01 = GameFilter(
-        minplayers=None, maxplayers=5, playerrangetype="normal", playstyle=None
+        minplayers=None,
+        maxplayers=5,
+        playerrangetype="normal",
+        playstyle=None,
+        gametype="boardgame",
     )
     expected_maxplayers_in_range_filter_list_01 = [
         BoardGame(
@@ -214,11 +226,15 @@ class TestFilterGamesData:
             averagerating=3,
             complexity=3,
             overallrank=3,
-            playstyle="competitive",
+            playstyle="Competitive",
         ),
     ]
     maxplayers_in_range_filter_02 = GameFilter(
-        minplayers=None, maxplayers=4, playerrangetype="normal", playstyle=None
+        minplayers=None,
+        maxplayers=4,
+        playerrangetype="normal",
+        playstyle=None,
+        gametype="boardgame",
     )
     expected_maxplayers_in_range_filter_list_02 = [
         BoardGame(
@@ -231,7 +247,7 @@ class TestFilterGamesData:
             averagerating=1,
             complexity=1,
             overallrank=1,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
         BoardGame(
             id=2,
@@ -243,7 +259,7 @@ class TestFilterGamesData:
             averagerating=2,
             complexity=2,
             overallrank=2,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
         BoardGame(
             id=3,
@@ -255,11 +271,11 @@ class TestFilterGamesData:
             averagerating=3,
             complexity=3,
             overallrank=3,
-            playstyle="competitive",
+            playstyle="Competitive",
         ),
     ]
     minplayers_exact_filter = GameFilter(
-        minplayers=2, maxplayers=None, playerrangetype="exact", playstyle=None
+        minplayers=2, maxplayers=None, playerrangetype="exact", playstyle=None, gametype="boardgame"
     )
     minplayers_exact_filter_list = [
         BoardGame(
@@ -272,7 +288,7 @@ class TestFilterGamesData:
             averagerating=2,
             complexity=2,
             overallrank=2,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
         BoardGame(
             id=4,
@@ -284,11 +300,11 @@ class TestFilterGamesData:
             averagerating=4,
             complexity=4,
             overallrank=4,
-            playstyle="competitive",
+            playstyle="Competitive",
         ),
     ]
     maxplayers_exact_filter = GameFilter(
-        minplayers=None, maxplayers=4, playerrangetype="exact", playstyle=None
+        minplayers=None, maxplayers=4, playerrangetype="exact", playstyle=None, gametype="boardgame"
     )
     maxplayers_exact_filter_list = [
         BoardGame(
@@ -301,7 +317,7 @@ class TestFilterGamesData:
             averagerating=1,
             complexity=1,
             overallrank=1,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
         BoardGame(
             id=2,
@@ -313,11 +329,15 @@ class TestFilterGamesData:
             averagerating=2,
             complexity=2,
             overallrank=2,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
     ]
     playstyle_cooperative_filter = GameFilter(
-        minplayers=None, maxplayers=None, playerrangetype=None, playstyle="cooperative"
+        minplayers=None,
+        maxplayers=None,
+        playerrangetype=None,
+        playstyle="Cooperative",
+        gametype="boardgame",
     )
     playstyle_cooperative_filter_list = [
         BoardGame(
@@ -330,7 +350,7 @@ class TestFilterGamesData:
             averagerating=1,
             complexity=1,
             overallrank=1,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
         BoardGame(
             id=2,
@@ -342,11 +362,15 @@ class TestFilterGamesData:
             averagerating=2,
             complexity=2,
             overallrank=2,
-            playstyle="cooperative",
+            playstyle="Cooperative",
         ),
     ]
     playstyle_competitive_filter = GameFilter(
-        minplayers=None, maxplayers=None, playerrangetype=None, playstyle="competitive"
+        minplayers=None,
+        maxplayers=None,
+        playerrangetype=None,
+        playstyle="Competitive",
+        gametype="boardgame",
     )
     playstyle_competitive_filter_list = [
         BoardGame(
@@ -359,7 +383,7 @@ class TestFilterGamesData:
             averagerating=3,
             complexity=3,
             overallrank=3,
-            playstyle="competitive",
+            playstyle="Competitive",
         ),
         BoardGame(
             id=4,
@@ -371,6 +395,27 @@ class TestFilterGamesData:
             averagerating=4,
             complexity=4,
             overallrank=4,
-            playstyle="competitive",
+            playstyle="Competitive",
+        ),
+    ]
+    gametype_boardgameexpansion_filter = GameFilter(
+        minplayers=None,
+        maxplayers=None,
+        playerrangetype=None,
+        playstyle=None,
+        gametype="boardgameexpansion",
+    )
+    gametype_boardgameexpansion_filter_list = [
+        BoardGame(
+            id=5,
+            name="Quux",
+            type="boardgameexpansion",
+            minplayers=2,
+            maxplayers=2,
+            yearpublished=5,
+            averagerating=5,
+            complexity=5,
+            overallrank=5,
+            playstyle="Competitive",
         ),
     ]

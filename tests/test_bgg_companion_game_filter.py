@@ -137,3 +137,17 @@ class TestFilterGames:
         expected_filtered_board_games = test_data.playstyle_competitive_filter_list
 
         assert actual_filtered_board_games == expected_filtered_board_games
+
+    @staticmethod
+    def test_gametype_filter():
+        """Testing when gametype is set to boardgameexpansion in the game filter."""
+        test_data = TestFilterGamesData()
+
+        filtered_board_games = FilterBoardGames(
+            board_games=test_data.board_games,
+            game_filter=test_data.gametype_boardgameexpansion_filter,
+        )
+        actual_filtered_board_games = filtered_board_games.filter_games()
+        expected_filtered_board_games = test_data.gametype_boardgameexpansion_filter_list
+
+        assert actual_filtered_board_games == expected_filtered_board_games

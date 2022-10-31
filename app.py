@@ -106,10 +106,20 @@ def get_users_ordered_collection() -> Union[str, Response]:
     args = request.args
     user = args.get("user")
     order_by = args.get("orderby")
+    if args.get("gametype") == "All":
+        gametype = None
+    else:
+        gametype = args.get("gametype")
+    if args.get("playstyle") == "All":
+        playstyle = None
+    else:
+        playstyle = args.get("playstyle")
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=cache)
 
     try:
-        ordered_board_games = bgg_companion_api.get_users_ordered_board_games(user, order_by)
+        ordered_board_games = bgg_companion_api.get_users_ordered_board_games(
+            user=user, order_by=order_by, playstyle=playstyle, gametype=gametype
+        )
         app.logger.info(f"Board game collection has been ordered")
         resp = jsonify(SerializeToJson.serialize_ordered_board_games(ordered_board_games))
         resp.set_cookie(key=USERNAME_COOKIE_NAME, value=user)
