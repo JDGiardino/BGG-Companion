@@ -17,6 +17,7 @@ black = "^22.3.0"
 pytest = "^7.1.2"
 snakeviz = "^2.1.1"
 Flask-Caching = "^2.0.1"
+pre-commit = "^2.20.0"
 
 [tool.black]
 line-length = 100
