@@ -16,10 +16,13 @@ class FilterBoardGames:
 
     def game_matches_filter(self, game: BoardGame) -> bool:
         return (
-            game.type == self.game_filter.gametype
+            self.__gametype(game=game)
             and self.__player_range_type(game=game)
             and self.__playstyle_type(game=game)
         )
+
+    def __gametype(self, game: BoardGame) -> bool:
+        return self.game_filter.gametype is None or game.type == self.game_filter.gametype
 
     def __player_range_type(self, game: BoardGame) -> bool:
         if self.game_filter.playerrangetype == "normal":

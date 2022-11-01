@@ -108,11 +108,11 @@ class BggCompanionApi(object):
                     break
         else:
             name = None
-        playstyle = "competitive"
+        playstyle = "Competitive"
         if "link" in item and isinstance(item["link"], list):
             for a_dict in item["link"]:
                 if a_dict["@value"] == "Cooperative Game":
-                    playstyle = "cooperative"
+                    playstyle = "Cooperative"
                     break
         return BoardGame(
             id=id,
@@ -131,7 +131,7 @@ class BggCompanionApi(object):
         )
 
     def get_users_game_ids(self, user: str) -> list[str]:
-        users_game_collection = self.get_collection(user)
+        users_game_collection = self.get_collection(user=user)
         id_list = []
         for game in users_game_collection:
             id_list.append(game["@objectid"])
@@ -139,18 +139,25 @@ class BggCompanionApi(object):
         return id_list
 
     def get_users_board_games(self, user: str) -> list[BoardGame]:
-        ids_list = self.get_users_game_ids(user)
-        users_board_games = self.get_board_games(tuple(ids_list))
+        ids_list = self.get_users_game_ids(user=user)
+        users_board_games = self.get_board_games(ids=tuple(ids_list))
         logging.info("Returning user's board games list")
         return users_board_games
 
     def get_users_filtered_board_games(
-        self, user: str, minplayers=None, maxplayers=None, playerrangetype=None, playstyle=None
+        self,
+        user: str,
+        gametype="boardgame",
+        minplayers=None,
+        maxplayers=None,
+        playerrangetype=None,
+        playstyle=None,
     ) -> list[BoardGame]:
-        users_board_games = self.get_users_board_games(user)
+        users_board_games = self.get_users_board_games(user=user)
         filter_board_games = FilterBoardGames(
             board_games=users_board_games,
             game_filter=GameFilter(
+                gametype=gametype,
                 minplayers=minplayers,
                 maxplayers=maxplayers,
                 playerrangetype=playerrangetype,
@@ -160,8 +167,12 @@ class BggCompanionApi(object):
         logging.info("Returning filtered board games")
         return filter_board_games.filter_games()
 
-    def get_users_ordered_board_games(self, user: str, order_by=None) -> list[BoardGame]:
-        users_board_games = self.get_users_board_games(user)
+    def get_users_ordered_board_games(
+        self, user: str, order_by=None, playstyle=None, gametype=None
+    ) -> list[BoardGame]:
+        users_board_games = self.get_users_filtered_board_games(
+            user=user, playstyle=playstyle, gametype=gametype
+        )
         ordered_board_games = OrderBoardGames(
             board_games=users_board_games, order_by=order_by
         ).order_games()

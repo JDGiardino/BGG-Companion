@@ -39,11 +39,32 @@
       >
       <input type="text" name="user" id="user" required />
       <br />
+      <details>
+        <summary>
+          <b>Filter Game Collection</b>
+        </summary>
+        <p>
+          Cooperative or Competitive
+          <select id="playstyle">
+            <option>All</option>
+            <option>Cooperative</option>
+            <option>Competitive</option>
+          </select>
+        </p>
+
+        <p>
+          Board Games or Board Game Expansions
+          <select id="gametype">
+            <option>All</option>
+            <option>Board Games</option>
+            <option>Board Game Expansions</option>
+          </select>
+        </p>
+      </details>
       <br />
       <p>Order their collection by...</p>
       <input type="submit" value="Alphabetical" id="alphabetical" />
       <input type="submit" value="Overall Rank" id="overall_rank" />
-      <input type="submit" value="Average Rating" id="average_rating" />
       <input type="submit" value="Complexity" id="complexity" />
     </div>
     <table id="table" border="1"></table>
