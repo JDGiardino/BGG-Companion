@@ -74,6 +74,14 @@ def get_random_game_from_users_collection() -> Union[str, Response]:
         playstyle = None
     else:
         playstyle = args.get("playstyle")
+    if args.get("mincomplexity") == "":
+        mincomplexity = None
+    else:
+        mincomplexity = args.get("mincomplexity")
+    if args.get("maxcomplexity") == "":
+        maxcomplexity = None
+    else:
+        maxcomplexity = args.get("maxcomplexity")
     bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=cache)
 
     try:
@@ -83,6 +91,8 @@ def get_random_game_from_users_collection() -> Union[str, Response]:
             maxplayers=maxplayers,
             playerrangetype=playerrangetype,
             playstyle=playstyle,
+            mincomplexity=mincomplexity,
+            maxcomplexity=maxcomplexity,
         )
         # python package called wt forms.  https://flask.palletsprojects.com/en/2.2.x/patterns/wtforms/
         app.logger.info(f"Random board game was selected")
