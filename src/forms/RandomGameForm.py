@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, DecimalField
-from wtforms.validators import InputRequired, Optional, NumberRange
+from wtforms.validators import InputRequired, Optional, NumberRange, AnyOf
 
 
 def convert_empty_string_to_none(arg):
@@ -45,11 +45,29 @@ class RandomGameForm(FlaskForm):
         "playerrangetype", filters=[convert_empty_string_to_none], validators=[Optional()]
     )
     playstyle = StringField(
-        "minplayers", filters=[convert_empty_string_to_none], validators=[Optional()]
+        "playstyle", filters=[convert_empty_string_to_none], validators=[Optional()]
     )
     mincomplexity = DecimalField(
-        "minplayers", filters=[convert_empty_string_to_none], validators=[Optional()]
+        "mincomplexity",
+        filters=[convert_empty_string_to_none],
+        validators=[
+            Optional(),
+            NumberRange(
+                min=1,
+                max=5,
+                message="Complexity level out of range.  Please only select a value (with decimals) between 1 - 5.",
+            ),
+        ],
     )
     maxcomplexity = DecimalField(
-        "minplayers", filters=[convert_empty_string_to_none], validators=[Optional()]
+        "maxcomplexity",
+        filters=[convert_empty_string_to_none],
+        validators=[
+            Optional(),
+            NumberRange(
+                min=1,
+                max=5,
+                message="Complexity level out of range.  Please only select a value (with decimals) between 1 - 5.",
+            ),
+        ],
     )
