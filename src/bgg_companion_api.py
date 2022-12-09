@@ -152,6 +152,8 @@ class BggCompanionApi(object):
         maxplayers=None,
         playerrangetype=None,
         playstyle=None,
+        mincomplexity=None,
+        maxcomplexity=None,
     ) -> list[BoardGame]:
         users_board_games = self.get_users_board_games(user=user)
         filter_board_games = FilterBoardGames(
@@ -162,6 +164,8 @@ class BggCompanionApi(object):
                 maxplayers=maxplayers,
                 playerrangetype=playerrangetype,
                 playstyle=playstyle,
+                mincomplexity=mincomplexity,
+                maxcomplexity=maxcomplexity,
             ),
         )
         logging.info("Returning filtered board games")

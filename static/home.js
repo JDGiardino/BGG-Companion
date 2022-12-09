@@ -21,6 +21,8 @@
     } else if (document.getElementById("cooperative").checked) {
       playstyle = "cooperative";
     } else playstyle = "";
+    const mincomplexity = document.getElementById("complexity-min").value;
+    const maxcomplexity = document.getElementById("complexity-max").value;
 
     return {
       user: user,
@@ -28,6 +30,8 @@
       maxplayers: maxplayers,
       playerrangetype: playerrangetype,
       playstyle: playstyle,
+      mincomplexity: mincomplexity,
+      maxcomplexity: maxcomplexity,
     };
   }
 
@@ -37,7 +41,8 @@
 
     const response = await fetch(
       `/random_game?user=${parameters.user}&minplayers=${parameters.minplayers}&maxplayers=${parameters.maxplayers}` +
-        `&playerrangetype=${parameters.playerrangetype}&playstyle=${parameters.playstyle}`
+        `&playerrangetype=${parameters.playerrangetype}&playstyle=${parameters.playstyle}&mincomplexity=${parameters.mincomplexity}` +
+        `&maxcomplexity=${parameters.maxcomplexity}`
     );
 
     if (response.ok) {

@@ -6,6 +6,7 @@ from src.bgg_companion_api import BggCompanionApi
 from src.utils.serialize_to_json import SerializeToJson
 from src.exceptions import UserIsNoneError, UserHasNoCollection
 from src.utils.requests_retry_client import RequestsRetryClient
+from src.forms.RandomGameForm import RandomGameForm
 
 from logging.config import dictConfig
 from flask import (
@@ -56,49 +57,40 @@ VISIT_COUNT_COOKIE_NAME = "visit-count"
 
 @app.route("/random_game")
 def get_random_game_from_users_collection() -> Union[str, Response]:
-    args = request.args
-    user = args.get("user")
-    if args.get("minplayers") == "":
-        minplayers = None
+    form = RandomGameForm(request.args)
+    if form.validate():
+        bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=cache)
+        try:
+            filtered_board_games = bgg_companion_api.get_users_filtered_board_games(
+                user=form.user.data,
+                minplayers=form.minplayers.data,
+                maxplayers=form.maxplayers.data,
+                playerrangetype=form.playerrangetype.data,
+                playstyle=form.playstyle.data,
+                mincomplexity=form.mincomplexity.data,
+                maxcomplexity=form.maxcomplexity.data,
+            )
+            resp = jsonify(dataclasses.asdict(random.choice(filtered_board_games)))
+            app.logger.info(f"Random board game was selected")
+            resp.set_cookie(key=USERNAME_COOKIE_NAME, value=form.user.data)
+            app.logger.info(f"Cookie was set")
+            return resp
+        except UserIsNoneError as exc:
+            app.logger.info(f"{form.user.data} does not exist within BoardGameGeek")
+            return abort(Response(response=str(exc), status=404))
+        except UserHasNoCollection as exc:
+            app.logger.info(f"{form.user.data} does not have a board game collection")
+            return abort(Response(response=str(exc), status=404))
+        # TO DO: The below return should be removed to hide unhandled exceptions from users. Keeping for now for development
+        except Exception as exc:
+            return abort(Response(response=str(exc), status=500))
     else:
-        minplayers = args.get("maxplayers")
-    if args.get("maxplayers") == "":
-        maxplayers = None
-    else:
-        maxplayers = args.get("maxplayers")
-    if args.get("playerrangetype") == "":
-        playerrangetype = None
-    else:
-        playerrangetype = args.get("playerrangetype")
-    if args.get("playstyle") == "":
-        playstyle = None
-    else:
-        playstyle = args.get("playstyle")
-    bgg_companion_api = BggCompanionApi(request_client=RequestsRetryClient(), cache=cache)
-
-    try:
-        filtered_board_games = bgg_companion_api.get_users_filtered_board_games(
-            user=user,
-            minplayers=minplayers,
-            maxplayers=maxplayers,
-            playerrangetype=playerrangetype,
-            playstyle=playstyle,
-        )
-        # python package called wt forms.  https://flask.palletsprojects.com/en/2.2.x/patterns/wtforms/
-        app.logger.info(f"Random board game was selected")
-        resp = jsonify(dataclasses.asdict(random.choice(filtered_board_games)))
-        resp.set_cookie(key=USERNAME_COOKIE_NAME, value=user)
-        app.logger.info(f"Cookie was set")
-        return resp
-    except UserIsNoneError as exc:
-        app.logger.info(f"{user} does not exist within BoardGameGeek")
-        return abort(Response(response=str(exc), status=404))
-    except UserHasNoCollection as exc:
-        app.logger.info(f"{user} does not have a board game collection")
-        return abort(Response(response=str(exc), status=404))
-    # TO DO: The below return should be removed to hide unhandled exceptions from users. Keeping for now for development
-    except Exception as exc:
-        return abort(Response(response=str(exc), status=500))
+        error_message = ""
+        for key, value in form.errors.items():
+            error_message += (
+                f"The following errors pertain to the {key} field:\n {','.join(value)}\n\n"
+            )
+        return abort(Response(response=error_message, status=400))
 
 
 @app.route("/ordered_games")

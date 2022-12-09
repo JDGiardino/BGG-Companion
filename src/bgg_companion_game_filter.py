@@ -19,6 +19,7 @@ class FilterBoardGames:
             self.__gametype(game=game)
             and self.__player_range_type(game=game)
             and self.__playstyle_type(game=game)
+            and self.__complexity_range(game=game)
         )
 
     def __gametype(self, game: BoardGame) -> bool:
@@ -38,6 +39,11 @@ class FilterBoardGames:
 
     def __playstyle_type(self, game: BoardGame) -> bool:
         return self.game_filter.playstyle is None or self.game_filter.playstyle == game.playstyle
+
+    def __complexity_range(self, game: BoardGame) -> bool:
+        return self.__mincomplexity_in_range(
+            game=game, gamefilter=self.game_filter
+        ) and self.__maxcomplexity_in_range(game=game, gamefilter=self.game_filter)
 
     @staticmethod
     def __minplayers_in_range(game: BoardGame, gamefilter: GameFilter) -> bool:
@@ -60,3 +66,11 @@ class FilterBoardGames:
     @staticmethod
     def __maxplayers_exact(game: BoardGame, gamefilter: GameFilter) -> bool:
         return gamefilter.maxplayers is None or game.maxplayers == gamefilter.maxplayers
+
+    @staticmethod
+    def __mincomplexity_in_range(game: BoardGame, gamefilter: GameFilter) -> bool:
+        return gamefilter.mincomplexity is None or game.complexity >= gamefilter.mincomplexity
+
+    @staticmethod
+    def __maxcomplexity_in_range(game: BoardGame, gamefilter: GameFilter) -> bool:
+        return gamefilter.maxcomplexity is None or game.complexity <= gamefilter.maxcomplexity
